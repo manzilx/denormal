@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NumberedCard from '../../components/NumberedCard.astro';
+import StageCard from '../../components/StageCard.astro';
+import Intake from '../../components/Intake.astro';
+import { products } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
+}
+
+const { product } = Astro.props;
+---
+<Base title={`${product.name} — Denormal Labs`} description={product.brief}>
+  <section class="product-hero"><div class="container product-hero-grid"><div><div class="product-index">{product.index}</div><div class="micro" style="margin-top:22px">{product.eyebrow}</div><h1 class="display">{product.name}</h1></div><div><div class="tagline">{product.tagline}</div><p class="brief">{product.brief}</p><a class="back-link" href="/#products">← Back to portfolio</a></div></div></section>
+
+  <section class="section"><div class="container"><SectionHead eyebrow={`${product.name} // Capabilities`} title="What is shipped." meta="SOURCE-BOUND CAPABILITY SET" /><div class="card-grid">{product.capabilities.map((capability, index) => <NumberedCard number={String(index + 1).padStart(2, '0')} code={capability.code.replace(' // ', '_')} title={capability.title} body={capability.body} accent={index === 0} />)}</div></div></section>
+
+  <section class="section"><div class="container"><SectionHead eyebrow="How it works" title="A path from source to proof." meta="DETERMINISTIC CORE // AUDITABLE OUTPUT" /><div class="runtime-grid">{product.stages.map((stage) => <StageCard stage={stage} />)}</div></div></section>
+
+  <section class="section"><div class="container detail-layout"><div><SectionHead eyebrow="Stack & standards" title="The implementation is part of the claim." meta="PRESENT IN THE CODE" /><table class="stack-table"><tbody><tr><th>Stack</th><td>{product.stack.join(' · ')}</td></tr><tr><th>Standards / vocabulary</th><td>{product.standards.join(' · ')}</td></tr></tbody></table><div class="chip-list">{product.standards.map((standard) => <span class="chip">{standard}</span>)}</div></div><aside class="detail-sidebar"><div class="micro">Proof points</div><div class="detail-proofs">{product.proofs.map((proof) => <div class="detail-proof"><strong>{proof.value}</strong><span>{proof.label}</span><p>{proof.body}</p></div>)}</div></aside></div></section>
+
+  <Intake title={`Talk through ${product.name}.`} description="Tell us what needs to be grounded, constrained, decided or proved. The intake is presentational and makes no network request." eyebrow={`${product.name.toUpperCase()} // ENGINEERING INTAKE`} />
+</Base>

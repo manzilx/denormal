@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import ConsolePanel from '../components/ConsolePanel.astro';
+import SectionHead from '../components/SectionHead.astro';
+import NumberedCard from '../components/NumberedCard.astro';
+import StageCard from '../components/StageCard.astro';
+import MetricTile from '../components/MetricTile.astro';
+import Intake from '../components/Intake.astro';
+import { products, portfolioMetrics, sharedStages } from '../data/products';
+---
+<Base title="Denormal Labs — Software for work that has to be provable" description="Denormal Labs builds operating systems for safety, contracts, quality, schedule and production.">
+  <section id="top" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="badge micro">FIVE SYSTEMS // ONE THESIS</div>
+        <h1 class="display">Software for work that has to be <span style="color:var(--accent)">provable</span>.</h1>
+        <p class="lede">Denormal Labs builds operating systems for industries where being wrong is expensive and being right has to be demonstrable — safety, contracts, quality, schedule and production. Deterministic engines make the decisions. Language models read, classify and draft, and every answer carries its source, its grounding and its audit row.</p>
+        <div class="hero-actions"><a class="button primary" href="#products">See the portfolio <span>→</span></a><a class="button secondary" href="#intake">Talk to engineering</a></div>
+        <div class="gauge" aria-label="Denormal method">
+          <div class="gauge-item"><div class="micro">01</div><div class="gauge-title">Ground</div></div>
+          <div class="gauge-item"><div class="micro">02</div><div class="gauge-title">Constrain</div></div>
+          <div class="gauge-item"><div class="micro">03</div><div class="gauge-title">Decide</div></div>
+          <div class="gauge-item"><div class="micro">04</div><div class="gauge-title">Prove</div></div>
+        </div>
+      </div>
+      <ConsolePanel />
+    </div>
+  </section>
+
+  <section id="sectors" class="sectors"><div class="container sector-line"><div class="micro">Where the work gets expensive</div><div class="sector-list"><span>Industrial safety</span><span>Contracts &amp; claims</span><span>EPC quality assurance</span><span>Capital project controls</span><span>Apparel production</span></div></div></section>
+
+  <section id="products" class="section"><div class="container"><SectionHead eyebrow="Portfolio // 5 systems" title="One method. Five places where evidence matters." meta="PORTFOLIO: 5 SYSTEMS // MEASURED IN-REPO" /><div class="card-grid">{products.map((product, index) => <NumberedCard number={product.index} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={`/products/${product.slug}/`} accent={index === 1} />)}</div></div></section>
+
+  <section id="runtime" class="section"><div class="container"><SectionHead eyebrow="Runtime // Shared method" title="The model is useful. The system is accountable." meta="GROUND → CONSTRAIN → DECIDE → PROVE" /><div class="runtime-grid">{sharedStages.map((stage) => <StageCard stage={stage} />)}</div></div></section>
+
+  <section id="benchmarks" class="section band"><div class="container"><SectionHead eyebrow="Measured in-repo" title="Proof before promises." meta="PORTFOLIO: 5 SYSTEMS // MEASURED IN-REPO" /><div class="metric-grid">{portfolioMetrics.map((metric) => <MetricTile metric={metric} />)}</div></div></section>
+
+  <Intake />
+</Base>

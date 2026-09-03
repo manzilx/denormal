@@ -1,0 +1,11 @@
+---
+const { stage } = Astro.props;
+---
+<article class="stage-card">
+  <div class="stage-number">{stage.number}</div>
+  <h3>{stage.title}</h3>
+  <p>{stage.body}</p>
+  <div class="stage-stats">
+    {stage.stats.map(([label, value]) => <div class="stage-stat"><span>{label}</span><strong>{value}</strong></div>)}
+  </div>
+</article>

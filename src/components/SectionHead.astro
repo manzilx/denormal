@@ -1,0 +1,10 @@
+---
+const { eyebrow, title, meta } = Astro.props;
+---
+<div class="section-head">
+  <div>
+    <div class="eyebrow micro">{eyebrow}</div>
+    <h2>{title}</h2>
+  </div>
+  {meta && <div class="meta micro">{meta}</div>}
+</div>

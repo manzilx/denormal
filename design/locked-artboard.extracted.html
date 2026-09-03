@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="e2607cfd-0b5c-453c-b5d1-85aeb082a435"></script>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <style></style>
+  <style>
+    :root {
+      --bg: #FAFAFA; --bg-blur: rgba(250,250,250,0.92); --panel: #F4F4F5; --card: #FFFFFF;
+      --ink: #18181B; --ink-2: #27272A; --ink-3: #3F3F46; --ink-4: #52525B;
+      --muted: #71717A; --muted-2: #A1A1AA; --line: #E4E4E7; --line-2: #D4D4D8;
+      --tint: #FFF7F2; --shadow: rgba(24,24,27,0.08); --band: #18181B; --acc2: #0891B2; --acc3: #2563EB;
+      --ok-bg: #F0FDF4; --ok-line: #BBF7D0; --ok-text: #166534;
+    }
+    html[data-theme="dark"] {
+      --bg: #08080A; --bg-blur: rgba(8,8,10,0.86); --panel: #0E0E11; --card: #101014;
+      --ink: #F2F2F3; --ink-2: #E4E4E7; --ink-3: #9C9CA5; --ink-4: #9C9CA5;
+      --muted: #7A7A85; --muted-2: #62626C; --line: #23232A; --line-2: #33333C;
+      --tint: #1C0D06; --shadow: rgba(234,88,12,0.22); --band: #0E0E11; --acc2: #22D3EE; --acc3: #60A5FA;
+      --ok-bg: #08160F; --ok-line: #17422A; --ok-text: #4ADE80;
+    }
+    html[data-theme="dark"] body {
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px),
+        radial-gradient(680px 340px at 18% -6%, rgba(234,88,12,0.16), transparent 70%);
+      background-size: 48px 48px, 48px 48px, 100% 100%;
+      background-attachment: scroll, scroll, fixed;
+    }
+    html[data-theme="dark"] input::placeholder,
+    html[data-theme="dark"] textarea::placeholder { color: #5C5C66; }
+    html[data-theme="dark"] select option { background: #101014; color: #F2F2F3; }
+    body { margin: 0; background: var(--bg); -webkit-font-smoothing: antialiased; }
+    a { color: var(--ink); text-decoration: none; }
+    a:hover { color: #EA580C; }
+    @keyframes dnrm-blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0.18; } }
+    @keyframes dnrm-scan { from { transform: translateX(-100%); } to { transform: translateX(400%); } }
+  </style>
+</helmet>
+<div style="font-family: Inter, sans-serif; color: var(--ink); background: transparent; letter-spacing: -0.01em;">
+
+  <header style="position: sticky; top: 0; z-index: 40; overflow: visible; background: var(--bg-blur); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);">
+    <div id="dnrm-progress" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--acc2); transition: width 0.08s linear;"></div>
+    <div id="dnrm-bar" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 40px); min-height: 76px; transition: min-height 0.18s linear; display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding-top: 10px; padding-bottom: 10px;">
+      <a href="#top" style="display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0;">
+        <span style="display: inline-flex; flex-direction: column;">
+          <span id="dnrm-word" style="font-size: 30px; font-weight: 800; letter-spacing: -0.035em; line-height: 1; transition: font-size 0.18s linear;">denormal</span>
+          <svg width="100%" height="10" sc-camel-view-box="0 0 200 16" sc-camel-preserve-aspect-ratio="none" style="margin-top: 4px;">
+            <rect x="0" y="13" width="200" height="3" fill="currentColor"></rect>
+            <rect x="0" y="0" width="3" height="13" fill="currentColor"></rect>
+            <rect x="65" y="6" width="3" height="7" fill="currentColor"></rect>
+            <rect x="131" y="6" width="3" height="7" fill="currentColor"></rect>
+            <rect x="197" y="6" width="3" height="7" fill="currentColor"></rect>
+            <rect id="dnrm-fill" x="3" y="7" width="62" height="6" fill="#EA580C"></rect>
+          </svg>
+        </span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.34em; text-transform: uppercase; color: var(--ink-3); margin-top: 6px;">Labs</span>
+      </a>
+      <nav style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; margin-left: auto; margin-right: 16px; flex: 0 1 auto; min-width: 0; justify-content: flex-start; font-size: 13px; font-weight: 500; margin-right: auto;">
+        <a href="#pillars" style="padding: 4px 0; border-bottom: 2px solid transparent;" style-hover="border-bottom: 2px solid #EA580C;">Solutions</a>
+        <a href="#sectors" style="padding: 4px 0; border-bottom: 2px solid transparent;" style-hover="border-bottom: 2px solid #EA580C;">Sectors</a>
+        <a href="#runtime" style="padding: 4px 0; border-bottom: 2px solid transparent;" style-hover="border-bottom: 2px solid #EA580C;">Capabilities</a>
+        <a href="#benchmarks" style="padding: 4px 0; border-bottom: 2px solid transparent;" style-hover="border-bottom: 2px solid #EA580C;">Benchmarks</a>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        <button type="button" id="dnrm-theme" aria-label="Toggle dark mode" style="height: 36px; width: 36px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-2); background: transparent; color: var(--ink); cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 0;" style-hover="border: 1px solid var(--ink); color: #EA580C;">DK</button>
+        <a href="#intake" style="height: 36px; display: inline-flex; align-items: center; padding: 0 clamp(10px, 1.1vw, 16px); border: 1px solid var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;" style-hover="background: var(--panel); color: var(--ink);">Schedule consultation</a>
+        <a href="#intake" style="height: 36px; display: inline-flex; align-items: center; padding: 0 clamp(10px, 1.1vw, 16px); background: var(--ink); color: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;" style-hover="background: #EA580C; color: var(--card);">Request blueprint</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="top" data-screen-label="Hero" style="border-bottom: 1px solid var(--line);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 3vw, 40px) 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 56px; align-items: start;">
+      <div>
+        <div style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 7px 10px; background: var(--panel); border: 1px solid var(--line); max-width: 100%;">
+          <span style="width: 6px; height: 6px; background: #EA580C; display: block; animation: dnrm-blink 1.6s steps(1, end) infinite;"></span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;">Autonomous dispatch engine v4.8</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #EA580C;">1.2MS</span>
+        </div>
+        <h1 style="font-size: clamp(38px, 5.2vw, 76px); font-weight: 800; line-height: 0.96; letter-spacing: -0.04em; margin: 28px 0 0; text-wrap: balance;">Engineering <span style="color: #EA580C;">predictability</span> into industrial operations</h1>
+        <p style="font-size: 17px; line-height: 27px; color: var(--ink-3); max-width: 460px; margin: 28px 0 0; text-wrap: pretty;">Denormal Labs audits, redesigns, and automates high-concurrency enterprise workflows. We fuse deep operational mapping with industrial-grade AI and deterministic infrastructure to eliminate operational variance.</p>
+        <div style="display: flex; gap: 12px; margin-top: 36px;">
+          <a href="#intake" style="height: 48px; display: inline-flex; align-items: center; gap: 14px; padding: 0 22px; background: #EA580C; color: var(--card); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;" style-hover="background: var(--ink); color: var(--bg);">Schedule operational audit <span style="font-size: 14px;">→</span></a>
+          <a href="#runtime" style="height: 48px; display: inline-flex; align-items: center; gap: 14px; padding: 0 22px; border: 1px solid var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;" style-hover="box-shadow: 3px 3px 0 0 var(--ink);">Explore architecture</a>
+        </div>
+        <div style="margin-top: 72px; border-top: 1px solid var(--line); padding-top: 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);">Transformation progress gauge</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em;">Stage 03 / 04 active</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 14px;">
+            <div style="height: 6px; background: #EA580C;"></div>
+            <div style="height: 6px; background: #EA580C;"></div>
+            <div style="height: 6px; background: #EA580C;"></div>
+            <div style="height: 6px; background: var(--line);"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);">
+            <span>01 Ingest</span><span>02 Denormalize</span><span>03 Execute</span><span>04 Telemetry</span>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{ showConsole }}" hint-placeholder-val="{{ true }}">
+      <div style="background: var(--card); border: 1px solid var(--ink); box-shadow: 6px 6px 0 0 var(--shadow); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 25%; height: 2px; background: #EA580C; animation: dnrm-scan 4.5s linear infinite;"></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--panel);">
+          <div style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;">
+            <span style="width: 16px; height: 16px; background: #EA580C; color: var(--card); display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700;">D</span>
+            <span>TELEMETRY_ORCHESTRATOR</span><span style="color: var(--muted-2);">//</span><span style="color: var(--ink-3);">SYS.DNRM-891</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: #16A34A;">
+            <span style="width: 6px; height: 6px; background: #16A34A; display: block;"></span>NOMINAL
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line);">
+          <div style="padding: 20px 18px; border-right: 1px solid var(--line);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Cycle time delta</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: #EA580C; margin-top: 8px;" id="dnrm-delta">-42.8%</div>
+          </div>
+          <div style="padding: 20px 18px; border-right: 1px solid var(--line);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Pipeline flow</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-top: 8px;"><span id="dnrm-flow">1,480</span> <span style="font-size: 13px; font-weight: 500; color: var(--muted);">t/h</span></div>
+          </div>
+          <div style="padding: 20px 18px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Dispersion</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-top: 8px;"><span id="dnrm-disp">0.002</span> <span style="font-size: 13px; font-weight: 500; color: var(--muted);">σ</span></div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid var(--line);">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Active workflow nodes</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted-2);">100HZ STREAM</span>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--panel); border-left: 3px solid transparent; transition: background 0.12s linear;" data-node="1">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="width: 6px; height: 6px; background: #16A34A; display: block; margin-top: 6px;"></span>
+              <div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;">NODE_01: CRUCIBLE_INGEST</div>
+                <div style="font-size: 12px; color: var(--muted); margin-top: 3px;">Telemetry parser &amp; SCADA pipeline</div>
+              </div>
+            </div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--ink-3); white-space: nowrap;">99.98% SYNC</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--panel); border-left: 3px solid #EA580C; background: var(--tint); transition: background 0.12s linear;" data-node="2">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="width: 6px; height: 6px; background: #EA580C; display: block; margin-top: 6px; animation: dnrm-blink 1.2s steps(1, end) infinite;"></span>
+              <div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;">NODE_02: WORKFLOW_DENORMALIZER</div>
+                <div style="font-size: 12px; color: var(--muted); margin-top: 3px;">Sequential lock bypass // Direct routing</div>
+              </div>
+            </div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: var(--card); background: #EA580C; padding: 4px 7px; white-space: nowrap;">RE-ROUTING</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-left: 3px solid transparent; transition: background 0.12s linear;" data-node="3">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="width: 6px; height: 6px; background: #16A34A; display: block; margin-top: 6px;"></span>
+              <div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;">NODE_03: PREDICTIVE_DISPATCH</div>
+                <div style="font-size: 12px; color: var(--muted); margin-top: 3px;">Parts staging &amp; work order allocation</div>
+              </div>
+            </div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--ink-3); white-space: nowrap;">ACTIVE [0.4s]</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid var(--ink); background: var(--ink); color: var(--muted-2); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em;">
+          <span>&gt; dnrm-runtime --deterministic</span>
+          <span style="color: var(--bg);">ENCLAVE SECURE (FIPS 140-3)</span>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="sectors" data-screen-label="Sectors" style="background: var(--panel); border-bottom: 1px solid var(--line);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 22px clamp(20px, 3vw, 40px); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);">
+      <span style="color: var(--muted);">Deployed across critical infrastructure</span>
+      <span style="flex: 1; height: 1px; background: var(--line-2);"></span>
+      <span>Energy &amp; utilities</span><span style="color: var(--line-2);">/</span>
+      <span>Heavy manufacturing</span><span style="color: var(--line-2);">/</span>
+      <span>Capital projects</span><span style="color: var(--line-2);">/</span>
+      <span>Supply chain networks</span><span style="color: var(--line-2);">/</span>
+      <span>Aerospace &amp; defense</span>
+    </div>
+  </section>
+
+  <section id="pillars" data-screen-label="Pillars" style="border-bottom: 1px solid var(--line);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 3vw, 40px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 48px; align-items: end; padding-bottom: 40px; border-bottom: 1px solid var(--line);">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 9px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #EA580C;">
+            <span style="width: 6px; height: 6px; background: #EA580C; display: block;"></span>Architectural pillars
+          </div>
+          <h2 style="font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; margin: 18px 0 0; max-width: 620px; text-wrap: balance;">Deterministic workflow modernization</h2>
+        </div>
+        <p style="font-size: 15px; line-height: 24px; color: var(--ink-3); margin: 0; text-wrap: pretty;">Industrial operations cannot tolerate generic software abstractions. We implement structured mathematical rigor into legacy systems, then hand the runtime to your own engineers.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-top: none;">
+        <div style="background: var(--card); padding: 32px 26px 26px; display: flex; flex-direction: column; min-height: 300px;" style-hover="background: var(--tint);">
+          <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--muted);"><span>01 // SYS_MOD</span></div>
+          <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 28px 0 0;">Operational process intelligence</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 14px 0 0;">Full-stack process mining, telemetry ingestion, and diagnostic mapping across multi-layered legacy operational silos.</p>
+          <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+            <span style="color: var(--muted);">Latency audit</span><span style="color: #EA580C;">Real-time</span>
+          </div>
+        </div>
+        <div style="background: var(--card); padding: 32px 26px 26px; display: flex; flex-direction: column; min-height: 300px; border-top: 2px solid #EA580C;" style-hover="background: var(--tint);">
+          <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #EA580C;"><span>02 // SYS_MOD</span></div>
+          <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 28px 0 0;">Workflow architecture &amp; redesign</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 14px 0 0;">Denormalizing fragmented operational handoffs into lean, standardized, deterministic execution pipelines.</p>
+          <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+            <span style="color: var(--muted);">State compaction</span><span style="color: #EA580C;">-64% hops</span>
+          </div>
+        </div>
+        <div style="background: var(--card); padding: 32px 26px 26px; display: flex; flex-direction: column; min-height: 300px;" style-hover="background: var(--tint);">
+          <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--muted);"><span>03 // SYS_MOD</span></div>
+          <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 28px 0 0;">Industrial AI &amp; autonomous loops</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 14px 0 0;">Deploying domain-calibrated models, predictive dispatchers, and automated anomaly resolution loops directly into field ops.</p>
+          <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+            <span style="color: var(--muted);">Inference gov</span><span style="color: var(--ink);">Deterministic</span>
+          </div>
+        </div>
+        <div style="background: var(--card); padding: 32px 26px 26px; display: flex; flex-direction: column; min-height: 300px;" style-hover="background: var(--tint);">
+          <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--muted);"><span>04 // SYS_MOD</span></div>
+          <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 28px 0 0;">Organizational enablement</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 14px 0 0;">Human-in-the-loop transition frameworks, frontline operator consoles, and real-time telemetry adoption analytics.</p>
+          <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+            <span style="color: var(--muted);">Workforce velocity</span><span style="color: #EA580C;">4.2x adoption</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="runtime" data-screen-label="Runtime" style="background: var(--panel); border-bottom: 1px solid var(--line);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 3vw, 40px);">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px 40px; padding-bottom: 32px; border-bottom: 1px solid var(--line-2);">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc2);">The denormal execution runtime</div>
+          <h2 style="font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; margin: 16px 0 0;">A four-stage precision pipeline</h2>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap;">BLUEPRINT_ID: #DN-FLOW-2025 // REVISION 4.02</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-top: none;">
+        <div style="background: var(--card); padding: 30px 26px 26px; display: flex; flex-direction: column; min-height: 300px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; color: var(--acc2); letter-spacing: -0.02em;">01</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Stage 1</span>
+          </div>
+          <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin: 24px 0 0;">Telemetry ingestion</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 12px 0 0;">Continuous capture of micro-delays, process drift, and legacy handoffs with sub-millisecond precision.</p>
+          <div style="margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Velocity:</span><span style="font-weight: 600; white-space: nowrap;">120k ev/sec</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Precision:</span><span style="font-weight: 600; white-space: nowrap; color: #16A34A;">99.9%</span></div>
+          </div>
+        </div>
+        <div style="background: var(--card); padding: 30px 26px 26px; display: flex; flex-direction: column; min-height: 300px; border-left: 2px solid #EA580C;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; color: #EA580C; letter-spacing: -0.02em;">02</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #EA580C;">Core action</span>
+          </div>
+          <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin: 24px 0 0;">Process denormalization</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 12px 0 0;">Eliminating redundant state transfers, bureaucratic validation queues, and non-deterministic logic loops.</p>
+          <div style="margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Reduction:</span><span style="font-weight: 600; white-space: nowrap; color: #EA580C;">-54% nodes</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Determinism:</span><span style="font-weight: 600; white-space: nowrap; color: #EA580C;">Absolute</span></div>
+          </div>
+        </div>
+        <div style="background: var(--card); padding: 30px 26px 26px; display: flex; flex-direction: column; min-height: 300px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; color: var(--acc2); letter-spacing: -0.02em;">03</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Stage 3</span>
+          </div>
+          <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin: 24px 0 0;">Autonomous execution</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 12px 0 0;">Industrial AI dispatch engines trigger automated operations, routing critical edge anomalies to designated engineers.</p>
+          <div style="margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Automation:</span><span style="font-weight: 600; white-space: nowrap;">88.4%</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Override:</span><span style="font-weight: 600; white-space: nowrap;">&lt; 3.0 sec</span></div>
+          </div>
+        </div>
+        <div style="background: var(--card); padding: 30px 26px 26px; display: flex; flex-direction: column; min-height: 300px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; color: var(--acc2); letter-spacing: -0.02em;">04</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Stage 4</span>
+          </div>
+          <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin: 24px 0 0;">Telemetry governance</h3>
+          <p style="font-size: 14px; line-height: 21px; color: var(--ink-4); margin: 12px 0 0;">Continuous compliance tracing, cryptographic immutable logging, and continuous feedback loop re-calibration.</p>
+          <div style="margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Audit trace:</span><span style="font-weight: 600; white-space: nowrap; color: #16A34A;">Cryptographic</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="color: var(--muted); white-space: nowrap;">Model drift:</span><span style="font-weight: 600; white-space: nowrap;">Continuous</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="benchmarks" data-screen-label="Benchmarks" style="background: var(--band, #18181B); color: #FAFAFA; border-top: 2px solid #EA580C;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 3vw, 40px);">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px 40px;">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #EA580C;">Validated operational results</div>
+          <h2 style="font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; margin: 16px 0 0;">Enterprise performance benchmarks</h2>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #A1A1AA; white-space: nowrap;">N = 24 DEPLOYMENTS // 2023—2025</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: #3F3F46; border: 1px solid #3F3F46; margin-top: 48px;">
+        <div style="background: #18181B; padding: 32px 26px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #A1A1AA;">Cycle time compression</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 700; letter-spacing: -0.03em; margin: 18px 0 0;">-38%</div>
+          <div style="height: 3px; background: var(--acc2); width: 64px; margin: 20px 0 0;"></div>
+          <p style="font-size: 13px; line-height: 20px; color: #A1A1AA; margin: 18px 0 0;">Average multi-facility cycle time reduction across high-concurrency manufacturing installations.</p>
+        </div>
+        <div style="background: #18181B; padding: 32px 26px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #A1A1AA;">Annualized savings</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 700; letter-spacing: -0.03em; margin: 18px 0 0; color: #EA580C;">$14.2M</div>
+          <div style="height: 3px; background: #EA580C; width: 64px; margin: 20px 0 0;"></div>
+          <p style="font-size: 13px; line-height: 20px; color: #A1A1AA; margin: 18px 0 0;">Documented operational variance recovery and throughput unlock per transformation unit.</p>
+        </div>
+        <div style="background: #18181B; padding: 32px 26px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #A1A1AA;">Deterministic compliance</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 700; letter-spacing: -0.03em; margin: 18px 0 0;">99.98%</div>
+          <div style="height: 3px; background: #16A34A; width: 64px; margin: 20px 0 0;"></div>
+          <p style="font-size: 13px; line-height: 20px; color: #A1A1AA; margin: 18px 0 0;">Process execution adherence and audit logging under federal standards.</p>
+        </div>
+        <div style="background: #18181B; padding: 32px 26px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #A1A1AA;">Change velocity</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 700; letter-spacing: -0.03em; margin: 18px 0 0;">4.2x</div>
+          <div style="height: 3px; background: var(--acc3); width: 64px; margin: 20px 0 0;"></div>
+          <p style="font-size: 13px; line-height: 20px; color: #A1A1AA; margin: 18px 0 0;">Faster frontline operator adoption leveraging zero-latency digital surfaces.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intake" data-screen-label="Intake" style="border-bottom: 1px solid var(--line);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 3vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 56px; align-items: start;">
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 9px; padding: 6px 10px; background: var(--panel); border: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">
+          <span style="width: 6px; height: 6px; background: #EA580C; display: block;"></span>Enterprise engagement protocol
+        </div>
+        <h2 style="font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; margin: 24px 0 0; max-width: 480px; text-wrap: balance;">Ready to denormalize your operational bottlenecks?</h2>
+        <p style="font-size: 16px; line-height: 25px; color: var(--ink-3); margin: 22px 0 0; max-width: 460px; text-wrap: pretty;">Schedule a comprehensive 14-day telemetry and workflow diagnosis. Our industrial systems architects will inspect your execution graph and deliver a deterministic blueprint.</p>
+        <div style="display: flex; flex-direction: column; gap: 18px; margin-top: 36px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;"><span style="width: 14px; height: 14px; flex: 0 0 14px; background: #EA580C; display: block; margin-top: 4px;"></span><span style="font-size: 14px; line-height: 21px; color: var(--ink-2); flex: 1 1 auto; min-width: 0;">Zero production disruption telemetry ingestion</span></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;"><span style="width: 14px; height: 14px; flex: 0 0 14px; background: #EA580C; display: block; margin-top: 4px;"></span><span style="font-size: 14px; line-height: 21px; color: var(--ink-2); flex: 1 1 auto; min-width: 0;">SOC 2 Type II &amp; ISO 27001 calibrated audit enclaves</span></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;"><span style="width: 14px; height: 14px; flex: 0 0 14px; background: #EA580C; display: block; margin-top: 4px;"></span><span style="font-size: 14px; line-height: 21px; color: var(--ink-2); flex: 1 1 auto; min-width: 0;">Detailed financial ROI &amp; throughput projection matrix</span></div>
+        </div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--ink); padding: 34px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; border-bottom: 1px solid var(--line);">
+          <div>
+            <div style="font-size: 21px; font-weight: 700; letter-spacing: -0.02em;">Technical audit intake</div>
+            <div style="font-size: 13px; color: var(--muted); margin-top: 5px;">Dispatch directly to enterprise system architects</div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: #EA580C;">[ENCRYPTED_256]</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 22px; margin-top: 26px;">
+          <label style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Lead executive / engineer</span>
+            <input type="text" placeholder="e.g., Dr. Marcus Vance" style="height: 42px; padding: 0 12px; border: 1px solid var(--line-2); background: var(--card); font-family: Inter, sans-serif; font-size: 14px; color: var(--ink); outline: none; min-width: 0; width: 100%; box-sizing: border-box;" style-focus="border: 2px solid #EA580C;">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Corporate email</span>
+            <input type="email" placeholder="marcus.v@enterprisecorp.com" style="height: 42px; padding: 0 12px; border: 1px solid var(--line-2); background: var(--card); font-family: Inter, sans-serif; font-size: 14px; color: var(--ink); outline: none; min-width: 0; width: 100%; box-sizing: border-box;" style-focus="border: 2px solid #EA580C;">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Industrial sector</span>
+            <sc-raw-select style="height: 42px; padding: 0 10px; border: 1px solid var(--line-2); background: var(--card); font-family: Inter, sans-serif; font-size: 14px; color: var(--ink); outline: none; min-width: 0; width: 100%; box-sizing: border-box;" style-focus="border: 2px solid #EA580C;">
+              <option>Energy, Oil &amp; Gas</option><option>Heavy manufacturing</option><option>Capital projects</option><option>Supply chain networks</option><option>Aerospace &amp; defense</option>
+            </sc-raw-select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Facility / node count</span>
+            <sc-raw-select style="height: 42px; padding: 0 10px; border: 1px solid var(--line-2); background: var(--card); font-family: Inter, sans-serif; font-size: 14px; color: var(--ink); outline: none; min-width: 0; width: 100%; box-sizing: border-box;" style-focus="border: 2px solid #EA580C;">
+              <option>1 – 5 high-volume facilities</option><option>6 – 20 facilities</option><option>20+ distributed network</option>
+            </sc-raw-select>
+          </label>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 8px; margin-top: 22px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Primary operational bottleneck / scope</span>
+          <textarea rows="3" placeholder="Describe latency spikes, legacy ERP locks, multi-party handoffs, or automated dispatch requirements..." style="padding: 12px; border: 1px solid var(--line-2); background: var(--card); font-family: Inter, sans-serif; font-size: 14px; line-height: 21px; color: var(--ink); outline: none; resize: vertical;" style-focus="border: 2px solid #EA580C;"></textarea>
+        </label>
+        <button type="button" sc-camel-on-click="{{ onSubmit }}" style="width: 100%; height: 50px; margin-top: 26px; background: var(--ink); color: var(--bg); border: none; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 14px;" style-hover="background: #EA580C;">{{ submitLabel }} <span style="font-size: 14px;">→</span></button>
+        <div style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted-2); margin-top: 16px;">SUBMISSION INITIATES NON-DISCLOSURE AGREEMENT (NDA) AUTO-DISPATCH</div>
+      </div>
+    </div>
+  </section>
+
+  <footer data-screen-label="Footer" style="background: var(--bg);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 64px clamp(20px, 3vw, 40px) 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 40px;">
+      <div>
+        <span style="display: inline-flex; flex-direction: column;">
+          <span style="font-size: 19px; font-weight: 800; letter-spacing: -0.035em; line-height: 1;">denormal</span>
+          <svg width="100%" height="7" sc-camel-view-box="0 0 200 16" sc-camel-preserve-aspect-ratio="none" style="margin-top: 4px;">
+            <rect x="0" y="13" width="200" height="3" fill="currentColor"></rect>
+            <rect x="0" y="0" width="3" height="13" fill="currentColor"></rect>
+            <rect x="65" y="6" width="3" height="7" fill="currentColor"></rect>
+            <rect x="131" y="6" width="3" height="7" fill="currentColor"></rect>
+            <rect x="197" y="6" width="3" height="7" fill="currentColor"></rect>
+            <rect x="3" y="7" width="62" height="6" fill="#EA580C"></rect>
+          </svg>
+        </span>
+        <p style="font-size: 13px; line-height: 21px; color: var(--ink-4); margin: 22px 0 0; max-width: 300px;">Architectural transformation engines and operational telemetry platforms designed for mission-critical industrial enterprise systems.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--ink-4);">
+          <span style="border: 1px solid var(--line); padding: 5px 9px; white-space: nowrap;">ISO 27001</span>
+          <span style="border: 1px solid var(--line); padding: 5px 9px; white-space: nowrap;">SOC 2 TYPE II</span>
+          <span style="border: 1px solid var(--line); padding: 5px 9px; white-space: nowrap;">FIPS 140-3</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);">Solutions</div>
+        <div style="display: flex; flex-direction: column; gap: 11px; margin-top: 18px; font-size: 13px; color: var(--ink-2);">
+          <a href="#pillars">Process telemetry</a><a href="#pillars">Platform security</a><a href="#runtime">Autonomous dispatches</a><a href="#runtime">Legacy ERP bridges</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);">Compliance</div>
+        <div style="display: flex; flex-direction: column; gap: 11px; margin-top: 18px; font-size: 13px; color: var(--ink-2);">
+          <a href="#intake">ISO 27001</a><a href="#intake">SOC 2 Type II</a><a href="#intake">Privacy architecture</a><a href="#intake">Terms of deployment</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);">System status</div>
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; background: var(--ok-bg); border: 1px solid var(--ok-line); padding: 7px 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--ok-text);">
+          <span style="width: 6px; height: 6px; background: #16A34A; display: block; animation: dnrm-blink 2s steps(1, end) infinite;"></span>Status: Nominal
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted); margin-top: 14px;">CLUSTER: US-EAST</div>
+      </div>
+    </div>
+    <div style="max-width: 1440px; margin: 48px auto 0; padding: 20px clamp(20px, 3vw, 40px) 28px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted);">
+      <span>© 2026 Denormal Labs Pvt. Ltd. Precision industrialism &amp; operational intelligence.</span>
+      <span style="display: flex; gap: 22px;"><span>VER 4.8.1</span><span>0.8MS</span><span style="color: #16A34A; font-weight: 600;">ONLINE</span></span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;showConsole&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false };
+
+  componentDidMount() {
+    const d = document;
+    try {
+      const saved = localStorage.getItem("dnrm-theme");
+      if (saved === "dark") d.documentElement.dataset.theme = "dark";
+    } catch (e) {}
+    const btn = d.getElementById("dnrm-theme");
+    if (btn) {
+      const sync = () => { btn.textContent = d.documentElement.dataset.theme === "dark" ? "LT" : "DK"; };
+      sync();
+      this._onTheme = () => {
+        const dark = d.documentElement.dataset.theme === "dark";
+        if (dark) delete d.documentElement.dataset.theme; else d.documentElement.dataset.theme = "dark";
+        try { localStorage.setItem("dnrm-theme", dark ? "light" : "dark"); } catch (e) {}
+        sync();
+      };
+      btn.addEventListener("click", this._onTheme);
+      this._btn = btn;
+    }
+
+    const bar = d.getElementById("dnrm-bar"), word = d.getElementById("dnrm-word"), fill = d.getElementById("dnrm-fill");
+    this._onScroll = () => {
+      const doc = d.documentElement;
+      const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const p = Math.min(1, Math.max(0, (window.scrollY || doc.scrollTop) / max));
+      const dense = p > 0.01;
+      if (bar) bar.style.minHeight = dense ? "60px" : "76px";
+      if (word) word.style.fontSize = dense ? "22px" : "30px";
+      if (fill) fill.setAttribute("width", String(62 + p * 132));
+      const prog = d.getElementById("dnrm-progress");
+      if (prog) prog.style.width = (p * 100).toFixed(2) + "%";
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+
+    const delta = d.getElementById("dnrm-delta"), flow = d.getElementById("dnrm-flow"), disp = d.getElementById("dnrm-disp");
+    this._tick = setInterval(() => {
+      if (delta) delta.textContent = "-" + (42.8 + (Math.random() * 1.6 - 0.8)).toFixed(1) + "%";
+      if (flow) flow.textContent = Math.round(1480 + (Math.random() * 90 - 45)).toLocaleString("en-US");
+      if (disp) disp.textContent = (0.002 + Math.random() * 0.0009).toFixed(3);
+    }, 1800);
+
+    const rows = Array.from(d.querySelectorAll("[data-node]"));
+    this._rows = rows.map(el => {
+      const status = el.lastElementChild;
+      return { el, status, html: status ? status.innerHTML : "", css: status ? status.getAttribute("style") : "" };
+    });
+    let i = 1;
+    const apply = n => {
+      this._rows.forEach((r, k) => {
+        const active = k === n;
+        r.el.style.background = active ? "var(--tint)" : "transparent";
+        r.el.style.borderLeftColor = active ? "#EA580C" : "transparent";
+        if (!r.status) return;
+        if (active) {
+          r.status.setAttribute("style", "font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: #FFFFFF; background: #EA580C; padding: 4px 7px; white-space: nowrap;");
+          r.status.innerHTML = "RE-ROUTING";
+        } else {
+          r.status.setAttribute("style", "font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--ink-3); white-space: nowrap;");
+          r.status.innerHTML = k === 0 ? "99.98% SYNC" : "ACTIVE [0.4s]";
+        }
+      });
+    };
+    apply(i);
+    this._cycle = setInterval(() => { i = (i + 1) % Math.max(1, this._rows.length); apply(i); }, 4200);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._tick); clearInterval(this._cycle);
+    window.removeEventListener("scroll", this._onScroll);
+    if (this._btn && this._onTheme) this._btn.removeEventListener("click", this._onTheme);
+  }
+  renderVals() {
+    return {
+      showConsole: this.props.showConsole ?? true,
+      submitLabel: this.state.sent ? "Specification transmitted" : "Transmit audit specification",
+      onSubmit: () => this.setState({ sent: true })
+    };
+  }
+}
+</script>
+
+
+</body></html>

@@ -1,0 +1,20 @@
+---
+import { products } from '../data/products';
+const consoleOrder = ['sentinel', 'onelegal', 'quality-ai', 'peaklogic', 'atelier'];
+const consoleProducts = consoleOrder.map((slug) => products.find((product) => product.slug === slug)!);
+---
+<div class="console" aria-label="Portfolio system telemetry">
+  <div class="console-top">
+    <div class="console-stat"><div class="micro">Portfolio</div><div class="console-value">05</div></div>
+    <div class="console-stat"><div class="micro">Test surface</div><div class="console-value">1,100+</div></div>
+    <div class="console-stat"><div class="micro">Core decisions</div><div class="console-value">100%</div></div>
+  </div>
+  <div class="console-list">
+    <div class="console-scan" aria-hidden="true"></div>
+    {consoleProducts.map((product, index) => <div class:list={['console-row', { active: index === 0 }]} data-node={index}>
+      <div class="console-label"><strong>NODE_{String(index + 1).padStart(2, '0')}: {product.name.toUpperCase().replaceAll(' ', '_')}</strong><div class="console-output">{product.console.input} → {product.console.output}</div></div>
+      <div class="console-status">{product.console.status}</div>
+    </div>)}
+  </div>
+  <div class="console-foot">PORTFOLIO ROUTER // SOURCE-BOUND OUTPUTS // AUDITABLE BY DESIGN</div>
+</div>

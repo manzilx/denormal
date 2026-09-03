@@ -1,0 +1,12 @@
+---
+const { number, code, title, body, stat, href, accent = false } = Astro.props;
+---
+<article class:list={['number-card', { accent }]}>
+  <div class="card-code micro">{number} // {code}</div>
+  <h3>{title}</h3>
+  <p>{body}</p>
+  <div class="card-foot">
+    {stat && <div class="card-stat"><strong>{stat[0]}</strong><span>{stat[1]}</span></div>}
+    {href && <a class="card-link" href={href}>Open system →</a>}
+  </div>
+</article>

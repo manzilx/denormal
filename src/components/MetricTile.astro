@@ -1,0 +1,9 @@
+---
+const { metric } = Astro.props;
+---
+<article class="metric-tile">
+  <div class="micro">{metric.label}</div>
+  <div class:list={['metric-value', { orange: metric.accent === 'orange' }]}>{metric.value}</div>
+  <div class:list={['metric-rule', metric.accent]}></div>
+  <p>{metric.body}</p>
+</article>

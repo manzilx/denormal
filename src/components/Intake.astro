@@ -1,0 +1,35 @@
+---
+import { products } from '../data/products';
+const { title = 'Bring a provable path into the work.', description = 'Tell us where evidence, constraints or handoffs break down. We will route the conversation to the system closest to the problem.', eyebrow = 'ENGINEERING INTAKE' } = Astro.props;
+---
+<section id="intake" class="section">
+  <div class="container intake-grid">
+    <div class="intake-copy">
+      <div class="badge micro">{eyebrow}</div>
+      <h2>{title}</h2>
+      <p class="lede">{description}</p>
+      <div class="intake-points">
+        <div class="intake-point">Cited outputs with the source record attached.</div>
+        <div class="intake-point">Deterministic gates where a best-effort answer is not enough.</div>
+        <div class="intake-point">Cloud, on-prem and air-gapped deployment postures across the portfolio.</div>
+      </div>
+    </div>
+    <div class="intake-card">
+      <div class="intake-card-head">
+        <div><div class="intake-card-title">Product engineering intake</div><div class="intake-card-subtitle">Route a conversation to the right system</div></div>
+        <span class="intake-token">[PRODUCT_INTAKE]</span>
+      </div>
+      <form data-intake-form>
+        <div class="intake-fields">
+          <div class="field"><label for="contact-name">Name</label><input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" /></div>
+          <div class="field"><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" /></div>
+          <div class="field"><label for="product">Product of interest</label><select id="product" name="product">{products.map((product) => <option value={product.slug}>{product.name}</option>)}<option value="portfolio">Portfolio review</option></select></div>
+          <div class="field"><label for="deployment">Deployment mode</label><select id="deployment" name="deployment"><option>Cloud</option><option>On-prem</option><option>Air-gapped</option></select></div>
+          <div class="field full"><label for="scope">What has to be provable?</label><textarea id="scope" name="scope" rows="3" placeholder="Describe the work, evidence or decision that needs a defensible path..."></textarea></div>
+        </div>
+        <button class="intake-submit button" type="submit" data-submit>Transmit specification <span>→</span></button>
+      </form>
+      <div class="intake-note micro">PRESENTATIONAL INTAKE // NO NETWORK REQUEST</div>
+    </div>
+  </div>
+</section>
