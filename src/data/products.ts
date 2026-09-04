@@ -167,3 +167,23 @@ export const portfolioMetrics: ProofMetric[] = [
   { value: '1.0', label: 'Cross-brand memory isolation', body: 'AtelierOS holds it at exactly 1.0 with a stop-the-line gate below that value.', accent: 'blue' },
   { value: '10ms', label: 'Budget to grade 5,000 activities', body: 'Peak Logic’s quality pass gates every delay analysis on the import critical path.', accent: 'cyan' }
 ];
+
+const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+
+// Counted test functions, per product, from each repo's own suite. Kept as an
+// explicit table so the console figure stays auditable rather than asserted.
+// Products whose suites are counted by file rather than by function are 0 here,
+// which is why the headline is stated as a floor ("+") and never as a total.
+export const testFunctionCounts: Partial<Record<ProductSlug, number>> = {
+  onelegal: 445,
+  atelier: 521,
+  'quality-ai': 149
+};
+
+const countedTests = Object.values(testFunctionCounts).reduce((a, b) => a + b, 0);
+export const testSurface = `${(Math.floor(countedTests / 100) * 100).toLocaleString('en-US')}+`;
+
+export const productCount = products.length;
+export const productCountWord = NUMBER_WORDS[productCount] ?? String(productCount);
+export const productCountPadded = String(productCount).padStart(2, '0');
+export const capitalise = (word: string) => word.charAt(0).toUpperCase() + word.slice(1);

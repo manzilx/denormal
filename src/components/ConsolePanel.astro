@@ -1,12 +1,11 @@
 ---
-import { products } from '../data/products';
-const consoleOrder = ['sentinel', 'onelegal', 'quality-ai', 'peaklogic', 'atelier'];
-const consoleProducts = consoleOrder.map((slug) => products.find((product) => product.slug === slug)!);
+import { products, productCountPadded, testSurface } from '../data/products';
+const consoleProducts = products;
 ---
 <div class="console" aria-label="Portfolio system telemetry">
   <div class="console-top">
-    <div class="console-stat"><div class="micro">Portfolio</div><div class="console-value">05</div></div>
-    <div class="console-stat"><div class="micro">Test surface</div><div class="console-value">1,100+</div></div>
+    <div class="console-stat"><div class="micro">Portfolio</div><div class="console-value">{productCountPadded}</div></div>
+    <div class="console-stat"><div class="micro">Test surface</div><div class="console-value">{testSurface}</div></div>
     <div class="console-stat"><div class="micro">Core decisions</div><div class="console-value">100%</div></div>
   </div>
   <div class="console-list">
