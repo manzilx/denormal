@@ -1,19 +1,20 @@
 ---
 import Logo from './Logo.astro';
+import { url } from '../lib/url';
 ---
 <header id="dnrm-bar" class="site-header">
   <div class="container">
-    <a href="/" aria-label="Denormal Labs home"><Logo /></a>
+    <a href={url("/")} aria-label="Denormal Labs home"><Logo /></a>
     <nav class="header-nav" aria-label="Primary navigation">
-      <a href="/#products">Products</a>
-      <a href="/#sectors">Sectors</a>
-      <a href="/#runtime">Runtime</a>
-      <a href="/#benchmarks">Proof</a>
-      <a href="/about/">About</a>
+      <a href={url("/#products")}>Products</a>
+      <a href={url("/#sectors")}>Sectors</a>
+      <a href={url("/#runtime")}>Runtime</a>
+      <a href={url("/#benchmarks")}>Proof</a>
+      <a href={url("/about/")}>About</a>
     </nav>
     <div class="header-actions">
       <button id="dnrm-theme" class="theme-toggle" type="button" aria-label="Toggle dark mode">DK</button>
-      <a class="nav-cta" href="/contact/">Talk to engineering</a>
+      <a class="nav-cta" href={url("/contact/")}>Talk to engineering</a>
     </div>
   </div>
   <div id="dnrm-progress" class="progress" aria-hidden="true"></div>

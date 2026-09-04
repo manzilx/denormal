@@ -1,16 +1,17 @@
 ---
 import Logo from './Logo.astro';
 import { products } from '../data/products';
+import { url } from '../lib/url';
 ---
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <a href="/" aria-label="Denormal Labs home"><Logo small /></a>
+      <a href={url("/")} aria-label="Denormal Labs home"><Logo small /></a>
       <p class="footer-description">Five systems for work where being right has to be demonstrable: safety, contracts, quality, schedule and production.</p>
       <div class="architecture-chips"><span class="chip">ON-PREM CAPABLE</span><span class="chip">LOCAL INFERENCE</span><span class="chip">AUDIT-CHAINED</span></div>
     </div>
-    <div><div class="footer-heading">Solutions</div><div class="footer-links">{products.map((product) => <a href={`/products/${product.slug}/`}>{product.name}</a>)}</div></div>
-    <div><div class="footer-heading">Company</div><div class="footer-links"><a href="/about/">About Denormal</a><a href="/contact/">Contact engineering</a><a href="/#runtime">Shared runtime</a><a href="/#benchmarks">Proof strip</a></div></div>
+    <div><div class="footer-heading">Solutions</div><div class="footer-links">{products.map((product) => <a href={url(`/products/${product.slug}/`)}>{product.name}</a>)}</div></div>
+    <div><div class="footer-heading">Company</div><div class="footer-links"><a href={url("/about/")}>About Denormal</a><a href={url("/contact/")}>Contact engineering</a><a href={url("/#runtime")}>Shared runtime</a><a href={url("/#benchmarks")}>Proof strip</a></div></div>
     <div><div class="footer-heading">System status</div><div class="status">Status: Nominal</div><div class="micro" style="margin-top:14px">PORTFOLIO: 5 SYSTEMS</div></div>
   </div>
   <div class="container footer-legal"><span>© 2026 Denormal Labs. Five systems // one thesis.</span><span class="footer-meta"><span>STATIC OUTPUT</span><span>ONLINE</span></span></div>

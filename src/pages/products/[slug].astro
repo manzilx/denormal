@@ -11,9 +11,10 @@ export function getStaticPaths() {
 }
 
 const { product } = Astro.props;
+import { url } from '../../lib/url';
 ---
 <Base title={`${product.name} — Denormal Labs`} description={product.brief}>
-  <section class="product-hero"><div class="container product-hero-grid"><div><div class="product-index">{product.index}</div><div class="micro" style="margin-top:22px">{product.eyebrow}</div><h1 class="display">{product.name}</h1></div><div><div class="tagline">{product.tagline}</div><p class="brief">{product.brief}</p><a class="back-link" href="/#products">← Back to portfolio</a></div></div></section>
+  <section class="product-hero"><div class="container product-hero-grid"><div><div class="product-index">{product.index}</div><div class="micro" style="margin-top:22px">{product.eyebrow}</div><h1 class="display">{product.name}</h1></div><div><div class="tagline">{product.tagline}</div><p class="brief">{product.brief}</p><a class="back-link" href={url("/#products")}>← Back to portfolio</a></div></div></section>
 
   <section class="section"><div class="container"><SectionHead eyebrow={`${product.name} // Capabilities`} title="What is shipped." meta="SOURCE-BOUND CAPABILITY SET" /><div class="card-grid">{product.capabilities.map((capability, index) => <NumberedCard number={String(index + 1).padStart(2, '0')} code={capability.code.split(' // ').at(-1)} title={capability.title} body={capability.body} accent={index === 0} />)}</div></div></section>
 
