@@ -58,10 +58,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .site-header .container { min-height: inherit; display: flex; align-items: center; gap: 28px; }
 .progress { position: absolute; inset: auto 0 0; height: 2px; background: var(--acc2); width: 0; }
 .brand { display: inline-flex; flex-direction: column; flex: 0 0 auto; color: var(--ink); }
-.brand-word { font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.045em; transition: font-size .2s ease; }
+.brand-word { font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.035em; transition: font-size .2s ease; }
 .brand.small .brand-word { font-size: 19px; }
 .brand-kicker { margin-top: 3px; color: var(--muted); font: 600 9px/1 'JetBrains Mono', monospace; letter-spacing: .14em; }
-.logo-mark { display: block; width: 100%; height: 7px; margin-top: 4px; color: currentColor; }
+/* The mark is preserveAspectRatio="none" and must span exactly the wordmark's
+   width. An in-flow SVG floors the flex container at its own intrinsic width
+   (height x 200/16 = 125px), so once the header shrinks on scroll the wordmark
+   drops below that and the rule overhangs it. Taking the SVG out of flow inside
+   a sized wrapper removes that contribution, so the rule tracks the glyphs at
+   every size. Heights are the lock's: 10px in the header, 7px in the footer. */
+.logo-rule { position: relative; display: block; width: 100%; height: 10px; margin-top: 4px; line-height: 0; }
+.brand.small .logo-rule { height: 7px; }
+.logo-mark { position: absolute; inset: 0; display: block; width: 100%; height: 100%; color: currentColor; }
 .header-nav { display: flex; flex: 1; justify-content: center; gap: clamp(14px, 2.2vw, 32px); color: var(--ink-3); font: 600 10px/1 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
 .header-nav a { padding-block: 4px; border-bottom: 2px solid transparent; }
 .header-nav a:hover { border-bottom-color: var(--accent); }
