@@ -16,18 +16,17 @@ import { products, portfolioMetrics, sharedStages } from '../data/products';
         <h1 class="display">Software for work that has to be <span style="color:var(--accent)">provable</span>.</h1>
         <p class="lede">Denormal Labs builds operating systems for industries where being wrong is expensive and being right has to be demonstrable — safety, contracts, quality, schedule and production. Deterministic engines make the decisions. Language models read, classify and draft, and every answer carries its source, its grounding and its audit row.</p>
         <div class="hero-actions"><a class="button primary" href="#products">See the portfolio <span>→</span></a><a class="button secondary" href="#intake">Talk to engineering</a></div>
-        <div class="gauge" aria-label="Denormal method">
-          <div class="gauge-item"><div class="micro">01</div><div class="gauge-title">Ground</div></div>
-          <div class="gauge-item"><div class="micro">02</div><div class="gauge-title">Constrain</div></div>
-          <div class="gauge-item"><div class="micro">03</div><div class="gauge-title">Decide</div></div>
-          <div class="gauge-item"><div class="micro">04</div><div class="gauge-title">Prove</div></div>
+        <div class="gauge" aria-label="The Denormal method">
+          <div class="gauge-head"><span class="micro">The denormal method</span><span class="micro">Four stages // all load-bearing</span></div>
+          <div class="gauge-bars"><i></i><i></i><i></i><i></i></div>
+          <div class="gauge-labels"><span>01 Ground</span><span>02 Constrain</span><span>03 Decide</span><span>04 Prove</span></div>
         </div>
       </div>
       <ConsolePanel />
     </div>
   </section>
 
-  <section id="sectors" class="sectors"><div class="container sector-line"><div class="micro">Where the work gets expensive</div><div class="sector-list"><span>Industrial safety</span><span>Contracts &amp; claims</span><span>EPC quality assurance</span><span>Capital project controls</span><span>Apparel production</span></div></div></section>
+  <section id="sectors" class="sectors"><div class="container sector-line"><span class="sector-label">Where the work gets expensive</span><span class="sector-rule"></span><span>Industrial safety</span><span class="sector-sep">/</span><span>Contracts &amp; claims</span><span class="sector-sep">/</span><span>EPC quality assurance</span><span class="sector-sep">/</span><span>Project controls</span><span class="sector-sep">/</span><span>Apparel production</span></div></section>
 
   <section id="products" class="section"><div class="container"><SectionHead eyebrow="Portfolio // 5 systems" title="One method. Five places where evidence matters." meta="PORTFOLIO: 5 SYSTEMS // MEASURED IN-REPO" /><div class="card-grid">{products.map((product, index) => <NumberedCard number={product.index} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={`/products/${product.slug}/`} accent={index === 1} />)}</div></div></section>
 
