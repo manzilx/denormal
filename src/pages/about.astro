@@ -2,12 +2,143 @@
 import Base from '../layouts/Base.astro';
 import SectionHead from '../components/SectionHead.astro';
 import NumberedCard from '../components/NumberedCard.astro';
-import { products, productCountWord, capitalise } from '../data/products';
+import StageCard from '../components/StageCard.astro';
 import { url } from '../lib/url';
+
+// Sourced from the owner's résumé. Two standing constraints: no figures, and
+// no employer or customer named. Duration and scale are stated in words.
+const experience = [
+  {
+    code: 'PROJECTS',
+    title: 'Capital project leadership',
+    body: 'Functional leadership of a portfolio of capital projects in emissions compliance and power generation, across their commercial life rather than a single phase of it.',
+    stat: ['EPC', 'infrastructure and power'] as [string, string]
+  },
+  {
+    code: 'COMMERCIAL',
+    title: 'Settlements and margin recovery',
+    body: 'Negotiating commercial settlements, recovering margin on running contracts, and closing new ones — the side of a project where the paperwork becomes money.',
+    stat: ['Contracts', 'negotiated and closed'] as [string, string]
+  },
+  {
+    code: 'CLAIMS',
+    title: 'Claims, disputes and arbitration',
+    body: 'Dispute and arbitration support across national highway concession programmes under FIDIC-family contracts, including extension-of-time and change-order claims.',
+    stat: ['FIDIC', 'concession programmes'] as [string, string]
+  },
+  {
+    code: 'PROCESS',
+    title: 'Lean ways of working',
+    body: 'Process re-engineering and adoption across a function: the operating cadence, the review discipline, and the reporting that makes either of them stick.',
+    stat: ['Lean', 'cadence and adoption'] as [string, string]
+  },
+  {
+    code: 'TEACHING',
+    title: 'Training the function',
+    body: 'In-house training in commercial acumen — which is where you learn precisely which parts of a process people get wrong, and why.',
+    stat: ['Training', 'commercial acumen'] as [string, string]
+  }
+];
+
+const method = [
+  {
+    number: '01',
+    title: 'Start from the real process',
+    body: 'Decision gates, roles, evidence, approvals, Lean flow and the audit trail — mapped as they actually run, not as the manual describes them.',
+    stats: [['FROM', 'the operating side'], ['ARTEFACT', 'the real process']] as [string, string][]
+  },
+  {
+    number: '02',
+    title: 'Convert it into architecture',
+    body: 'The workflow becomes screens, schemas, APIs, prompts, fallbacks and exports — with the load-bearing decisions written as deterministic code.',
+    stats: [['INTO', 'schemas and gates'], ['CORE', 'deterministic']] as [string, string][]
+  },
+  {
+    number: '03',
+    title: 'Pressure-test it against the work',
+    body: 'Then check it against operating experience rather than a demo script, because the failure modes that matter are the ones a practitioner already knows.',
+    stats: [['AGAINST', 'real operations'], ['NOT', 'a demo script']] as [string, string][]
+  }
+];
+
+const credentials = [
+  'MBA Executive, FMS Delhi',
+  'B.Tech Civil Engineering, NERIST',
+  'CIDC',
+  'ASSOCHAM',
+  'IACCM'
+];
 ---
-<!-- TODO: add owner-supplied founding, team and location facts here when available. -->
-<Base title="About Denormal Labs" description={`${capitalise(productCountWord)} systems, one thesis: auditable operations software.`}>
-  <section class="product-hero"><div class="container product-hero-grid"><div><div class="product-index">00</div><h1 class="display">{capitalise(productCountWord)} systems.<br /><span style="color:var(--accent)">One thesis.</span></h1></div><div><div class="micro">ABOUT // DENORMAL LABS</div><p class="brief">Denormal Labs builds software for work where being wrong is expensive and being right has to be demonstrable. Across safety, procurement, quality, schedule, claims, statutory filing and production, the method stays consistent: structure the record, constrain the model, make the decision deterministic and return the proof with it.</p></div></div></section>
-  <section class="section"><div class="container"><SectionHead eyebrow="The thesis" title="Best-effort software is not enough when the output becomes evidence." meta="GROUND // CONSTRAIN // DECIDE // PROVE" /><div class="card-grid">{products.slice(0, 3).map((product) => <NumberedCard number={product.index} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.tagline + ' ' + product.brief} stat={product.cardStat} href={url(`/products/${product.slug}/`)} />)}</div></div></section>
-  <section class="section"><div class="container detail-layout"><div><SectionHead eyebrow="The portfolio" title="The method travels." meta="SAFETY // PROCUREMENT // QUALITY // SCHEDULE // CLAIMS // STATUTORY // PRODUCTION" /><p class="lede" style="margin-top:24px">Sentinel grounds safety advice in cited authorities and refuses to answer below its floor. Control Tower matches goods receipts with a matcher that holds no model. Quality AI makes a requirement unrepresentable without its source citation. Peak Logic keeps three CPM implementations in parity. OneLegal freezes the evidence before drafting. Sachiv computes every statutory date and figure before the model is allowed to describe it. AtelierOS keeps the sketch bound to the production record.</p></div><aside class="detail-sidebar"><div class="micro">COMPANY PROFILE</div><h3 style="margin-top:14px">Owner-supplied details pending.</h3><p class="lede" style="font-size:14px;line-height:21px;margin-top:10px">This page intentionally contains no invented founding story, team profile or location.</p></aside></div></section>
+<Base
+  title="About Denormal Labs"
+  description="Operations software built from two decades of running the processes it encodes."
+>
+  <section class="product-hero">
+    <div class="container product-hero-grid">
+      <div>
+        <div class="product-index">00</div>
+        <h1 class="display">Built from the<br /><span style="color:var(--accent)">operating</span> side.</h1>
+      </div>
+      <div>
+        <div class="micro">ABOUT // DENORMAL LABS</div>
+        <p class="brief">Over two decades in EPC, infrastructure and power-sector contract leadership came before any of this software existed. The processes these systems encode — the claim, the hold point, the receipt, the statutory clock — are processes we ran, argued and answered for. That is the whole reason the portfolio looks the way it does.</p>
+        <a class="back-link" href={url('/#products')}>← See the portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow="Before the software"
+        title="Two decades on the other side of the desk."
+        meta="MANUFACTURING // COMPLEX PROJECTS"
+      />
+      <div class="card-grid">
+        {experience.map((item, index) => (
+          <NumberedCard
+            number={String(index + 1).padStart(2, '0')}
+            code={item.code}
+            title={item.title}
+            body={item.body}
+            stat={item.stat}
+            accent={index === 0}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow="How we build"
+        title="The process comes first. It always did."
+        meta="PROCESS → ARCHITECTURE → PRESSURE TEST"
+      />
+      <div class="runtime-grid">{method.map((stage) => <StageCard stage={stage} />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-layout">
+      <div>
+        <SectionHead
+          eyebrow="Where the models sit"
+          title="Last thing chosen. First thing constrained."
+          meta="THE TECHNOLOGY SERVES THE PROCESS"
+        />
+        <p class="lede" style="margin-top:24px">A language model is the last component we pick and the first one we put a fence around. The decisions that carry consequence — precedence between conflicting specifications, whether a hold point may be passed, what a statute actually requires and by when — are deterministic code with tests against them. The model reads, classifies and drafts around that, and what it returns carries its source, its grounding and its audit row.</p>
+        <p class="lede" style="margin-top:18px">This ordering is not a technical preference. It is what years of being personally accountable for an output teaches you to build.</p>
+        <p class="lede" style="margin-top:18px">It is also why the sensitive path in these systems can run without reaching a model vendor at all — through forced-stub modes, deterministic rule engines, a local inference endpoint, or a keyless offline embedder. In several of them that is the default rather than an option, so the work can stay inside your estate.</p>
+      </div>
+      <aside class="detail-sidebar">
+        <div class="micro">Credentials</div>
+        <div class="chip-list" style="margin-top:16px">{credentials.map((c) => <span class="chip">{c}</span>)}</div>
+        <div class="micro" style="margin-top:32px">Based in</div>
+        <h3 style="margin-top:10px">New Delhi, India.</h3>
+        <p class="lede" style="font-size:14px;line-height:21px;margin-top:10px">Working with manufacturers and complex-project owners wherever the process is the problem.</p>
+      </aside>
+    </div>
+  </section>
 </Base>

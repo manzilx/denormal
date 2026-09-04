@@ -73,7 +73,7 @@ const productEntries: Omit<Product, 'index'>[] = [
   {
     slug: 'control-tower', name: 'Control Tower', eyebrow: 'CONTROL TOWER // PROCUREMENT',
     tagline: 'Traced from spec to site receipt.',
-    brief: 'A procurement and supply-chain cockpit for EPC and project-driven contractors. It carries a line from the bill of materials through sourcing and award to the goods receipt recorded at the site store, and keeps the whole path auditable.',
+    brief: 'A procurement and supply-chain cockpit for manufacturers and complex capital projects. It carries a line from the bill of materials through sourcing and award to the goods receipt recorded at the site store, and keeps the whole path auditable.',
     console: { input: 'Delivery challan', output: 'matched receipt \u2192 stock ledger', status: 'AUTO \u2265 0.85' },
     cardStat: ['13', 'stages traced, BOM to delivery'],
     capabilities: [
@@ -97,9 +97,9 @@ const productEntries: Omit<Product, 'index'>[] = [
     ]
   },
   {
-    slug: 'quality-ai', name: 'Quality AI', eyebrow: 'QUALITY AI // EPC QA',
+    slug: 'quality-ai', name: 'Quality AI', eyebrow: 'QUALITY AI // QUALITY ASSURANCE',
     tagline: 'The model reads. The engine decides.',
-    brief: 'Document-grounded quality control for EPC work packages. Three requirement sources become one governing requirement and an enforced ITP path to NCR closure.',
+    brief: 'Document-grounded quality control for manufacturing and project work packages. Three requirement sources become one governing requirement and an enforced ITP path to NCR closure.',
     console: { input: '3 specifications', output: '1 governing requirement', status: '409 ON BYPASS' },
     cardStat: ['99', 'API routes'],
     capabilities: [
@@ -121,7 +121,7 @@ const productEntries: Omit<Product, 'index'>[] = [
   {
     slug: 'peaklogic', name: 'Peak Logic', eyebrow: 'PEAK LOGIC // CONTROLS',
     tagline: 'Float you can defend.',
-    brief: 'A CPM scheduling and forensic delay-analysis platform for EPC planners and claims consultants. It grades a P6 schedule before producing a defensible net extension-of-time entitlement.',
+    brief: 'A CPM scheduling and forensic delay-analysis platform for planners and claims consultants on complex projects. It grades a P6 schedule before producing a defensible net extension-of-time entitlement.',
     console: { input: 'XER', output: 'graded → net EOT', status: 'PARITY LOCKED' },
     cardStat: ['518', 'activities in the reference project'],
     capabilities: [
@@ -144,7 +144,7 @@ const productEntries: Omit<Product, 'index'>[] = [
   {
     slug: 'onelegal', name: 'OneLegal', eyebrow: 'ONELEGAL // CLAIMS',
     tagline: 'Evidence you can seal.',
-    brief: 'A contract-and-litigation workbench for in-house counsel and EPC claims teams. Counsel curates and cryptographically seals an evidence set before governed drafting can run over it.',
+    brief: 'A contract-and-litigation workbench for in-house counsel and commercial claims teams. Counsel curates and cryptographically seals an evidence set before governed drafting can run over it.',
     console: { input: 'Sealed evidence', output: 'governed drafting', status: 'SEAL VERIFIED' },
     cardStat: ['~300', 'playbook questions across 11 families'],
     capabilities: [

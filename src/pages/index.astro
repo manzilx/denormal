@@ -9,13 +9,13 @@ import Intake from '../components/Intake.astro';
 import { products, portfolioMetrics, sharedStages, productCount, productCountWord, capitalise } from '../data/products';
 import { url } from '../lib/url';
 ---
-<Base title="Denormal Labs — Software for work that has to be provable" description="Denormal Labs builds operating systems for safety, contracts, quality, schedule and production.">
+<Base title="Denormal Labs — operations software for manufacturing and complex projects" description="Denormal Labs builds operations software for manufacturing and complex projects, from processes we ran before we wrote them.">
   <section id="top" class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <div class="badge micro">{productCountWord.toUpperCase()} SYSTEMS // ONE THESIS</div>
-        <h1 class="display">Software for work that has to be <span style="color:var(--accent)">provable</span>.</h1>
-        <p class="lede">Denormal Labs builds operating systems for industries where being wrong is expensive and being right has to be demonstrable — safety, contracts, quality, schedule and production. Deterministic engines make the decisions. Language models read, classify and draft, and every answer carries its source, its grounding and its audit row.</p>
+        <div class="badge micro">Built from the operating side</div>
+        <h1 class="display">We knew the <span style="color:var(--accent)">process</span> before we wrote the software.</h1>
+        <p class="lede">Denormal Labs builds operations software for manufacturing and complex projects. Each system starts from a process we have actually run — its decision gates, approvals, evidence and audit trail — and the technology is chosen to serve that process, not to replace the judgement inside it.</p>
         <div class="hero-actions"><a class="button primary" href="#products">See the portfolio <span>→</span></a><a class="button secondary" href="#intake">Talk to engineering</a></div>
         <div class="gauge" aria-label="The Denormal method">
           <div class="gauge-head"><span class="micro">The denormal method</span><span class="micro">Four stages // all load-bearing</span></div>
@@ -27,13 +27,22 @@ import { url } from '../lib/url';
     </div>
   </section>
 
-  <section id="sectors" class="sectors"><div class="container sector-line"><span class="sector-label">Where the work gets expensive</span><span class="sector-rule"></span><span>Industrial safety</span><span class="sector-sep">/</span><span>Procurement</span><span class="sector-sep">/</span><span>EPC quality</span><span class="sector-sep">/</span><span>Project controls</span><span class="sector-sep">/</span><span>Claims</span><span class="sector-sep">/</span><span>Statutory</span><span class="sector-sep">/</span><span>Apparel</span></div></section>
+  <section id="sectors" class="sectors"><div class="container sector-line"><span class="sector-label">Where the work gets expensive</span><span class="sector-rule"></span><span>Manufacturing</span><span class="sector-sep">/</span><span>Complex projects</span><span class="sector-sep">/</span><span>Safety</span><span class="sector-sep">/</span><span>Procurement</span><span class="sector-sep">/</span><span>Quality</span><span class="sector-sep">/</span><span>Claims</span><span class="sector-sep">/</span><span>Statutory</span></div></section>
 
-  <section id="products" class="section"><div class="container"><SectionHead eyebrow={`Portfolio // ${productCount} systems`} title={`One method. ${capitalise(productCountWord)} places where evidence matters.`} meta={`PORTFOLIO: ${productCount} SYSTEMS // MEASURED IN-REPO`} /><div class="card-grid">{products.map((product, index) => <NumberedCard number={product.index} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={url(`/products/${product.slug}/`)} accent={index === 1} />)}</div></div></section>
+  <section id="products" class="section"><div class="container"><SectionHead eyebrow={`Portfolio // ${productCount} systems`} title={`One method. ${capitalise(productCountWord)} places we have worked.`} meta={`PORTFOLIO: ${productCount} SYSTEMS // MEASURED IN-REPO`} /><div class="card-grid">{products.map((product, index) => <NumberedCard number={product.index} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={url(`/products/${product.slug}/`)} accent={index === 1} />)}</div></div></section>
 
   <section id="runtime" class="section"><div class="container"><SectionHead eyebrow="Runtime // Shared method" title="The model is useful. The system is accountable." meta="GROUND → CONSTRAIN → DECIDE → PROVE" /><div class="runtime-grid">{sharedStages.map((stage) => <StageCard stage={stage} />)}</div></div></section>
 
   <section id="benchmarks" class="section band"><div class="container"><SectionHead eyebrow="Measured in-repo" title="Proof before promises." meta={`PORTFOLIO: ${productCount} SYSTEMS // MEASURED IN-REPO`} /><div class="metric-grid">{portfolioMetrics.map((metric) => <MetricTile metric={metric} />)}</div></div></section>
+
+  <section id="security" class="section"><div class="container"><SectionHead eyebrow="Privacy &amp; security" title="Your data does not have to leave to be useful." meta="POSTURE // TRACEABLE TO SOURCE" /><div class="card-grid">
+    <NumberedCard number="01" code="RESIDENCY" title="The sensitive path can run with no model vendor" body="Sentinel forces deterministic stubs and local embeddings on demand. Control Tower falls back to written templates with no key present. Sachiv answers from its rule engine offline. AtelierOS ships a keyless embedder as the default, and OneLegal's code default is a local inference endpoint." stat={['4 ways', 'to keep data in your estate']} accent={true} />
+    <NumberedCard number="02" code="ISOLATION" title="Separated by construction, not by a filter" body="OneLegal gives every matter its own vector collection, so a query cannot physically reach another matter's index — proven by a seeded canary that fails loudly. Peak Logic's org guard refuses an unregistered route rather than allowing it through." stat={['Fail-closed', 'unregistered routes refused']} />
+    <NumberedCard number="03" code="AUDIT" title="Two trails built to survive an adversary" body="Quality AI's audit log is append-only enforced by database triggers, written in the same transaction as the change it records. OneLegal keeps a SHA-256 hash chain, flushed to disk per event, that detects tampering, deletion and re-linking — and verifies offline." stat={['SHA-256', 'chained and verifiable']} />
+    <NumberedCard number="04" code="BOUNDARY" title="Retrieved content is data, never instruction" body="OneLegal marks every evidence excerpt as untrusted material the model may not obey, screens it against known injection patterns, and flags rather than silently refusing. Filing, signing, serving and deleting are refused to any automated path, leaving a human route only." stat={['Human-only', 'for external actions']} />
+  </div>
+  <div class="disclosure"><div class="micro">Where the line is</div><p>These are engineering postures, not audited controls. There is no SOC 2 or ISO 27001 certification behind them, no encryption at rest, and no single sign-on in any of these systems today. Several run on self-asserted identity headers and are built for a trusted network rather than the open internet. We would rather you knew that from us than found it in a security review.</p></div>
+  </div></section>
 
   <Intake />
 </Base>

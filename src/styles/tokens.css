@@ -147,6 +147,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .metric-rule.blue { background: var(--acc3); }
 .metric-tile p { margin: 18px 0 0; color: #A1A1AA; font-size: 13px; line-height: 20px; }
 
+.disclosure { margin-top: 1px; padding: 30px 26px; background: var(--panel); border: 1px solid var(--line); border-top: 2px solid var(--accent); }
+.disclosure p { max-width: 860px; margin: 14px 0 0; color: var(--ink-3); font-size: 15px; line-height: 24px; text-wrap: pretty; }
+
 .intake-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); align-items: start; gap: 56px; }
 .intake-copy h2 { max-width: 520px; margin: 24px 0 0; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.04; letter-spacing: -.035em; }
 .intake-copy .lede { max-width: 480px; margin: 22px 0 0; }
@@ -210,6 +213,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 900px) {
   .hero-grid, .product-hero-grid, .detail-layout { grid-template-columns: 1fr; }
   .header-nav { gap: 14px; }
+  /* Six nav items leave no room for the header CTA on a tablet, so it drops a
+     breakpoint earlier than the nav does. It is repeated in the hero, the
+     footer and on /contact/, so nothing is actually lost. */
+  .nav-cta { display: none; }
   .detail-sidebar { position: static; }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
