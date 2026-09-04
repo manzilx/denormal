@@ -27,7 +27,7 @@ import { url } from '../lib/url';
     </div>
   </section>
 
-  <section id="sectors" class="sectors"><div class="container sector-line"><span class="sector-label">Where the work gets expensive</span><span class="sector-rule"></span><span>Industrial safety</span><span class="sector-sep">/</span><span>Contracts &amp; claims</span><span class="sector-sep">/</span><span>EPC quality assurance</span><span class="sector-sep">/</span><span>Project controls</span><span class="sector-sep">/</span><span>Apparel production</span></div></section>
+  <section id="sectors" class="sectors"><div class="container sector-line"><span class="sector-label">Where the work gets expensive</span><span class="sector-rule"></span><span>Industrial safety</span><span class="sector-sep">/</span><span>Procurement</span><span class="sector-sep">/</span><span>EPC quality</span><span class="sector-sep">/</span><span>Project controls</span><span class="sector-sep">/</span><span>Claims</span><span class="sector-sep">/</span><span>Statutory</span><span class="sector-sep">/</span><span>Apparel</span></div></section>
 
   <section id="products" class="section"><div class="container"><SectionHead eyebrow={`Portfolio // ${productCount} systems`} title={`One method. ${capitalise(productCountWord)} places where evidence matters.`} meta={`PORTFOLIO: ${productCount} SYSTEMS // MEASURED IN-REPO`} /><div class="card-grid">{products.map((product, index) => <NumberedCard number={product.index} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={url(`/products/${product.slug}/`)} accent={index === 1} />)}</div></div></section>
 

@@ -1,4 +1,11 @@
-export type ProductSlug = 'sentinel' | 'quality-ai' | 'peaklogic' | 'onelegal' | 'atelier';
+export type ProductSlug =
+  | 'sentinel'
+  | 'control-tower'
+  | 'quality-ai'
+  | 'peaklogic'
+  | 'onelegal'
+  | 'sachiv'
+  | 'atelier';
 
 export interface Capability {
   code: string;
@@ -36,9 +43,12 @@ export interface Product {
   proofs: ProofMetric[];
 }
 
-export const products: Product[] = [
+// Order is the narrative the home page tells, and the number each product
+// carries is its position in it. Reorder this array and the cards, console
+// rows, detail pages and about page all renumber together.
+const productEntries: Omit<Product, 'index'>[] = [
   {
-    slug: 'sentinel', index: '01', name: 'Sentinel', eyebrow: 'SENTINEL // EHS',
+    slug: 'sentinel', name: 'Sentinel', eyebrow: 'SENTINEL // EHS',
     tagline: 'Safety intelligence that refuses to guess.',
     brief: 'A mobile-first EHS platform for plants and construction sites. It turns hazard evidence into cited countermeasures, with a hard refusal path when the source base is not strong enough.',
     console: { input: 'Hazard capture', output: 'cited countermeasure', status: '30/100 FLOOR' },
@@ -61,7 +71,33 @@ export const products: Product[] = [
     proofs: [{ value: '30/100', label: 'Grounding floor', body: 'Below it, Sentinel returns “insufficient sources” instead of synthesising an answer.', accent: 'orange' }, { value: '21', label: 'Hazard taxonomy', body: 'The shipped hazard and waste taxonomy anchors classification and reporting.', accent: 'cyan' }]
   },
   {
-    slug: 'quality-ai', index: '02', name: 'Quality AI', eyebrow: 'QUALITY AI // EPC QA',
+    slug: 'control-tower', name: 'Control Tower', eyebrow: 'CONTROL TOWER // PROCUREMENT',
+    tagline: 'Traced from spec to site receipt.',
+    brief: 'A procurement and supply-chain cockpit for EPC and project-driven contractors. It carries a line from the bill of materials through sourcing and award to the goods receipt recorded at the site store, and keeps the whole path auditable.',
+    console: { input: 'Delivery challan', output: 'matched receipt \u2192 stock ledger', status: 'AUTO \u2265 0.85' },
+    cardStat: ['13', 'stages traced, BOM to delivery'],
+    capabilities: [
+      { code: '01 // PLAN', title: 'Bill of materials as the spine', body: 'Every line carries a lifecycle state from missing specification through requisitioned and ordered to delivered, with long-lead items flagged.' },
+      { code: '02 // SOURCE', title: 'Requisition to purchase order', body: 'Requisition, RFQ, quote comparison and weighted technical bid evaluation produce a combined rank that drives the award and drafts the order.' },
+      { code: '03 // RECEIVE', title: 'Goods receipt at the site store', body: 'A device-enrolled field API captures receipts against the delivery challan, matched to open orders by a scored matcher that contains no model at all.' },
+      { code: '04 // GOVERN', title: 'Approval gates on high-risk writes', body: 'Large orders, single-source awards and over-budget quotes freeze their payload behind an approval, which the committer later replays verbatim.' },
+      { code: '05 // TRACE', title: 'Audit chain and reconciliation', body: 'Site and ERP receipt channels accumulate separately and stay independently auditable, under entity tracing, pivots and export.' }
+    ],
+    stages: [
+      { number: '01', title: 'Plan', body: 'The bill of materials and procurement plan establish what the project owes itself, and by when.', stats: [['STATES', '5 per line'], ['LONG LEAD', '\u2265 365 days']] },
+      { number: '02', title: 'Source', body: 'Sourcing runs to an award that is scored, not asserted, with delivery terms carried as a first-class field.', stats: [['INCOTERMS', '7 supported'], ['EVALUATION', 'weighted TBE']] },
+      { number: '03', title: 'Receive', body: 'Receipts sync from the site idempotently, so a replay is a no-op and a conflict returns the server watermark.', stats: [['AUTO-MATCH', '0.85'], ['OVER-RECEIPT', '1.05 headroom']] },
+      { number: '04', title: 'Prove', body: 'Confirmation commits durably first, then applies effects, with a startup sweep that repairs any crash in between.', stats: [['CHAIN', '13 stages'], ['LEDGER', 'append-only']] }
+    ],
+    stack: ['FastAPI / Python', 'Next.js 14 / React 18', 'SQLite in WAL for the store ledger', 'Snapshotted in-memory domain state', 'DeepSeek tool-calling, no retrieval layer', 'Docker + Caddy, or Fly.io'],
+    standards: ['Incoterms EXW \u2192 DDP', 'GRN and delivery challan', 'Technical bid evaluation', 'On-time delivery and quality PPM', 'Free-issue vs contractor material', 'UOM canonicalisation'],
+    proofs: [
+      { value: '0.85', label: 'Auto-match threshold', body: 'The receipt matcher is deterministic by design and contains no model; extraction is the only stage that calls one.', accent: 'orange' },
+      { value: '13', label: 'Traced stages', body: 'The audit chain runs from bill-of-materials line to delivery, with entity tracing and export.', accent: 'cyan' }
+    ]
+  },
+  {
+    slug: 'quality-ai', name: 'Quality AI', eyebrow: 'QUALITY AI // EPC QA',
     tagline: 'The model reads. The engine decides.',
     brief: 'Document-grounded quality control for EPC work packages. Three requirement sources become one governing requirement and an enforced ITP path to NCR closure.',
     console: { input: '3 specifications', output: '1 governing requirement', status: '409 ON BYPASS' },
@@ -83,7 +119,7 @@ export const products: Product[] = [
     proofs: [{ value: '0', label: 'LLM decisions on load-bearing paths', body: 'The model reads, classifies and drafts; deterministic Rust makes the decisions.', accent: 'cyan' }, { value: '149', label: 'Counted test functions', body: 'The supplied verification count includes 100 Rust tests and 49 Python tests.', accent: 'blue' }]
   },
   {
-    slug: 'peaklogic', index: '03', name: 'Peak Logic', eyebrow: 'PEAK LOGIC // CONTROLS',
+    slug: 'peaklogic', name: 'Peak Logic', eyebrow: 'PEAK LOGIC // CONTROLS',
     tagline: 'Float you can defend.',
     brief: 'A CPM scheduling and forensic delay-analysis platform for EPC planners and claims consultants. It grades a P6 schedule before producing a defensible net extension-of-time entitlement.',
     console: { input: 'XER', output: 'graded → net EOT', status: 'PARITY LOCKED' },
@@ -106,7 +142,7 @@ export const products: Product[] = [
     proofs: [{ value: '10ms', label: 'Quality budget', body: 'The schedule-quality pass targets 5,000 activities on the import critical path.', accent: 'cyan' }, { value: '672', label: 'Reference dependencies', body: 'The flagship seeded power-plant project is a real imported XER case.', accent: 'blue' }]
   },
   {
-    slug: 'onelegal', index: '04', name: 'OneLegal', eyebrow: 'ONELEGAL // CLAIMS',
+    slug: 'onelegal', name: 'OneLegal', eyebrow: 'ONELEGAL // CLAIMS',
     tagline: 'Evidence you can seal.',
     brief: 'A contract-and-litigation workbench for in-house counsel and EPC claims teams. Counsel curates and cryptographically seals an evidence set before governed drafting can run over it.',
     console: { input: 'Sealed evidence', output: 'governed drafting', status: 'SEAL VERIFIED' },
@@ -129,7 +165,33 @@ export const products: Product[] = [
     proofs: [{ value: '64:1', label: 'Retrieval burial ratio', body: 'A 10-chunk contract is evaluated inside a 630-chunk FIDIC Silver Book.', accent: 'green' }, { value: '445', label: 'Test functions', body: 'The workbench’s verification surface spans 32 files.', accent: 'blue' }]
   },
   {
-    slug: 'atelier', index: '05', name: 'AtelierOS', eyebrow: 'ATELIEROS // PRODUCTION',
+    slug: 'sachiv', name: 'Sachiv', eyebrow: 'SACHIV // STATUTORY',
+    tagline: 'Every due date carries its section.',
+    brief: 'Corporate secretarial compliance under the Indian Companies Act, 2013, built for a Company Secretary rather than a generic compliance team. It computes what each company owes the Registrar, when, and what it costs if it slips \u2014 and cites the provision behind every line.',
+    console: { input: 'Company file', output: 'obligations \u2192 exposure', status: 'PROVISION CITED' },
+    cardStat: ['~150', 'Companies Act sections cited'],
+    capabilities: [
+      { code: '01 // CALENDAR', title: 'Statutory calendar with stated basis', body: 'Annual and event-driven filings across 27 e-forms, where each due date reports whether it runs from the actual general meeting or the last permissible one.' },
+      { code: '02 // EVENTS', title: 'Events that start a clock', body: 'Twenty-two recordable events raise their own filings \u2014 a director appointed, a charge created, a special resolution passed.' },
+      { code: '03 // APPLICABILITY', title: 'What the company is caught by', body: 'Ten statutory tests decide whether independent directors, a woman director, key managerial personnel, secretarial audit, CSR or a vigil mechanism apply.' },
+      { code: '04 // EXPOSURE', title: 'Additional fee and penalty, computed apart', body: 'The additional-fee slabs and the adjudicated penalty are calculated and reported separately, with company and officer figures kept distinct.' },
+      { code: '05 // PLAYBOOK', title: 'Practitioner playbooks and drafting', body: 'Nineteen playbooks carry prerequisites, steps, attachments, signatories and common mistakes; six document types draft from deterministic templates.' }
+    ],
+    stages: [
+      { number: '01', title: 'Compute', body: 'A pure statutory engine derives every date, fee and applicability conclusion with no model involved.', stats: [['ENGINE', '6,058 lines'], ['MODEL', 'not imported']] },
+      { number: '02', title: 'Cite', body: 'Each obligation carries its provision and instrument, and the basis line that explains the date.', stats: [['SECTIONS', '~150'], ['FORMS', '27']] },
+      { number: '03', title: 'Rank', body: 'Guidance orders what the engine already computed; it never computes a date or a rupee itself.', stats: [['REGISTERS', '16'], ['PENALTY RULES', '23']] },
+      { number: '04', title: 'Draft', body: 'Notices, resolutions and minutes complete from templates, so a broken model call still yields a whole document.', stats: [['DRAFT TYPES', '6'], ['OFFLINE', 'zero keys']] }
+    ],
+    stack: ['Next.js 15.5 / React 19', 'Embedded SQLite, no separate backend', 'Zod validation', 'Vitest, typecheck and build in CI', 'DeepSeek, optional', 'Runs fully without an API key'],
+    standards: ['Companies Act, 2013', 'Section 403 additional-fee slabs', '27 ROC e-forms', '16 statutory registers', 'Charge ladder, s.77 to s.87', 'Company and officer penalties'],
+    proofs: [
+      { value: '198', label: 'Statutory engine tests', body: 'The date, fee, penalty and applicability logic is covered by its own suite, run in CI on every push.', accent: 'green' },
+      { value: '0', label: 'Figures the model produces', body: 'Every number is computed deterministically and passed to the model as context; it explains and drafts, never recomputes.', accent: 'blue' }
+    ]
+  },
+  {
+    slug: 'atelier', name: 'AtelierOS', eyebrow: 'ATELIEROS // PRODUCTION',
     tagline: 'Images inspire. Specs ship.',
     brief: 'A design-to-production operating system for independent fashion labels. The sketch stays the ground truth as a structured garment record moves through renders, revisions and a factory tech pack.',
     console: { input: 'Sketch', output: 'spec → tech pack', status: 'ISOLATION 1.0' },
@@ -165,8 +227,15 @@ export const portfolioMetrics: ProofMetric[] = [
   { value: '30/100', label: 'Grounding floor', body: 'Below it Sentinel returns “insufficient sources” instead of an answer.', accent: 'orange' },
   { value: '64:1', label: 'Retrieval burial ratio', body: 'OneLegal evaluates a 10-chunk contract inside a 630-chunk FIDIC Silver Book.', accent: 'green' },
   { value: '1.0', label: 'Cross-brand memory isolation', body: 'AtelierOS holds it at exactly 1.0 with a stop-the-line gate below that value.', accent: 'blue' },
-  { value: '10ms', label: 'Budget to grade 5,000 activities', body: 'Peak Logic’s quality pass gates every delay analysis on the import critical path.', accent: 'cyan' }
+  { value: '10ms', label: 'Budget to grade 5,000 activities', body: 'Peak Logic’s quality pass gates every delay analysis on the import critical path.', accent: 'cyan' },
+  { value: '0.85', label: 'Receipt auto-match threshold', body: 'Control Tower matches goods receipts to open orders with a scored matcher that contains no model.', accent: 'orange' },
+  { value: '~150', label: 'Companies Act sections cited', body: 'Sachiv states the provision and the basis behind every due date it computes.', accent: 'green' }
 ];
+
+export const products: Product[] = productEntries.map((entry, i) => ({
+  ...entry,
+  index: String(i + 1).padStart(2, '0')
+}));
 
 const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
@@ -177,7 +246,9 @@ const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'sev
 export const testFunctionCounts: Partial<Record<ProductSlug, number>> = {
   onelegal: 445,
   atelier: 521,
-  'quality-ai': 149
+  sachiv: 198,
+  'quality-ai': 149,
+  'control-tower': 77
 };
 
 const countedTests = Object.values(testFunctionCounts).reduce((a, b) => a + b, 0);
