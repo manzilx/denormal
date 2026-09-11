@@ -1,0 +1,4 @@
+# Cloudflare Pages redirect rules.
+# The apex is canonical; www 301s to it so a page is never indexed twice.
+# HTTPS is forced by Cloudflare itself (Always Use HTTPS), not here.
+https://www.denormal.in/*  https://denormal.in/:splat  301!

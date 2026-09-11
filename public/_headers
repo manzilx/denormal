@@ -1,0 +1,28 @@
+# Cloudflare Pages header rules. Replaces what .htaccess did on Apache —
+# everything else (canonical host, 404, sitemap) is handled in the build or
+# by the platform itself.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Astro fingerprints everything under /_astro/, so those URLs can never change
+# contents and may be cached hard.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Anything on a stable path must revalidate, or a deploy never reaches someone
+# who has visited before.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap-index.xml
+  Cache-Control: public, max-age=0, must-revalidate
+
+/robots.txt
+  Cache-Control: public, max-age=0, must-revalidate
