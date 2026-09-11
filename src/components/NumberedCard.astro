@@ -1,8 +1,12 @@
 ---
-const { number, code, title, body, stat, href, accent = false } = Astro.props;
+import Glyph from './Glyph.astro';
+const { number, code, title, body, stat, href, glyph, accent = false } = Astro.props;
 ---
 <article class:list={['number-card', { accent }]}>
-  <div class="card-code micro">{number} // {code}</div>
+  <div class="card-head">
+    <div class="card-code micro">{number} // {code}</div>
+    {glyph && <span class="card-glyph"><Glyph slug={glyph} /></span>}
+  </div>
   <h3>{title}</h3>
   <p>{body}</p>
   <div class="card-foot">

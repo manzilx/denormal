@@ -131,6 +131,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .card-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 28px; }
 .card-stat strong { display: block; color: var(--ink); font: 700 18px/1 'JetBrains Mono', monospace; }
 .card-stat span { display: block; max-width: 160px; margin-top: 6px; color: var(--muted); font: 10px/1.35 'JetBrains Mono', monospace; text-transform: uppercase; }
+
+/* Product glyphs. One schematic mark per system, drawn on a 32-unit grid with
+   the same square-capped, mitred construction as the wordmark rule. Stroke
+   weight is a custom property rather than an attribute so a larger placement
+   thins the line instead of scaling it into a slab. */
+.glyph { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: var(--glyph-sw, 1.75); stroke-linecap: square; stroke-linejoin: miter; }
+.glyph .g-a { stroke: var(--accent); stroke-width: var(--glyph-sw-a, 2.25); }
+.glyph .g-af { fill: var(--accent); stroke: none; }
+.glyph .g-f { fill: currentColor; stroke: none; }
+
+.card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.card-glyph { flex: 0 0 auto; width: 34px; height: 34px; margin-top: -9px; color: var(--muted-2); transition: color .15s ease; }
+.number-card:hover .card-glyph { color: var(--accent); }
+.number-card.accent .card-glyph { color: var(--muted); }
+
+.product-mast { display: flex; align-items: center; gap: clamp(20px, 3vw, 34px); }
+.product-glyph { flex: 0 0 auto; width: clamp(46px, 7vw, 78px); height: clamp(46px, 7vw, 78px); color: var(--ink-4); --glyph-sw: 1.4; --glyph-sw-a: 1.9; }
+
 .card-link { color: var(--accent); font: 600 10px/1 'JetBrains Mono', monospace; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
 
 .runtime-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-top: 0; }
