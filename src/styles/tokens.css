@@ -229,6 +229,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .intake-note { margin-top: 14px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
 .intake-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
+/* Honeypot. Off-canvas rather than display:none — some bots skip fields that
+   are explicitly hidden, and this still keeps it out of the layout and away
+   from assistive tech via aria-hidden and tabindex on the field itself. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.intake-status { margin-top: 14px; padding: 11px 13px; border: 1px solid var(--line-2); font-size: 13.5px; line-height: 1.5; }
+.intake-status.ok { border-color: var(--ok); color: var(--ok-text); background: var(--ok-bg); }
+.intake-status.err { border-color: var(--accent); color: var(--accent); background: var(--tint); }
+.intake-submit[disabled] { opacity: .6; cursor: progress; }
+
 @media (max-width: 900px) {
   .hero-grid, .product-hero-grid, .detail-layout { grid-template-columns: 1fr; }
   .header-nav { gap: 14px; }

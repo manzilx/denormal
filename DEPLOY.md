@@ -54,6 +54,23 @@ injects its own beacon, so nothing is hardcoded in this repo. It is also the
 only way to answer the question the marketing plan is built around: which
 piece of writing preceded an enquiry.
 
+**6 · Intake delivery secrets.** The form at `/api/intake` posts to a Pages
+Function that sends through Resend. Workers &amp; Pages → the project → Settings
+→ Variables and Secrets:
+
+| Name | Value | Required |
+|---|---|---|
+| `RESEND_API_KEY` | From resend.com, as a **secret** | yes |
+| `INTAKE_TO` | Where enquiries land. Defaults to `hello@denormal.in` | no |
+| `INTAKE_FROM` | Must be on a domain verified in Resend. Defaults to `intake@denormal.in` | no |
+
+Resend needs `denormal.in` verified before it will send — it hands you DKIM
+and SPF records to add in Cloudflare DNS.
+
+Until `RESEND_API_KEY` exists the endpoint returns 503 and the form tells the
+visitor to email instead. That is deliberate: it never shows a thank-you for a
+message it did not deliver.
+
 ## What *is* in the repo
 
 - `public/_headers` — security headers and the cache policy. Fingerprinted

@@ -19,18 +19,23 @@ const { title = 'Start with the process, not the software.', description = 'Tell
         <div><div class="intake-card-title">Product engineering intake</div><div class="intake-card-subtitle">Route a conversation to the right system</div></div>
         <span class="intake-token">[PRODUCT_INTAKE]</span>
       </div>
-      <form data-intake-form>
+      <form data-intake-form method="post" action="/api/intake">
+        <div class="hp" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
         <div class="intake-fields">
           <div class="field"><label for="contact-name">Name</label><input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" /></div>
-          <div class="field"><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" /></div>
+          <div class="field"><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required /></div>
           <div class="field"><label for="product">Product of interest</label><select id="product" name="product">{products.map((product) => <option value={product.slug}>{product.name}</option>)}<option value="portfolio">Portfolio review</option></select></div>
           <div class="field"><label for="deployment">Deployment mode</label><select id="deployment" name="deployment"><option>Cloud</option><option>On-prem</option><option>Local inference</option></select></div>
-          <div class="field full"><label for="scope">Which process is breaking down?</label><textarea id="scope" name="scope" rows="3" placeholder="Describe the work, evidence or decision that needs a defensible path..."></textarea></div>
+          <div class="field full"><label for="scope">Which process is breaking down?</label><textarea id="scope" name="scope" rows="3" required placeholder="Describe the work, evidence or decision that needs a defensible path..."></textarea></div>
         </div>
         <button class="intake-submit button" type="submit" data-submit>Transmit specification <span>→</span></button>
-        <p class="intake-note">This form is a specification aid — it makes no network request. To reach us, write to <a href="mailto:hello@denormal.in">hello@denormal.in</a>.</p>
+        <p class="intake-status" data-intake-status role="status" aria-live="polite" hidden></p>
+        <p class="intake-note">Or write to <a href="mailto:hello@denormal.in">hello@denormal.in</a> directly.</p>
       </form>
-      <div class="intake-note micro">PRESENTATIONAL INTAKE // NO NETWORK REQUEST</div>
+      <div class="intake-note micro">INTAKE // ROUTED TO ENGINEERING</div>
     </div>
   </div>
 </section>

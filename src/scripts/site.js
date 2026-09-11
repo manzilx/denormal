@@ -14,11 +14,53 @@ themeButton?.addEventListener('click', () => {
   syncThemeButton();
 });
 
+// The form posts to a Pages Function. It keeps a native action and method, so
+// with JavaScript unavailable it still submits — the response is then a JSON
+// body rather than a styled page, which is ugly but delivers the message.
+// Nothing here claims success the server did not report.
 document.querySelectorAll('[data-intake-form]').forEach((form) => {
-  form.addEventListener('submit', (event) => {
+  const button = form.querySelector('[data-submit]');
+  const status = form.querySelector('[data-intake-status]');
+  const label = button ? button.innerHTML : '';
+
+  const say = (text, kind) => {
+    if (!status) return;
+    status.textContent = text;
+    status.className = `intake-status ${kind}`;
+    status.hidden = false;
+  };
+
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const button = form.querySelector('[data-submit]');
-    if (button) button.innerHTML = 'Specification transmitted <span>→</span>';
+    if (button) {
+      button.disabled = true;
+      button.innerHTML = 'Transmitting…';
+    }
+    if (status) status.hidden = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        form.reset();
+        say('Specification received. We will reply to the address you gave.', 'ok');
+        if (button) button.innerHTML = 'Specification transmitted <span>→</span>';
+        return;
+      }
+      say(data.error || 'That did not send. Please write to hello@denormal.in.', 'err');
+    } catch {
+      say('That did not send — check your connection, or write to hello@denormal.in.', 'err');
+    }
+
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = label;
+    }
   });
 });
 
