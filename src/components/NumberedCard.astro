@@ -1,8 +1,8 @@
 ---
 import Glyph from './Glyph.astro';
-const { number, code, title, body, stat, href, glyph, accent = false } = Astro.props;
+const { number, code, title, body, stat, href, glyph, accent = false, selectable = false } = Astro.props;
 ---
-<article class:list={['number-card', { accent }]}>
+<article class:list={['number-card', { accent, selectable }]} data-select-card={selectable ? '' : undefined}>
   <div class="card-head">
     <div class="card-code micro">{number} // {code}</div>
     {glyph && <span class="card-glyph"><Glyph slug={glyph} /></span>}

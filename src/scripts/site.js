@@ -91,3 +91,120 @@ if (!reducedMotion) {
   applyRow(active);
   if (rows.length > 1) window.setInterval(() => { active = (active + 1) % rows.length; applyRow(active); }, 4200);
 }
+
+// Hero lattice. A 26px node field with a slow diagonal wave and a square
+// cursor neighbourhood, painted to canvas so the per-frame work stays off the
+// document. Ported from the frozen design, including its one per-page
+// difference: the home hero draws its cursor connectors horizontally, a
+// product hero vertically.
+//
+// Two guards the design file does not carry, neither of them visible: the loop
+// is parked while the hero is scrolled out of view, and it stops entirely if
+// the canvas context is unavailable.
+document.querySelectorAll('[data-hero-field]').forEach((cv) => {
+  const ctx = cv.getContext('2d');
+  if (!ctx) return;
+
+  const vertical = cv.dataset.heroField === 'v';
+  const STEP = 26;
+  const R = 150;
+  const mouse = { x: -9999, y: -9999 };
+  let w = 0;
+  let h = 0;
+  let raf = 0;
+  let running = false;
+
+  const onMove = (event) => {
+    const rect = cv.getBoundingClientRect();
+    mouse.x = event.clientX - rect.left;
+    mouse.y = event.clientY - rect.top;
+  };
+  const onLeave = () => { mouse.x = -9999; mouse.y = -9999; };
+  const resize = () => {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    w = cv.clientWidth;
+    h = cv.clientHeight;
+    cv.width = w * dpr;
+    cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  resize();
+  window.addEventListener('mousemove', onMove, { passive: true });
+  window.addEventListener('mouseleave', onLeave);
+  window.addEventListener('resize', resize);
+  new ResizeObserver(resize).observe(cv);
+
+  // getComputedStyle returns a live declaration, so the field repaints in the
+  // new palette the moment the theme toggle flips without re-reading anything.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cs = getComputedStyle(document.documentElement);
+  const t0 = performance.now();
+
+  const frame = (now) => {
+    const t = reduce ? 0 : (now - t0) / 1000;
+    const ink = cs.getPropertyValue('--ink').trim() || '#18181B';
+    const acc = cs.getPropertyValue('--accent').trim() || '#EA580C';
+    ctx.clearRect(0, 0, w, h);
+    const cols = Math.ceil(w / STEP);
+    const rows = Math.ceil(h / STEP);
+
+    for (let i = 0; i <= cols; i++) {
+      for (let j = 0; j <= rows; j++) {
+        const x = i * STEP;
+        const y = j * STEP;
+        const wave = (Math.sin((x + y) / 220 - t * 0.7) + 1) / 2;
+        const dx = x - mouse.x;
+        const dy = y - mouse.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        const near = d < R ? 1 - d / R : 0;
+        const a = 0.05 + wave * 0.07 + near * 0.5;
+        const sq = 1 + near * 3.2 + wave * 0.6;
+        const hot = near > 0.62 || wave > 0.985;
+
+        ctx.fillStyle = hot ? acc : ink;
+        ctx.globalAlpha = hot ? Math.min(1, a + 0.2) : a;
+        ctx.fillRect(x - sq / 2, y - sq / 2, sq, sq);
+
+        if (near > 0.35 && (vertical ? j < rows : i < cols)) {
+          ctx.globalAlpha = (near - 0.35) * 0.35;
+          ctx.strokeStyle = ink;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          if (vertical) ctx.lineTo(x, y + STEP);
+          else ctx.lineTo(x + STEP, y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    ctx.globalAlpha = 1;
+    raf = requestAnimationFrame(frame);
+  };
+
+  const start = () => { if (!running) { running = true; raf = requestAnimationFrame(frame); } };
+  const stop = () => { running = false; cancelAnimationFrame(raf); };
+
+  new IntersectionObserver((entries) => {
+    entries.forEach((entry) => (entry.isIntersecting ? start() : stop()));
+  }).observe(cv);
+});
+
+// Portfolio card emphasis. The accent rule is the design's scarcest gesture —
+// a 2px top border in exactly one place site-wide — and it is spent on the one
+// card the reader has picked out. Nothing is accented on load, and clicking
+// the same card again clears it.
+//
+// Deliberately pointer-only and not in the tab order: the mark carries no
+// information a keyboard user would otherwise miss, so making every card a
+// focus stop ahead of its own link would cost more than it gives.
+const selectable = [...document.querySelectorAll('[data-select-card]')];
+selectable.forEach((card) => {
+  card.addEventListener('click', (event) => {
+    if (event.target.closest('a')) return;
+    const on = card.classList.contains('accent');
+    selectable.forEach((other) => other.classList.remove('accent'));
+    if (!on) card.classList.add('accent');
+  });
+});

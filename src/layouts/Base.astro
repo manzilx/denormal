@@ -12,7 +12,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { url } from '../lib/url';
 
-const { title = 'Denormal Labs', description = 'Operations software for manufacturing and complex projects.' } = Astro.props;
+const { title = 'Denormal Labs', description = 'Operations software for manufacturing and complex projects.', bodyClass } = Astro.props;
 // Canonical URL for this page, resolved against the configured site so every
 // spelling of the host collapses to one indexed address.
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
@@ -46,7 +46,7 @@ const ogImage = Astro.site ? new URL('og.png', Astro.site).href : url('/og.png')
       try { if (localStorage.getItem('dnrm-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch {}
     </script>
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main"><slot /></main>
