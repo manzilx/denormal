@@ -41,6 +41,19 @@ The build does not force TLS; the edge does.
 **3 · Custom domains.** The Pages project must list both `denormal.in` and
 `www.denormal.in`, or the redirect rule above has nothing to fire on.
 
+**4 · Email routing for `hello@denormal.in`.** The site publishes that
+address and the intake form makes no network request, so it is the only way
+anyone reaches you. Cloudflare dashboard → the `denormal.in` zone → Email →
+Email Routing → add `hello@` as a custom address forwarding to the inbox you
+actually read, and accept the MX records it offers. Until that exists, mail to
+the published address bounces.
+
+**5 · Web Analytics.** Workers &amp; Pages → the project → Metrics → enable
+Cloudflare Web Analytics. It is free, cookieless, needs no consent banner, and
+injects its own beacon, so nothing is hardcoded in this repo. It is also the
+only way to answer the question the marketing plan is built around: which
+piece of writing preceded an enquiry.
+
 ## What *is* in the repo
 
 - `public/_headers` — security headers and the cache policy. Fingerprinted
