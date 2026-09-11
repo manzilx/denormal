@@ -1,15 +1,23 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-// GitHub Pages serves a project repo from a subpath, so the Pages build sets
-// SITE_BASE=/denormal (see .github/workflows/deploy.yml). Everything else —
-// local dev, and any host that serves from a domain root such as Cloudflare
-// Pages or Netlify — builds at '/'. Internal links go through src/lib/url.ts,
-// which reads whichever base is configured, so both shapes work unchanged.
+// ─────────────────────────────────────────────────────────────────────────────
+// The live domain, no trailing slash, https.
+// It is the canonical host: it stamps canonical URLs and the sitemap, and the
+// .htaccess redirects every other spelling (http, www) to it. Getting it wrong
+// means search engines index two versions of every page.
+const SITE = process.env.SITE_URL || 'https://denormal.in';
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Hostinger serves from the domain root, so base stays '/'. It is still driven
+// by an env var because internal links go through src/lib/url.ts, which lets
+// the same source build for a subpath host without touching any markup.
 const base = process.env.SITE_BASE || '/';
 
 export default defineConfig({
-  site: process.env.SITE_URL || 'https://manzilx.github.io',
+  site: SITE,
   base,
   output: 'static',
-  trailingSlash: 'always'
+  trailingSlash: 'always',
+  integrations: [sitemap()]
 });

@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import NumberedCard from '../components/NumberedCard.astro';
+import { products } from '../data/products';
+import { url } from '../lib/url';
+---
+<Base title="Not found — Denormal Labs" description="That page does not exist.">
+  <section class="product-hero">
+    <div class="container product-hero-grid">
+      <div>
+        <div class="product-index">404</div>
+        <h1 class="display">This one has<br /><span style="color:var(--accent)">no source</span>.</h1>
+      </div>
+      <div>
+        <div class="micro">ERROR // PAGE NOT FOUND</div>
+        <p class="brief">The address you asked for does not resolve to anything we publish. It may have moved, or it may never have existed — and guessing at an answer is not something we do here either.</p>
+        <a class="back-link" href={url('/')}>← Back to the portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="micro" style="margin-bottom:20px">Try one of these instead</div>
+      <div class="card-grid">
+        {products.map((product) => (
+          <NumberedCard
+            number={product.index}
+            code={product.name.toUpperCase().replaceAll(' ', '_')}
+            title={product.name}
+            body={product.tagline}
+            href={url(`/products/${product.slug}/`)}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
