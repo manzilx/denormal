@@ -1,9 +1,12 @@
 export type ProductSlug =
+  | 'power-contract-intelligence'
   | 'sentinel'
   | 'control-tower'
   | 'quality-ai'
   | 'peaklogic'
+  | 'nexusref'
   | 'onelegal'
+  | 'foretell'
   | 'sachiv'
   | 'atelier';
 
@@ -47,6 +50,32 @@ export interface Product {
 // carries is its position in it. Reorder this array and the cards, console
 // rows, detail pages and about page all renumber together.
 const productEntries: Omit<Product, 'index'>[] = [
+  {
+    slug: 'power-contract-intelligence', name: 'Power Contract Intelligence', eyebrow: 'PCI // PRE-AWARD',
+    tagline: 'Cited to what it was shown.',
+    brief: 'A pre-award tender workspace for power-sector supply and services bids. The tender pack goes in; risks, deviations, pre-bid queries and a clause map come out, and three review gates carry it to a go/no-go and a submission workbook.',
+    console: { input: 'Tender pack', output: 'risks \u2192 go/no-go', status: 'SHOWN-CHUNKS ONLY' },
+    cardStat: ['13', 'queries every pack is read against'],
+    capabilities: [
+      { code: '01 // INGEST', title: 'The whole pack, or none of it', body: 'Ten document formats parse per-file, so one unreadable appendix cannot sink a batch. A completeness ledger records what parsed, what was empty and what was truncated.' },
+      { code: '02 // RETRIEVE', title: 'Thirteen fixed tender questions', body: 'Every pack is read against the same domain queries \u2014 penalties, warranty, local content, change in law, termination \u2014 so no tender is analysed ad hoc.' },
+      { code: '03 // GROUND', title: 'Citations that resolve only to what was shown', body: 'The citation index is built from the chunks actually sent to the model, and reviewer-facing quotes are clamped to what grounded the finding.' },
+      { code: '04 // GATE', title: 'Three reviewed gates to a decision', body: 'Qualification and go/no-go, then bid strategy and general-conditions review, then risk, compliance and submission \u2014 each answered by a reviewer, not inferred.' },
+      { code: '05 // ISSUE', title: 'A workbook a committee can read', body: 'Deviation register, risk register, pre-bid queries, pricing assumptions and the gate records export as a multi-sheet workbook and a print pack.' }
+    ],
+    stages: [
+      { number: '01', title: 'Parse', body: 'The tender pack becomes text with a ledger of exactly what did and did not make it in.', stats: [['FORMATS', '10 supported'], ['SILENT LOSS', 'designed out']] },
+      { number: '02', title: 'Retrieve', body: 'Chunks are ranked against thirteen fixed tender questions, on-device by default.', stats: [['QUERIES', '13 fixed'], ['EMBEDDINGS', 'local by default']] },
+      { number: '03', title: 'Propose', body: 'The model writes risks, deviations and positions, and must cite the chunks it was given.', stats: [['MODEL', 'content only'], ['NUMBERS', 'never']] },
+      { number: '04', title: 'Verify', body: 'Coverage claims are re-checked against the full source by literal match before a reviewer sees them.', stats: [['CHECK', 'substring'], ['NOT', 'embeddings']] }
+    ],
+    stack: ['React 19 / Express 5', 'SQLite or PostgreSQL', 'DeepSeek, optional', 'On-device lexical embeddings', 'ExcelJS export', 'Runs with no API key'],
+    standards: ['General and special conditions', 'Bill of quantities', 'Service-level schedules', 'Local content requirements', 'Change in law', 'Pre-award scope only'],
+    proofs: [
+      { value: '13', label: 'Fixed tender queries', body: 'Every pack is read against the same domain questions, so coverage does not depend on who ran it.', accent: 'cyan' },
+      { value: '247', label: 'Tests', body: 'Covering grounding, provenance, ownership and corrupt-payload handling.', accent: 'blue' }
+    ]
+  },
   {
     slug: 'sentinel', name: 'Sentinel', eyebrow: 'SENTINEL // EHS',
     tagline: 'Safety intelligence that refuses to guess.',
@@ -142,6 +171,32 @@ const productEntries: Omit<Product, 'index'>[] = [
     proofs: [{ value: '10ms', label: 'Quality budget', body: 'The schedule-quality pass targets 5,000 activities on the import critical path.', accent: 'cyan' }, { value: '672', label: 'Reference dependencies', body: 'The flagship seeded power-plant project is a real imported XER case.', accent: 'blue' }]
   },
   {
+    slug: 'nexusref', name: 'NexusRef', eyebrow: 'NEXUSREF // THE RECORD',
+    tagline: 'Every letter has a number.',
+    brief: 'A correspondence and document repository for large projects. Every letter, transmittal, query, order and drawing is filed against a project and folder, given a formal sequenced reference, routed through approvals, and logged.',
+    console: { input: 'Inbound mail', output: 'filed \u2192 referenced', status: 'SENDER WINS' },
+    cardStat: ['0.4', 'confidence floor before triage'],
+    capabilities: [
+      { code: '01 // FILE', title: 'Deterministic-first routing', body: 'A matched sender always decides the destination, because the address is the routing key. The model is only consulted when no party matched.' },
+      { code: '02 // REFERENCE', title: 'A sequence that cannot drift', body: 'Formal references are issued from the highest existing sequence across every reference-bearing table, with versioned bumps on revision.' },
+      { code: '03 // INGEST', title: 'Mailbox sync that repeats safely', body: 'Microsoft 365 polling and change webhooks reconcile through an idempotent runner, so a redelivered message files once.' },
+      { code: '04 // SHARE', title: 'Counterparties without accounts', body: 'Expiring, revocable share links with hashed passwords scope a single folder, and count every view, download and upload.' },
+      { code: '05 // ANSWER', title: 'Questions against the record', body: 'Retrieval is a lexical ranker with inverse-document-frequency weighting \u2014 inspectable and reproducible, with recency as a boost that never substitutes for a match.' }
+    ],
+    stages: [
+      { number: '01', title: 'Receive', body: 'Mail arrives from a synced mailbox or an inbound webhook with a verified signature.', stats: [['SOURCE', 'M365 + webhook'], ['REPLAY', 'idempotent']] },
+      { number: '02', title: 'Route', body: 'The sender decides where it belongs; the model only fills what identity could not.', stats: [['KEY', 'the address'], ['MODEL', 'fallback only']] },
+      { number: '03', title: 'Validate', body: 'Any model answer is re-checked against that tenant\u2019s own project and folder ids.', stats: [['SCOPE', 'tenant ids'], ['BELOW 0.4', 'triage']] },
+      { number: '04', title: 'Log', body: 'The reference is issued, approvals route, and the audit trail records who did what.', stats: [['REFERENCE', 'sequenced'], ['TRAIL', 'persisted']] }
+    ],
+    stack: ['TypeScript monorepo', 'Next.js 15 / React 19', 'Prisma + PostgreSQL', 'Microsoft Entra ID', 'S3 or local disk', 'Deterministic twin for every AI surface'],
+    standards: ['Formal reference numbering', 'Transmittals and queries', 'Approval workflows', 'Document control', 'External collaboration', 'Audit trail'],
+    proofs: [
+      { value: '0.4', label: 'Confidence floor', body: 'Below it, mail goes to triage rather than being filed in the wrong place.', accent: 'orange' },
+      { value: '321', label: 'Tests', body: 'Including a dedicated cross-tenant scope suite.', accent: 'green' }
+    ]
+  },
+  {
     slug: 'onelegal', name: 'OneLegal', eyebrow: 'ONELEGAL // CLAIMS',
     tagline: 'Evidence you can seal.',
     brief: 'A contract-and-litigation workbench for in-house counsel and commercial claims teams. Counsel curates and cryptographically seals an evidence set before governed drafting can run over it.',
@@ -163,6 +218,32 @@ const productEntries: Omit<Product, 'index'>[] = [
     stack: ['FastAPI / Python 3.12', 'Next.js 14', 'ChromaDB per matter', 'BM25 + Voyage reranker', 'Provider-routed LLM', 'LM Studio local default'],
     standards: ['FIDIC Red / Silver', 'IChemE Red / Green / Burgundy', 'Orgalime SE 01 / S 2012 / SI 14 / SC 18', 'NTPC GCC', 'England & Wales CPR', 'India jurisdiction pack'],
     proofs: [{ value: '64:1', label: 'Retrieval burial ratio', body: 'A 10-chunk contract is evaluated inside a 630-chunk FIDIC Silver Book.', accent: 'green' }, { value: '445', label: 'Test functions', body: 'The workbench’s verification surface spans 32 files.', accent: 'blue' }]
+  },
+  {
+    slug: 'foretell', name: 'Foretell', eyebrow: 'FORETELL // CASH',
+    tagline: 'The model never touches a number.',
+    brief: 'A cash-collection forecasting and latest-estimate review workbench for project-finance controllers. An invoice register and a baseline go in; probabilistic collection forecasts, cash at risk and shortfall probability come out.',
+    console: { input: 'Invoice register', output: 'P10 \u2192 P50 \u2192 P90', status: 'SEEDED \u00b7 REPRODUCIBLE' },
+    cardStat: ['10,000', 'simulation floor to publish'],
+    capabilities: [
+      { code: '01 // IMPORT', title: 'A register, as it actually arrives', body: 'Header detection and fuzzy column mapping across eight required and nineteen optional fields, with locale-aware numbers and day-first dates, and a per-row issue list.' },
+      { code: '02 // FORECAST', title: 'Survival analysis, not a guess', body: 'Kaplan\u2013Meier on observed payment delays with censoring, pooled across portfolio, business, purpose, project and customer, then calibrated and given conformal intervals.' },
+      { code: '03 // GOVERN', title: 'A review cycle with a memory', body: 'Baselines freeze, rebaselining demands a reason and an effective date, and a same-date correction becomes a new numbered revision rather than an edit.' },
+      { code: '04 // EVIDENCE', title: 'Findings that cite a row', body: 'Uploaded files are split into locator-tagged segments, so an extracted blocker points at a sheet and row or a line of a document.' },
+      { code: '05 // PROVE', title: 'Model health you can check', body: 'A strictly prequential backtest scores each invoice using only what was known before its cutoff, and reports calibration and interval coverage.' }
+    ],
+    stages: [
+      { number: '01', title: 'Import', body: 'The register and plan are parsed, mapped and fingerprinted.', stats: [['FIELDS', '8 required'], ['FINGERPRINT', 'per dataset']] },
+      { number: '02', title: 'Forecast', body: 'Delay distributions are pooled, calibrated and sampled with correlated shocks.', stats: [['METHOD', 'Kaplan\u2013Meier'], ['SEED', 'fixed']] },
+      { number: '03', title: 'Review', body: 'A latest estimate is published against a frozen baseline, with a reason on every revision.', stats: [['PUBLISH', '10,000 sims'], ['INTERACTIVE', '180']] },
+      { number: '04', title: 'Prove', body: 'The server recomputes the fingerprint on publish and refuses a mismatch.', stats: [['MISMATCH', 'HTTP 409'], ['BACKTEST', 'prequential']] }
+    ],
+    stack: ['TypeScript / Next.js 16', 'Drizzle on Cloudflare D1', 'R2 object storage', 'DeepSeek, optional', 'Deterministic forecast engine', 'Works with no API key'],
+    standards: ['Latest estimate discipline', 'Baseline and rebaseline', 'Cash at risk', 'P10 / P50 / P90', 'Prequential backtesting', 'Versioned review register'],
+    proofs: [
+      { value: '10,000', label: 'Simulations to publish', body: 'A published forecast runs a hard floor; the interactive view uses 180 and says so.', accent: 'blue' },
+      { value: '409', label: 'On a fingerprint mismatch', body: 'The register cannot show what it was not computed from, so publish refuses rather than warns.', accent: 'orange' }
+    ]
   },
   {
     slug: 'sachiv', name: 'Sachiv', eyebrow: 'SACHIV // STATUTORY',
@@ -229,7 +310,10 @@ export const portfolioMetrics: ProofMetric[] = [
   { value: '1.0', label: 'Cross-brand memory isolation', body: 'AtelierOS holds it at exactly 1.0 with a stop-the-line gate below that value.', accent: 'blue' },
   { value: '10ms', label: 'Budget to grade 5,000 activities', body: 'Peak Logic’s quality pass gates every delay analysis on the import critical path.', accent: 'cyan' },
   { value: '0.85', label: 'Receipt auto-match threshold', body: 'Control Tower matches goods receipts to open orders with a scored matcher that contains no model.', accent: 'orange' },
-  { value: '~150', label: 'Companies Act sections cited', body: 'Sachiv states the provision and the basis behind every due date it computes.', accent: 'green' }
+  { value: '~150', label: 'Companies Act sections cited', body: 'Sachiv states the provision and the basis behind every due date it computes.', accent: 'green' },
+  { value: '13', label: 'Fixed tender queries', body: 'Power Contract Intelligence reads every pack against the same domain questions rather than ad hoc.', accent: 'blue' },
+  { value: '10,000', label: 'Simulations behind a published forecast', body: 'Foretell seeds them, so the same register reproduces the same number.', accent: 'cyan' },
+  { value: '0.4', label: 'Confidence floor before triage', body: 'NexusRef would rather queue a letter for a human than file it in the wrong project.', accent: 'orange' }
 ];
 
 export const products: Product[] = productEntries.map((entry, i) => ({
@@ -248,7 +332,10 @@ export const testFunctionCounts: Partial<Record<ProductSlug, number>> = {
   atelier: 521,
   sachiv: 198,
   'quality-ai': 149,
-  'control-tower': 77
+  'control-tower': 77,
+  'power-contract-intelligence': 247,
+  nexusref: 321,
+  foretell: 111
 };
 
 const countedTests = Object.values(testFunctionCounts).reduce((a, b) => a + b, 0);
