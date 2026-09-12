@@ -121,7 +121,7 @@ const productEntries: Omit<Product, 'index'>[] = [
     ],
     stack: ['pnpm + Turborepo', 'Next.js 15.5 / React 19', 'NestJS 11 / Fastify', 'Python 3.12 compute engine', 'PostgreSQL 16 + Prisma', 'Redis 7 + BullMQ + Railway'],
     standards: ['P6 XER constraints', 'SCL Protocol TIA', 'Malmaison concurrency', 'CPM / calendars / float', 'DCMA-14 inspired quality gate', 'Append-only AuditLog'],
-    proofs: [{ value: '10ms', label: 'Quality budget', body: 'The schedule-quality pass targets 5,000 activities on the import critical path.', accent: 'cyan' }, { value: '672', label: 'Reference dependencies', body: 'The flagship seeded power-plant project is a real imported XER case.', accent: 'blue' }]
+    proofs: [{ value: '10ms', label: 'Quality budget', body: 'The schedule-quality pass targets 5,000 activities on the import critical path.', accent: 'cyan' }, { value: '672', label: 'Reference dependencies', body: 'The seeded 1 \u00d7 660 MW reference is a generated schedule, not client data \u2014 a genuine XER the parser reads exactly as it reads P6\u2019s own export.', accent: 'blue' }]
   },
   {
     slug: 'sentinel', featured: true, name: 'Sentinel', eyebrow: 'SENTINEL // EHS',
