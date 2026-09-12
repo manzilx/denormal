@@ -128,7 +128,7 @@ const productEntries: Omit<Product, 'index'>[] = [
     tagline: 'Safety intelligence that refuses to guess.',
     brief: 'A mobile-first EHS platform for plants and construction sites. It turns hazard evidence into cited countermeasures, with a hard refusal path when the source base is not strong enough.',
     console: { input: 'Hazard capture', output: 'cited countermeasure', status: '30/100 FLOOR' },
-    cardStat: ['2,833', 'RAG chunks across 3 authorities'],
+    cardStat: ['2,833', 'RAG chunks across 4 authorities'],
     capabilities: [
       { code: '01 // CAPTURE', title: 'Evidence-first hazard capture', body: 'Photo or video keyframes become a hazard class, drafted report, checklist, reasoning trace and audit row.' },
       { code: '02 // GROUND', title: 'Hybrid safety retrieval', body: 'BM25 and dense Chroma retrieval fuse through RRF and reranking, returning grounding, coverage and a citation chain.' },
@@ -138,7 +138,7 @@ const productEntries: Omit<Product, 'index'>[] = [
     ],
     stages: [
       { number: '01', title: 'Capture', body: 'A worker records the point-of-work evidence from the mobile client.', stats: [['CLIENT', 'iOS + web'], ['MODE', 'offline queue']] },
-      { number: '02', title: 'Ground', body: 'The retrieval layer finds authoritative countermeasures and measures source coverage.', stats: [['CORPUS', '3 authorities'], ['FLOOR', '30 / 100']] },
+      { number: '02', title: 'Ground', body: 'The retrieval layer finds authoritative countermeasures and measures source coverage.', stats: [['CORPUS', '4 authorities'], ['FLOOR', '30 / 100']] },
       { number: '03', title: 'Advise', body: 'Models classify and draft; deterministic policy recomputes high-risk outcomes.', stats: [['PERMITS', '5 types'], ['POWRA', '5 templates']] },
       { number: '04', title: 'Prove', body: 'The final report, citation chain and capture session remain auditable.', stats: [['VIDEOS', '178 OSHA'], ['TRAIL', 'tamper-evident']] }
     ],
