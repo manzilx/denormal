@@ -6,7 +6,7 @@ import NumberedCard from '../components/NumberedCard.astro';
 import StageCard from '../components/StageCard.astro';
 import MetricTile from '../components/MetricTile.astro';
 import Intake from '../components/Intake.astro';
-import { products, portfolioMetrics, sharedStages, productCount, productCountWord, capitalise } from '../data/products';
+import { featuredProducts, portfolioMetrics, sharedStages, productCount, productCountWord, featuredCount, featuredCountWord, capitalise } from '../data/products';
 import { url } from '../lib/url';
 ---
 <Base title="Denormal Labs — operations software for manufacturing and complex projects" description="Denormal Labs builds operations software for manufacturing and complex projects, from processes we ran before we wrote them.">
@@ -30,11 +30,11 @@ import { url } from '../lib/url';
 
   <section id="sectors" class="sectors"><div class="container sector-line"><span class="sector-label">Where the work gets expensive</span><span class="sector-rule"></span><span>Manufacturing</span><span class="sector-sep">/</span><span>Complex projects</span><span class="sector-sep">/</span><span>Tendering</span><span class="sector-sep">/</span><span>Safety</span><span class="sector-sep">/</span><span>Supply</span><span class="sector-sep">/</span><span>Quality</span><span class="sector-sep">/</span><span>Claims</span><span class="sector-sep">/</span><span>Cash</span></div></section>
 
-  <section id="products" class="section"><div class="container"><SectionHead eyebrow={`Portfolio // ${productCount} systems`} title={`One method. ${capitalise(productCountWord)} places we have worked.`} meta={`PORTFOLIO: ${productCount} SYSTEMS // MEASURED IN-REPO`} /><div class="card-grid">{products.map((product, index) => <NumberedCard number={product.index} glyph={product.slug} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={url(`/products/${product.slug}/`)} selectable={true} />)}</div></div></section>
+  <section id="products" class="section"><div class="container"><SectionHead eyebrow={`Portfolio // ${featuredCount} systems`} title={`One method. ${capitalise(featuredCountWord)} places we have worked.`} meta={`FOCUS: ${featuredCount} SYSTEMS // MEASURED IN-REPO`} /><div class="card-grid">{featuredProducts.map((product) => <NumberedCard number={product.index} glyph={product.slug} code={product.name.toUpperCase().replaceAll(' ', '_')} title={product.name} body={product.brief} stat={product.cardStat} href={url(`/products/${product.slug}/`)} selectable={true} />)}</div><p class="grid-note"><a href={url('/portfolio/')}>See all {productCountWord} systems we have built →</a></p></div></section>
 
   <section id="runtime" class="section"><div class="container"><SectionHead eyebrow="Runtime // Shared method" title="The model is useful. The system is accountable." meta="GROUND → CONSTRAIN → DECIDE → PROVE" /><div class="runtime-grid">{sharedStages.map((stage) => <StageCard stage={stage} />)}</div></div></section>
 
-  <section id="benchmarks" class="section band"><div class="container"><SectionHead eyebrow="Measured in-repo" title="Proof before promises." meta={`PORTFOLIO: ${productCount} SYSTEMS // MEASURED IN-REPO`} /><div class="metric-grid">{portfolioMetrics.map((metric) => <MetricTile metric={metric} />)}</div></div></section>
+  <section id="benchmarks" class="section band"><div class="container"><SectionHead eyebrow="Measured in-repo" title="Proof before promises." meta={`MEASURED IN-REPO // ACROSS ALL ${productCount} SYSTEMS`} /><div class="metric-grid">{portfolioMetrics.map((metric) => <MetricTile metric={metric} />)}</div></div></section>
 
   <section id="security" class="section"><div class="container"><SectionHead eyebrow="Privacy &amp; security" title="Your data does not have to leave to be useful." meta="POSTURE // TRACEABLE TO SOURCE" /><div class="card-grid">
     <NumberedCard number="01" code="RESIDENCY" title="The sensitive path can run with no model vendor" body="Eight of the ten do, by four different mechanisms. Sentinel forces deterministic stubs and local embeddings. Control Tower and Sachiv fall back to written templates and a rule engine. AtelierOS and Power Contract Intelligence ship keyless embedders as the default. NexusRef carries a deterministic twin for every AI surface, and OneLegal's code default is a local inference endpoint." stat={['8 of 10', 'run with no model vendor']} />

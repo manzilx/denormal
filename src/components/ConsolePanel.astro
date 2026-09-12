@@ -1,11 +1,11 @@
 ---
-import { products, productCountPadded, testSurface } from '../data/products';
-const consoleProducts = products;
+import { featuredProducts, featuredCountPadded, featuredTestSurface } from '../data/products';
+const consoleProducts = featuredProducts;
 ---
 <div class="console" aria-label="Portfolio system telemetry">
   <div class="console-top">
-    <div class="console-stat"><div class="micro">Portfolio</div><div class="console-value">{productCountPadded}</div></div>
-    <div class="console-stat"><div class="micro">Test surface</div><div class="console-value">{testSurface}</div></div>
+    <div class="console-stat"><div class="micro">Portfolio</div><div class="console-value">{featuredCountPadded}</div></div>
+    <div class="console-stat"><div class="micro">Test surface</div><div class="console-value">{featuredTestSurface}</div></div>
     <div class="console-stat"><div class="micro">Core decisions</div><div class="console-value">100%</div></div>
   </div>
   <div class="console-list">

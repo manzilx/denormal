@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NumberedCard from '../../components/NumberedCard.astro';
+import Intake from '../../components/Intake.astro';
+import { products, productCount, productCountWord, testSurface, capitalise } from '../../data/products';
+import { url } from '../../lib/url';
+---
+<Base
+  title="Portfolio — Denormal Labs"
+  description={`The full body of work: ${productCountWord} systems built from processes we ran first.`}
+  bodyClass="has-grid"
+>
+  <section class="product-hero">
+    <canvas class="hero-field" data-hero-field="v" aria-hidden="true"></canvas>
+    <div class="container product-hero-grid">
+      <div>
+        <div class="product-mast"><div class="product-index">{productCount}</div></div>
+        <h1 class="display">The whole<br /><span style="color:var(--accent)">body</span> of work.</h1>
+      </div>
+      <div>
+        <div class="micro">PORTFOLIO // {productCount} SYSTEMS</div>
+        <p class="brief">The home page leads with the five we take to work today. This is everything — {productCountWord} systems that share no runtime and one method. Each began as a process we had already run, and each returns an answer you can trace back to its source.</p>
+        <a class="back-link" href={url('/#products')}>← Back to the five</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow={`Portfolio // ${productCount} systems`}
+        title={`One method. ${capitalise(productCountWord)} places we have worked.`}
+        meta={`MEASURED IN-REPO // ${testSurface} COUNTED TESTS`}
+      />
+      <div class="card-grid">
+        {products.map((product) => (
+          <NumberedCard
+            number={product.index}
+            glyph={product.slug}
+            code={product.name.toUpperCase().replaceAll(' ', '_')}
+            title={product.name}
+            body={product.brief}
+            stat={product.cardStat}
+            href={url(`/products/${product.slug}/`)}
+            selectable={true}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Intake
+    title="Start with the one closest to your problem."
+    description="Tell us what needs to be grounded, constrained, decided or proved. It reaches engineering directly."
+    eyebrow="PORTFOLIO // ENGINEERING INTAKE"
+  />
+</Base>
