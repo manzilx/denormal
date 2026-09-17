@@ -1,0 +1,385 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Denormal Systems Brochure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>
+  :root{--bg:#FAFAFA;--panel:#F4F4F5;--card:#FFF;--ink:#18181B;--ink-3:#3F3F46;--ink-4:#52525B;
+    --muted:#71717A;--muted-2:#A1A1AA;--line:#E4E4E7;--line-2:#D4D4D8;--tint:#FFF7F2;
+    --band:#18181B;--band-ink:#FAFAFA;--band-muted:#A1A1AA;--band-line:#3F3F46;
+    --accent:#EA580C;--acc2:#0891B2;--ok:#16A34A}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#08080A;--panel:#0E0E11;--card:#101014;--ink:#F2F2F3;--ink-3:#9C9CA5;--ink-4:#9C9CA5;
+    --muted:#7A7A85;--muted-2:#62626C;--line:#23232A;--line-2:#33333C;--tint:#1C0D06;
+    --band:#0E0E11;--band-ink:#F2F2F3;--band-muted:#7A7A85;--band-line:#33333C;--acc2:#22D3EE;--ok:#4ADE80}}
+  :root[data-theme="dark"]{--bg:#08080A;--panel:#0E0E11;--card:#101014;--ink:#F2F2F3;--ink-3:#9C9CA5;--ink-4:#9C9CA5;
+    --muted:#7A7A85;--muted-2:#62626C;--line:#23232A;--line-2:#33333C;--tint:#1C0D06;
+    --band:#0E0E11;--band-ink:#F2F2F3;--band-muted:#7A7A85;--band-line:#33333C;--acc2:#22D3EE;--ok:#4ADE80}
+  *{box-sizing:border-box;border-radius:0}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 15.5px/1.62 Inter,system-ui,sans-serif;
+       letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{margin:0;letter-spacing:-.035em;text-wrap:balance} p{margin:0;text-wrap:pretty}
+  .wrap{width:min(1080px,100%);margin:0 auto;padding-inline:clamp(18px,3.5vw,44px)}
+  .micro{font:600 10px/1.2 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--accent)}
+  .eyebrow::before{content:"";width:6px;height:6px;background:var(--accent);flex:0 0 6px}
+  header.cover{border-bottom:1px solid var(--line);padding-block:clamp(30px,5vw,60px) clamp(24px,3.5vw,40px)}
+  h1{margin-top:14px;font-size:clamp(32px,5.5vw,56px);font-weight:800;line-height:.97}
+  .lede{margin-top:20px;max-width:62ch;color:var(--ink-3);font-size:16.5px;line-height:1.65}
+  .idx{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--card);border:1px solid var(--line)}
+  .idx a{background:var(--card);padding:14px 15px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:5px;box-shadow:1px 0 0 0 var(--line),0 1px 0 0 var(--line)}
+  .idx a:hover{background:var(--tint)}
+  .idx .n{font:700 10px/1 'JetBrains Mono',monospace;color:var(--accent);letter-spacing:.1em}
+  .idx .t{font-size:14px;font-weight:700;line-height:1.25}
+  .idx .s{font:400 11.5px/1.35 Inter,sans-serif;color:var(--muted)}
+  .prod{border-bottom:1px solid var(--line);padding-block:clamp(26px,4vw,44px)}
+  .phead{display:flex;align-items:flex-start;gap:clamp(16px,2.5vw,28px)}
+  .pnum{font:800 clamp(30px,4.5vw,46px)/.85 'JetBrains Mono',monospace;color:var(--accent);letter-spacing:-.06em}
+  .pname{flex:1 1 auto}
+  .pname h2{font-size:clamp(22px,3vw,30px);font-weight:800}
+  .ptag{display:block;margin-top:7px;font:600 10px/1.2 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .pglyph{flex:0 0 auto;width:clamp(42px,6vw,60px);height:clamp(42px,6vw,60px);color:var(--ink-4)}
+  .glyph{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+  .glyph .g-a{stroke:var(--accent);stroke-width:2}
+  .glyph .g-af{fill:var(--accent);stroke:none}
+  .glyph .g-f{fill:currentColor;stroke:none}
+  .flow{margin-top:22px;display:flex;align-items:stretch;gap:0;flex-wrap:wrap;border:1px solid var(--line);background:var(--card)}
+  .flow .step{flex:1 1 200px;padding:16px 18px;display:flex;gap:11px;align-items:flex-start}
+  .flow .sn{flex:0 0 auto;width:19px;height:19px;background:var(--accent);color:#fff;
+            font:700 10px/19px 'JetBrains Mono',monospace;text-align:center}
+  .flow .step p{font-size:13.5px;line-height:1.45;color:var(--ink)}
+  .flow .arr{flex:0 0 auto;align-self:center;padding:0 10px;color:var(--muted-2);font-size:17px}
+  .qa{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1px;background:var(--card);border:1px solid var(--line)}
+  .qa>div{background:var(--card);padding:18px 18px 20px;box-shadow:1px 0 0 0 var(--line),0 1px 0 0 var(--line)}
+  .qa h3{font:600 10px/1.2 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .ben{margin-top:20px;border:1px solid var(--line);background:var(--card)}
+  .ben-h{padding:11px 18px;background:var(--panel);box-shadow:0 1px 0 0 var(--line)}
+  .ben-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--card)}
+  .ben-g>div{background:var(--card);padding:16px 18px 18px;box-shadow:1px 0 0 0 var(--line)}
+  .ben-g h4{margin:0;font-size:14px;font-weight:700;letter-spacing:-.02em}
+  .ben-g p{margin-top:7px;font-size:13px;line-height:1.5;color:var(--ink-3)}
+  .ben-g p b{color:var(--ink);font-weight:600}
+  .qa p{margin-top:9px;font-size:14px;line-height:1.55;color:var(--ink-3)}
+</style></head><body>
+<header class="cover"><div class="wrap">
+  <span class="micro eyebrow">Denormal Labs</span>
+  <h1>Five systems for<br>work that has to<br>stand up to audit.</h1>
+  <p class="lede">Each one began as a process we ran ourselves before we wrote any software for it &mdash; a tender read, a claim built, a hold point held, a hazard closed out. They share no runtime. They share one rule: every answer arrives with the evidence it was built from.</p>
+  <div class="idx">
+    <a href="#p1"><span class="n">01</span><span class="t">Power Contract Intelligence</span><span class="s">Pre-award tender review</span></a>
+    <a href="#p2"><span class="n">02</span><span class="t">OneLegal</span><span class="s">Contracts and claims</span></a>
+    <a href="#p3"><span class="n">03</span><span class="t">Peak Logic</span><span class="s">Schedule and delay analysis</span></a>
+    <a href="#p4"><span class="n">04</span><span class="t">Sentinel</span><span class="s">Safety and permits</span></a>
+    <a href="#p5"><span class="n">05</span><span class="t">Quality AI</span><span class="s">Inspection and non-conformance</span></a>
+  </div>
+</div></header>
+<section class="prod" id="p1">
+  <div class="wrap">
+    <div class="phead">
+      <div class="pnum">01</div>
+      <div class="pname"><h2>Power Contract Intelligence</h2><span class="ptag">Pre-award tender review</span></div>
+      <span class="pglyph"><svg class="glyph" viewBox="0 0 32 32" aria-hidden="true"><path class="g-a" d="M9 13.5 H5 V19.5 H9" /> <line x1="13" y1="7" x2="28" y2="7" /> <line x1="13" y1="12" x2="28" y2="12" /> <line class="g-a" x1="13" y1="16.5" x2="24" y2="16.5" /> <line x1="13" y1="21" x2="28" y2="21" /> <line x1="13" y1="26" x2="22" y2="26" /></svg></span>
+    </div>
+    <div class="flow"><div class="step"><span class="sn">1</span><p>Tender pack</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">2</span><p>Read against 13 fixed questions</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">3</span><p>Deviation register &rarr; go/no-go</p></div></div>
+    <div class="qa">
+      <div><h3>What it is</h3><p>A workspace for reading a tender pack before you bid or before you award. The pack goes in; risks, deviations, pre-bid queries and a clause map come out.</p></div>
+      <div><h3>What it does</h3><p>Reads hundreds of pages of general and special conditions, scope, bill of quantities and tax appendices against the same thirteen questions every time — penalties, warranty, local content, change in law, termination — then carries the findings through three review gates to a recorded go/no-go.</p></div>
+      <div><h3>Why buy it</h3><p>What sinks a contract is the clause nobody had time to read. Bid decisions are made in days; the pack is read by whoever was free. This makes the reading uniform, so coverage does not depend on who ran it or how busy that week was.</p></div>
+      <div><h3>How it helps you</h3><p>Your committee receives a deviation register, a risk register, pre-bid queries and the gate records as one workbook. Every finding cites the clause it came from, so a reviewer can check it rather than take it on trust.</p></div>
+    </div>
+  </div>
+<div class="ben">
+      <div class="ben-h"><span class="micro">What you get back</span></div>
+      <div class="ben-g">
+        <div><h4>Man-hours</h4><p>One pack, read once, against the same thirteen questions &mdash; rather than each reviewer reading as far as the calendar allowed. <b>Your arithmetic:</b> staff-days per tender pack today &times; packs per year.</p></div>
+        <div><h4>Records digitised</h4><p>The deviation register, pre-bid queries, pricing assumptions and all three gate decisions stop being an email thread and become one workbook, every finding cited to the clause it came from.</p></div>
+        <div><h4>Money</h4><p>The exposure you avoid is the clause nobody had time to read. Price it the way your own contracts do &mdash; the LD ladder, the change-in-law position, the local-content undertaking you would otherwise have accepted unpriced.</p></div>
+      </div>
+    </div>
+  </section>
+<section class="prod" id="p2">
+  <div class="wrap">
+    <div class="phead">
+      <div class="pnum">02</div>
+      <div class="pname"><h2>OneLegal</h2><span class="ptag">Contracts and claims</span></div>
+      <span class="pglyph"><svg class="glyph" viewBox="0 0 32 32" aria-hidden="true"><rect class="g-af" x="4" y="6.5" width="24" height="3" /> <rect x="4" y="10.5" width="24" height="17.5" /> <rect x="9" y="15" width="8" height="8" /> <rect x="15" y="15" width="8" height="8" /></svg></span>
+    </div>
+    <div class="flow"><div class="step"><span class="sn">1</span><p>Contract set</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">2</span><p>Sealed evidence, cited to clause</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">3</span><p>Risk matrix &rarr; drafted notice</p></div></div>
+    <div class="qa">
+      <div><h3>What it is</h3><p>A workbench for contract review and dispute work. A contract set is read into an isolated matter and returned as a risk matrix with clause-level citations.</p></div>
+      <div><h3>What it does</h3><p>Maps a contract against roughly three hundred canonical questions across eleven contract families, including FIDIC, IChemE, Orgalime and the NTPC general conditions. For a dispute, counsel curates an evidence set and seals it; drafting may then run only over that frozen set.</p></div>
+      <div><h3>Why buy it</h3><p>A six-hundred-page contract is unreadable under deal pressure. And in a dispute, drafting over a corpus that keeps growing means you can never state precisely what a submission was based on &mdash; which is the first question the other side asks.</p></div>
+      <div><h3>How it helps you</h3><p>Deviation review that occupies an officer for a fortnight becomes a day with a written trail. The sealed set means that when you say what a claim was built from, you can prove it &mdash; to the tribunal, and to audit.</p></div>
+    </div>
+  </div>
+<div class="ben">
+      <div class="ben-h"><span class="micro">What you get back</span></div>
+      <div class="ben-g">
+        <div><h4>Man-hours</h4><p>Deviation review against your general conditions, on every bidder, without the review shortening as the deadline approaches. <b>Your arithmetic:</b> reviewer-days per bidder &times; bidders per tender.</p></div>
+        <div><h4>Records digitised</h4><p>A contract set becomes a searchable matter with clause-level citation, and an evidence set can be sealed so a draft states exactly what it was built from &mdash; instead of a corpus that has moved on since.</p></div>
+        <div><h4>Money</h4><p>External counsel hours on first-pass review, and the far larger figure behind them: claims that fail on documentation rather than entitlement. Your own arbitration history is the honest input here.</p></div>
+      </div>
+    </div>
+  </section>
+<section class="prod" id="p3">
+  <div class="wrap">
+    <div class="phead">
+      <div class="pnum">03</div>
+      <div class="pname"><h2>Peak Logic</h2><span class="ptag">Schedule and delay analysis</span></div>
+      <span class="pglyph"><svg class="glyph" viewBox="0 0 32 32" aria-hidden="true"><rect class="g-f" x="3" y="6" width="12" height="4.5" /> <rect class="g-a" x="16" y="6" width="9" height="4.5" /> <path d="M15 10.5 V17 H21 V21" /> <rect class="g-f" x="21" y="21" width="8" height="4.5" /></svg></span>
+    </div>
+    <div class="flow"><div class="step"><span class="sn">1</span><p>P6 schedule (XER)</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">2</span><p>Graded, then analysed event by event</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">3</span><p>Net EOT, with the working shown</p></div></div>
+    <div class="qa">
+      <div><h3>What it is</h3><p>A critical-path scheduling and forensic delay-analysis platform. It reads a Primavera P6 schedule, grades it, then produces a defensible extension-of-time position.</p></div>
+      <div><h3>What it does</h3><p>Imports the XER directly, runs its own CPM engine over it &mdash; forward and backward pass, float, calendars, constraints, lag &mdash; then applies delay events one at a time in an SCL Protocol time-impact analysis with Malmaison attribution.</p></div>
+      <div><h3>Why buy it</h3><p>Building an extension-of-time claim takes weeks, and the number has to survive an opposing expert who will attack the method before the arithmetic. Meanwhile you need a Primavera licence simply to open the file.</p></div>
+      <div><h3>How it helps you</h3><p>You get a cumulative waterfall showing how the number was produced, not just the number. A schedule-quality gate blocks the analysis until the programme is fit to analyse, and any override is recorded.</p></div>
+    </div>
+  </div>
+<div class="ben">
+      <div class="ben-h"><span class="micro">What you get back</span></div>
+      <div class="ben-g">
+        <div><h4>Man-hours</h4><p>A schedule graded and a delay analysis run event by event, in place of weeks of manual forensic work. <b>Your arithmetic:</b> analyst-weeks per claim &times; claims in dispute.</p></div>
+        <div><h4>Records digitised</h4><p>Baselines, schedule-quality scores, delay events and the attribution behind the entitlement become a stored, re-runnable record rather than one consultant&rsquo;s working file.</p></div>
+        <div><h4>Money</h4><p>A forensic delay analysis bought from a claims consultant is a market rate you can check against quotes you already hold. Add the Primavera licences currently needed simply to open the file.</p></div>
+      </div>
+    </div>
+  </section>
+<section class="prod" id="p4">
+  <div class="wrap">
+    <div class="phead">
+      <div class="pnum">04</div>
+      <div class="pname"><h2>Sentinel</h2><span class="ptag">Safety and permits</span></div>
+      <span class="pglyph"><svg class="glyph" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10 V4 H10" /> <path d="M22 4 H28 V10" /> <path d="M4 22 V28 H10" /> <path d="M22 28 H28 V22" /> <line x1="16" y1="20" x2="16" y2="11" /> <line class="g-a" x1="7" y1="20" x2="25" y2="20" /></svg></span>
+    </div>
+    <div class="flow"><div class="step"><span class="sn">1</span><p>Photograph at the workface</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">2</span><p>Classified and grounded in standards</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">3</span><p>Cited countermeasure + audit row</p></div></div>
+    <div class="qa">
+      <div><h3>What it is</h3><p>A mobile-first environment, health and safety platform for plants and construction sites. A worker photographs a hazard; a cited countermeasure comes back.</p></div>
+      <div><h3>What it does</h3><p>Classifies the photograph against a twenty-one-type hazard taxonomy, drafts the report, and retrieves countermeasures from a corpus spanning OSHA, HSE UK, NIOSH and Lean material &mdash; each answer carrying its citation chain and a grounding score.</p></div>
+      <div><h3>Why buy it</h3><p>Safety software collects reports. The gap is the loop from an observation to a corrected condition. Near-misses are under-reported to the point where leading indicators stop meaning anything, because reporting one costs twelve minutes of paperwork.</p></div>
+      <div><h3>How it helps you</h3><p>Reporting takes under a minute from the phone already in the worker&rsquo;s hand, which is the only intervention that reliably moves reporting rates. Permit-to-work audits return PASS, FAIL or UNCERTAIN against a cited standard rather than one inspector&rsquo;s opinion.</p></div>
+    </div>
+  </div>
+<div class="ben">
+      <div class="ben-h"><span class="micro">What you get back</span></div>
+      <div class="ben-g">
+        <div><h4>Man-hours</h4><p>Reporting a hazard takes under a minute from the phone already in the worker&rsquo;s hand. <b>Your arithmetic:</b> minutes per paper report today &times; reports per site per month &times; sites.</p></div>
+        <div><h4>Records digitised</h4><p>Near-miss and hazard data becomes real rather than notional, with photograph, location, capture-time and the cited standard attached &mdash; a contemporaneous record, not one reconstructed after an incident.</p></div>
+        <div><h4>Money</h4><p>This is the product where labour saved is the smallest part. The number that matters is one lost-time injury: enquiry, stoppage, statutory exposure, and the ministry correspondence that follows.</p></div>
+      </div>
+    </div>
+  </section>
+<section class="prod" id="p5">
+  <div class="wrap">
+    <div class="phead">
+      <div class="pnum">05</div>
+      <div class="pname"><h2>Quality AI</h2><span class="ptag">Inspection and non-conformance</span></div>
+      <span class="pglyph"><svg class="glyph" viewBox="0 0 32 32" aria-hidden="true"><line x1="3" y1="16" x2="12.5" y2="16" /> <path d="M9.5 12.5 L13 16 L9.5 19.5" /> <line class="g-a" x1="16" y1="4" x2="16" y2="28" /> <line x1="19.5" y1="16" x2="29" y2="16" stroke-dasharray="2.5 2.5" /></svg></span>
+    </div>
+    <div class="flow"><div class="step"><span class="sn">1</span><p>Three specifications</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">2</span><p>Precedence decided and recorded</p></div><div class="arr" aria-hidden="true">&rarr;</div><div class="step"><span class="sn">3</span><p>One governing requirement &rarr; ITP</p></div></div>
+    <div class="qa">
+      <div><h3>What it is</h3><p>Document-grounded quality control for manufacturing and project work packages. Requirements in, inspection and test plan out, non-conformance closed with evidence.</p></div>
+      <div><h3>What it does</h3><p>Breaks specifications into individually testable requirements, each returned with its clause and exact character span, then applies a deterministic precedence rule to decide which of the conflicting sources governs.</p></div>
+      <div><h3>Why buy it</h3><p>Three requirement sources stack on every activity &mdash; the client specification, the corporate standard, the applicable code &mdash; and they contradict one another. Today an engineer reconciles them by hand, under time pressure, and nothing records why one won.</p></div>
+      <div><h3>How it helps you</h3><p>The governing requirement is recorded with its reasoning. Inspection hold points are enforced rather than advisory: skip one and the system refuses. The audit log is append-only and written in the same transaction as the change it records.</p></div>
+    </div>
+  </div>
+<div class="ben">
+      <div class="ben-h"><span class="micro">What you get back</span></div>
+      <div class="ben-g">
+        <div><h4>Man-hours</h4><p>Three specifications reconciled into one governing requirement with the reasoning recorded, instead of an engineer doing it by hand per activity. <b>Your arithmetic:</b> hours per work package &times; packages per project.</p></div>
+        <div><h4>Records digitised</h4><p>Requirements, the precedence decision, the inspection and test plan and every non-conformance become a linked record with an append-only audit trail written in the same transaction as the change.</p></div>
+        <div><h4>Money</h4><p>Rework and the cost of poor quality, plus the schedule cost of a hold point discovered late. Your NCR register already holds both figures.</p></div>
+      </div>
+    </div>
+  </section>
+<style>
+  .sec{border-bottom:1px solid var(--line);padding-block:clamp(26px,4vw,46px)}
+  .tiers{margin-top:24px;display:flex;flex-direction:column;gap:1px;background:var(--card);border:1px solid var(--line)}
+  .tier{background:var(--card);padding:20px 18px 22px;display:grid;grid-template-columns:52px 1fr;gap:16px;box-shadow:0 1px 0 0 var(--line)}
+  .tier:last-child{box-shadow:none}
+  .tier-n{font:800 26px/1 'JetBrains Mono',monospace;color:var(--accent);letter-spacing:-.05em}
+  .tier h3{font-size:18px;font-weight:700}
+  .tier-s{margin-top:5px;font:600 10px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .tier>div>p:last-child{margin-top:10px;font-size:14px;line-height:1.58;color:var(--ink-3)}
+  .sec h2{font-size:clamp(22px,3vw,32px);font-weight:800}
+  .sec .kick{margin-top:12px;max-width:68ch;color:var(--ink-3);font-size:15.5px}
+  .opts{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:1px;background:var(--card);border:1px solid var(--line)}
+  .opt{background:var(--card);padding:20px 18px 22px;display:flex;flex-direction:column;gap:13px;box-shadow:1px 0 0 0 var(--line),0 1px 0 0 var(--line)}
+  .opt.best{border-top:2px solid var(--accent)}
+  .opt.ok{border-top:2px solid var(--acc2)}
+  .opt.last{border-top:2px solid var(--line-2)}
+  .opt-rank{font:600 10px/1.2 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+  .opt.best .opt-rank{color:var(--accent)} .opt.ok .opt-rank{color:var(--acc2)} .opt.last .opt-rank{color:var(--muted)}
+  .opt h3{font-size:17px;font-weight:700}
+  .opt p{font-size:13.5px;line-height:1.55;color:var(--ink-3)}
+  .dia{display:block;width:100%;height:78px}
+  .lst{margin:20px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px 30px}
+  .lst li{position:relative;padding-left:17px;font-size:14px;line-height:1.55;color:var(--ink-3)}
+  .lst li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:1.5px;background:var(--accent)}
+  .lst li b{color:var(--ink);font-weight:600}
+  .road{margin-top:26px;border:1px solid var(--line);background:var(--card)}
+  .road-h{padding:14px 18px;background:var(--panel);box-shadow:0 1px 0 0 var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .road-h b{font-size:15px;font-weight:700}
+  .road-h span{font:600 9.5px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--accent);padding:3px 8px}
+  .road ul{margin:0;padding:6px 0;list-style:none}
+  .road li{padding:12px 18px;box-shadow:0 1px 0 0 var(--line);font-size:14px;line-height:1.5;color:var(--ink-3)}
+  .road li:last-child{box-shadow:none}
+  .road li b{color:var(--ink);font-weight:600;display:block;margin-bottom:3px}
+  .note{margin-top:22px;padding:17px 19px;border:1px solid var(--accent);background:var(--tint)}
+  .note p{font-size:14.5px;line-height:1.6;color:var(--ink)}
+  .closing{background:var(--band);color:var(--band-ink);border:0;padding-block:clamp(26px,4vw,46px)}
+  .closing h2{color:var(--band-ink)} .closing .micro{color:var(--accent)}
+  .closing p{color:var(--band-muted);max-width:64ch;margin-top:14px;font-size:15.5px;line-height:1.6}
+  .contact{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px 40px}
+  .contact div{display:flex;flex-direction:column;gap:5px}
+  .contact span{font:600 9.5px/1.2 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--band-muted)}
+  .contact b{font:500 15px/1.2 'JetBrains Mono',monospace;color:var(--band-ink)}
+  footer{padding-block:22px 36px;color:var(--muted);font:400 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.08em}
+  @media print{
+    :root{--bg:#fff!important;--panel:#F7F7F8!important;--card:#fff!important;
+      --ink:#18181B!important;--ink-3:#3F3F46!important;--ink-4:#52525B!important;
+      --muted:#71717A!important;--muted-2:#A1A1AA!important;
+      --line:#D9D9DE!important;--line-2:#C4C4CB!important;--tint:#FFF7F2!important;
+      --band:#fff!important;--band-ink:#18181B!important;--band-muted:#3F3F46!important;--band-line:#D9D9DE!important;
+      --accent:#C2410C!important;--acc2:#0E7490!important;--ok:#15803D!important}
+    @page{margin:13mm}
+    html,body{background:#fff!important}
+    body{font-size:10.5pt;line-height:1.45}
+    h1{font-size:25pt}
+    .wrap{width:100%;padding-inline:0}
+    .prod,.sec,.closing{padding-block:13pt}
+    .closing{border-top:2px solid var(--accent)}
+    h2,h3{break-after:avoid}
+    .prod,.opt,.qa>div,.road,.note,.flow,.idx,.ben,.tier{break-inside:avoid}
+    /* Three across becomes 2+1 with a blank quadrant at page width; stacked
+       full-width reads better and wastes nothing. */
+    .ben-g{grid-template-columns:1fr}
+    .ben-g>div{box-shadow:0 1px 0 0 var(--line)}
+    .prod{break-before:auto}
+    footer{break-before:avoid}
+  }
+</style>
+
+<section class="sec value"><div class="wrap">
+  <span class="micro eyebrow">The business case</span>
+  <h2 style="margin-top:12px">Three places the money is.</h2>
+  <p class="kick">In ascending order of size, and descending order of how easily you can prove them. We would rather you built the case on the first and were surprised by the third than the other way round.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-n">01</div>
+      <div>
+        <h3>Staff time</h3>
+        <p class="tier-s">Smallest number. Easiest to compute. Put it in the paper first.</p>
+        <p>Reviewer-days per tender pack, analyst-weeks per claim, engineer-hours per work package, minutes per hazard report. You already know these figures, or the people who do sit two desks away. Multiply by your own volumes; we have deliberately not guessed at them for you.</p>
+      </div>
+    </div>
+    <div class="tier">
+      <div class="tier-n">02</div>
+      <div>
+        <h3>Records that did not exist before</h3>
+        <p class="tier-s">Hard to price. Decisive on the day it is tested.</p>
+        <p>Every one of these systems turns work that currently lives in mailboxes, spreadsheets and individual working files into a record with its source attached: the clause a finding came from, the standard a countermeasure cites, the reasoning behind a precedence decision, the schedule state an entitlement was computed against. That record is what an audit, a tribunal or a departmental enquiry actually asks for &mdash; and it is the thing organisations discover they do not have at precisely the wrong moment.</p>
+      </div>
+    </div>
+    <div class="tier">
+      <div class="tier-n">03</div>
+      <div>
+        <h3>Loss avoided</h3>
+        <p class="tier-s">Largest by an order of magnitude. Hardest to attribute.</p>
+        <p>One arbitration lost on record-keeping rather than merit. One clause accepted unpriced at award. One lost-time injury and the enquiry behind it. No honest vendor can promise you avoided any of these &mdash; but your own files will tell you what the last one cost, and that figure is the real size of the problem.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note"><p><b>We have put no savings percentage in this document, and that is deliberate.</b> We have no customers yet, so any figure we printed would be invented &mdash; and you have read enough vendor claims to discount an invented one instantly. What is here instead is the arithmetic and the inputs. Run it with your own numbers, or give us one real document and we will run it with you on your own work.</p></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <span class="micro eyebrow">Data security</span>
+  <h2 style="margin-top:12px">Where your data is stored.</h2>
+  <p class="kick">Every one of these systems is a self-contained service. It does not need to live with us, and in almost every case it should not. These are the three ways it can be deployed, in the order we would recommend them.</p>
+
+  <div class="opts">
+    <div class="opt best">
+      <span class="opt-rank">Recommended</span>
+      <h3>On your own servers</h3>
+      <svg class="dia" viewBox="0 0 200 78" aria-hidden="true">
+        <rect x="6" y="8" width="188" height="62" fill="none" stroke="var(--accent)" stroke-width="2"></rect>
+        <text x="14" y="23" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--accent)" letter-spacing="1">YOUR NETWORK</text>
+        <rect x="26" y="34" width="60" height="26" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+        <text x="36" y="50" font-family="JetBrains Mono, monospace" font-size="8" fill="currentColor">APP</text>
+        <rect x="114" y="34" width="60" height="26" fill="var(--accent)" stroke="none"></rect>
+        <text x="124" y="50" font-family="JetBrains Mono, monospace" font-size="8" fill="#fff">DATA</text>
+        <line x1="86" y1="47" x2="114" y2="47" stroke="currentColor" stroke-width="1.5"></line>
+      </svg>
+      <p>It runs inside your perimeter, on hardware you already own and already audit. Your existing access control, backup and retention policies apply unchanged. Nothing of yours is in our hands, so there is nothing for us to lose, disclose, or hand back when the contract ends.</p>
+    </div>
+    <div class="opt ok">
+      <span class="opt-rank">Also good</span>
+      <h3>In your own cloud account</h3>
+      <svg class="dia" viewBox="0 0 200 78" aria-hidden="true">
+        <rect x="6" y="8" width="188" height="62" fill="none" stroke="var(--acc2)" stroke-width="2"></rect>
+        <text x="14" y="23" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--acc2)" letter-spacing="1">YOUR CLOUD TENANCY</text>
+        <rect x="26" y="34" width="60" height="26" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+        <text x="36" y="50" font-family="JetBrains Mono, monospace" font-size="8" fill="currentColor">APP</text>
+        <rect x="114" y="34" width="60" height="26" fill="var(--acc2)" stroke="none"></rect>
+        <text x="124" y="50" font-family="JetBrains Mono, monospace" font-size="8" fill="#fff">DATA</text>
+        <line x1="86" y1="47" x2="114" y2="47" stroke="currentColor" stroke-width="1.5"></line>
+      </svg>
+      <p>If you already hold a contract with a MeitY-empanelled cloud provider &mdash; AWS Mumbai and Azure India among them &mdash; we deploy into your tenancy. You inherit your own empanelment, your own audit trail and your own controls, and procurement has nothing new to assess. For a PSU with an existing cloud footprint this is usually the shortest route.</p>
+    </div>
+    <div class="opt last">
+      <span class="opt-rank">Only if you prefer</span>
+      <h3>Hosted by us</h3>
+      <svg class="dia" viewBox="0 0 200 78" aria-hidden="true">
+        <rect x="6" y="8" width="90" height="62" fill="none" stroke="var(--muted-2)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+        <text x="14" y="23" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--muted)" letter-spacing="1">YOU</text>
+        <rect x="104" y="8" width="90" height="62" fill="none" stroke="var(--muted-2)" stroke-width="1.5"></rect>
+        <text x="112" y="23" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--muted)" letter-spacing="1">INDIA REGION</text>
+        <rect x="118" y="34" width="60" height="26" fill="var(--muted-2)" stroke="none"></rect>
+        <text x="128" y="50" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--card)">DATA</text>
+        <line x1="40" y1="47" x2="104" y2="47" stroke="var(--muted-2)" stroke-width="1.5" stroke-dasharray="3 3"></line>
+      </svg>
+      <p>We run it for you in an India region, so the data stays in the country. We would still rather you chose one of the options above: they keep the data inside your control and under your compliance posture rather than ours, which is a better answer for you and an easier one for your auditors.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px;font-size:18px">What is held, and what is not</h3>
+  <ul class="lst">
+    <li><b>Held:</b> the documents you supply &mdash; the tender pack, the contract set, the schedule, the photographs.</li>
+    <li><b>Held:</b> the record derived from them &mdash; findings, citations, decisions, and the audit trail that shows how each was reached.</li>
+    <li><b>Not held:</b> anything else. No copies, no analytics on your content, no shadow index.</li>
+    <li><b>Not done:</b> we do not train on your material. There is no training pipeline in any of these systems &mdash; not a policy we have chosen to follow, but a component that does not exist.</li>
+  </ul>
+
+  <div class="note"><p>Some features can call an external model service. <b>Before you deploy, we will tell you exactly which product calls which service, and precisely what that service receives</b> &mdash; in writing, so your security team can assess it rather than take our word for it. Where you would rather nothing left your network at all, say so and we will scope the deployment that way.</p></div>
+
+  <div class="road">
+    <div class="road-h"><b>What is not built yet</b><span>Roadmap, not shipped</span></div>
+    <ul>
+      <li><b>Hosted deployment on MeitY-empanelled infrastructure</b>Today our own hosting is an India region but not an empanelled offering. If you want us to host, this is the gap to close first &mdash; and deploying into your own tenancy sidesteps it entirely.</li>
+      <li><b>Encryption at rest, applied by the application</b>On your own infrastructure, the disk and volume encryption you already run covers this. As a hosted service, it is work we still owe you.</li>
+      <li><b>Single sign-on against your directory</b>Today these are built for a trusted network behind your own perimeter authentication, not for the open internet.</li>
+      <li><b>A formal retention, deletion and legal-hold policy</b>Deployed with you, retention follows your policy on your storage. As a product feature, it is not there yet.</li>
+    </ul>
+  </div>
+
+  <div class="note" style="margin-top:22px"><p>We would rather write that list down than have you find it during a security review. <b>Every claim in this brochure is meant to survive being checked</b> &mdash; which only means anything if we are equally plain about what is missing.</p></div>
+</div></section>
+
+<section class="closing"><div class="wrap">
+  <span class="micro">Next step</span>
+  <h2 style="margin-top:12px">Start with one document.</h2>
+  <p>Give us one real artifact &mdash; a tender pack, a programme, a contract set, six months of near-miss reports &mdash; and we will return a written findings document on it. A fixed scope, a fixed fee, and no deployment, no integration and no procurement exercise required. If it tells you something you did not already know, we will talk about a pilot. If it does not, you will have lost two weeks and very little money.</p>
+  <div class="contact">
+    <div><span>Web</span><b>denormal.in</b></div>
+    <div><span>Mail</span><b>manzil@denormal.in</b></div>
+    <div><span>Based in</span><b>New Delhi, India</b></div>
+  </div>
+</div></section>
+
+<footer class="wrap">DENORMAL LABS &middot; FIVE SYSTEMS &middot; CLAIMS LIMITED TO SHIPPED CAPABILITY &middot; NO CERTIFICATIONS ASSERTED</footer>
+</body></html>
