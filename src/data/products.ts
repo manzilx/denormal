@@ -54,7 +54,7 @@ const productEntries: Omit<Product, 'index'>[] = [
   {
     slug: 'power-contract-intelligence', featured: true, name: 'Power Contract Intelligence', eyebrow: 'PCI // PRE-AWARD',
     tagline: 'Cited to what it was shown.',
-    brief: 'A pre-award tender workspace for power-sector supply and services bids. The tender pack goes in; risks, deviations, pre-bid queries and a clause map come out, and three review gates carry it to a go/no-go and a submission workbook.',
+    brief: 'A pre-award tender workspace for power-sector supply and services bids. The tender pack goes in; risks, deviations, pre-bid queries and a clause map come out, and three review stages carry it to a go/no-go and a submission workbook.',
     console: { input: 'Tender pack', output: 'risks \u2192 go/no-go', status: 'SHOWN-CHUNKS ONLY' },
     cardStat: ['13', 'queries every pack is read against'],
     capabilities: [
