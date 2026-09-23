@@ -112,6 +112,16 @@ function finish(html, { theme, label }) {
   // tablets and desktops, where it sits on one line, keep it.
   html = must(html, '">Five systems · shipped capability only</span>', '" data-dn-tagline>Five systems · shipped capability only</span>', 'hero tagline');
 
+  // On phones the hero keeps only the wordmark, its LABS tag and the headline.
+  // Hidden under 560px: the label block above the wordmark ("Process
+  // improvement for manufacturing and complex projects", plus the tagline
+  // above) and the coordinates beside LABS. Tablets and desktops keep both.
+  html = must(html,
+    '<div data-reveal="fade" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">',
+    '<div data-dn-eyebrow data-reveal="fade" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">',
+    'hero label block');
+  html = must(html, '">28.61° N · 77.21° E · NEW DELHI</span>', '" data-dn-coords>28.61° N · 77.21° E · NEW DELHI</span>', 'hero coordinates');
+
   // About tab: appended to the primary nav, after the three section links.
   const inactive = theme === 'light' ? '#18181B' : '#F4F4F5';
   const about = theme === 'light' ? '/about/' : '/dark/about/';
@@ -134,7 +144,7 @@ function finish(html, { theme, label }) {
   html = html.slice(0, close)
     + `<a href="${about}" data-dn-about style="align-items:center;padding:10px 11px;flex:0 0 auto;white-space:nowrap;color:${inactive};font:600 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase">About</a>`
     + html.slice(close);
-  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){[data-dn-tagline]{display:none!important}header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
+  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){[data-dn-tagline],[data-dn-eyebrow],[data-dn-coords]{display:none!important}header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
   return correct(html);
 }
