@@ -14,7 +14,7 @@ import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { renderAbout } from '../site/about.mjs';
-import { CORRECTIONS } from '../site/corrections.mjs';
+import { CORRECTIONS, BANNED } from '../site/corrections.mjs';
 
 const OUT = 'dist';
 const EXPORT = 'export';
@@ -57,6 +57,16 @@ function unbundle(file) {
   for (const e of ext) if (url[e.uuid]) map[e.id] = url[e.uuid];
   const resources = `<script>window.__resources = ${JSON.stringify(map).replace(/<\//g, '<\\/')};</script>`;
   html = html.replace(/<head[^>]*>/i, (m) => m + resources);
+  return html;
+}
+
+const used = new Set();
+function correct(html) {
+  CORRECTIONS.forEach(([find, replace], i) => {
+    const next = find instanceof RegExp ? html.replace(find, replace) : html.split(find).join(replace);
+    if (next !== html) used.add(i);
+    html = next;
+  });
   return html;
 }
 
@@ -104,14 +114,12 @@ function finish(html, { theme, label }) {
     + html.slice(close);
   html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:560px){header a[href="#start"]{display:none!important}}</style></head>`);
 
-  for (const [find, replace, why] of CORRECTIONS) if (html.includes(find)) html = html.split(find).join(replace);
-  return html;
+  return correct(html);
 }
 
 const light = finish(unbundle('Denormal Website - Light.html'), { theme: 'light' });
 const dark = finish(unbundle('Denormal Website - Dark.html'), { theme: 'dark' });
-let brochure = unbundle('Denormal Brochure.html');
-for (const [find, replace] of CORRECTIONS) if (brochure.includes(find)) brochure = brochure.split(find).join(replace);
+let brochure = correct(unbundle('Denormal Brochure.html'));
 brochure = brochure.replace(/<html>/i, '<html lang="en">').replace(/<\/title>/i, (m) => m + '\n<link rel="icon" href="/favicon.svg" type="image/svg+xml">');
 
 // The About page reuses the site's own @font-face rules, already rewritten
@@ -148,6 +156,13 @@ writeFileSync(join(OUT, '_headers'), readFileSync('public/_headers', 'utf8')
   .replace('/_astro/*', '/assets/*')
   .replace(/\n# Astro fingerprints[^\n]*\n# contents[^\n]*\n/, '\n# Asset names are content hashes, so those URLs can never change contents.\n')
   + '\n/*/\n  Cache-Control: public, max-age=0, must-revalidate\n');
+
+// A correction that matched nothing anywhere usually means the export's
+// wording changed; the BANNED check below decides whether that matters.
+CORRECTIONS.forEach(([, , why], i) => { if (!used.has(i)) console.warn(`  note: correction unused — ${why}`); });
+const leaks = [];
+for (const [path, html] of Object.entries(pages)) for (const b of BANNED) if (html.includes(b)) leaks.push(`${path}: "${b}"`);
+if (leaks.length) throw new Error(`build: disproved claims reached dist/ — fix site/corrections.mjs\n  ${leaks.join('\n  ')}`);
 
 const n = readFileSync(join(OUT, 'index.html')).length;
 console.log(`built ${Object.keys(pages).length} pages → ${OUT}/ (home ${Math.round(n / 1024)} KB)`);
