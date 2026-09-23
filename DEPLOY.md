@@ -1,8 +1,30 @@
 # Deploying denormal.in
 
-The site is a static Astro build hosted on **Cloudflare Pages**, which builds
-this repo directly on every push to `main`. There is no CI workflow in this
-repo — Cloudflare does the build itself.
+The site is hosted on **Cloudflare Pages**, which builds this repo directly on
+every push to `main`. There is no CI workflow in this repo — Cloudflare does
+the build itself.
+
+**What gets built.** The site is designed in Claude Design and exported to
+`export/` as three self-unpacking HTML files (Light, Dark, Brochure).
+`pnpm build` runs `scripts/build-site.mjs`, which unpacks them at build time
+into `dist/`: real HTML, and every font and script as a content-hashed file
+under `/assets/`. It also adds the About page (`site/about.mjs`), the About
+tab, redirects for the old Astro URLs, and applies `site/corrections.mjs`.
+
+| Path | Source |
+|---|---|
+| `/` · `/dark/` | `export/Denormal Website - Light.html` · `- Dark.html` |
+| `/about/` · `/dark/about/` | `site/about.mjs` |
+| `/brochure/` | `export/Denormal Brochure.html` |
+
+To ship a new design: re-export from Claude Design over the files in
+`export/`, run `pnpm build`, check it with the `site` preview, push. The build
+fails loudly if the export no longer contains the markup it patches (theme
+toggle, nav), rather than shipping a page without them.
+
+The previous Astro site is still in `src/` and builds with
+`pnpm astro:build`; switching back is a one-line change to `build` in
+`package.json`.
 
 Domain `denormal.in` is registered at Hostinger; its DNS is served by
 Cloudflare. Hostinger hosting is not used.
@@ -11,7 +33,7 @@ Cloudflare. Hostinger hosting is not used.
 
 | Setting | Value |
 |---|---|
-| Framework preset | Astro |
+| Framework preset | None (Astro also works — the build command is what runs) |
 | Build command | `pnpm build` |
 | Output directory | `dist` |
 | `NODE_VERSION` | `22` |

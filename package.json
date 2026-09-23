@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "node scripts/build-site.mjs",
+    "preview": "node scripts/build-site.mjs && npx --yes serve dist -l 4321",
+    "astro:dev": "astro dev",
+    "astro:build": "astro build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
