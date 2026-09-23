@@ -172,6 +172,23 @@ function finish(html, { theme, label }) {
     + html.slice(close);
   html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){[data-dn-tagline],[data-dn-eyebrow],[data-dn-coords]{display:none!important}header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
+  // One wordmark in view at a time. While the hero's big "denormal" is on
+  // screen, the small header logo and its LABS tag are hidden; once the hero
+  // mark has scrolled up under the 64px header, they fade in.
+  //
+  // Measured from the hero mark's live position on scroll, resize and while
+  // the canvas runtime is still rendering — not with an IntersectionObserver.
+  // An observer created early reads a 0×0 mark and a 0×0 viewport (the runtime
+  // has not laid the page out yet), reports "not visible", and in this setup
+  // never reports again. Readings with no height are ignored for the same
+  // reason. The class is set before first paint when the page opens at the
+  // top, so the small logo does not flash; if the mark never renders, the
+  // logo is shown.
+  const LOGO = 'header a[aria-label="Denormal Labs home"]';
+  html = html.replace(/<\/head>/i, `<style>${LOGO},${LOGO}+span{transition:opacity .35s ease,transform .35s ease,visibility .35s}html.dn-hero-mark ${LOGO},html.dn-hero-mark ${LOGO}+span{opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none}</style>
+<script>(function(){var root=document.documentElement,q='span[role="img"][aria-label="denormal"]',raf=0;if((window.scrollY||0)<120)root.classList.add('dn-hero-mark');function upd(){raf=0;var m=document.querySelector(q);if(!m)return;var r=m.getBoundingClientRect();if(!r.height)return;root.classList.toggle('dn-hero-mark',r.bottom>64)}function req(){if(!raf)raf=requestAnimationFrame(upd)}addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('load',req);var mo=new MutationObserver(req);mo.observe(root,{childList:true,subtree:true});setTimeout(function(){mo.disconnect();if(!document.querySelector(q))root.classList.remove('dn-hero-mark');req()},8000)})();</script></head>`);
+  if (!html.includes('role="img" aria-label="denormal"')) throw new Error('build: hero wordmark not found for the header-logo handover');
+
   return correct(html);
 }
 
