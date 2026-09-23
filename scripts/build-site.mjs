@@ -172,6 +172,21 @@ function finish(html, { theme, label }) {
     + html.slice(close);
   html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){[data-dn-tagline],[data-dn-eyebrow],[data-dn-coords]{display:none!important}header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
+  // The sticky header lives inside a wrapper that closed straight after
+  // <main>, with the Deployment and Next step sections outside it. A sticky
+  // element cannot outlive its container, so the header — nav and "Send one
+  // document" included — scrolled away for the last two sections. Moving the
+  // wrapper's closing tag to after the last section puts both inside it.
+  html = must(html, '</section></main></div>', '</section></main>', 'wrapper close after main');
+  if ((html.match(/<\/section>\s*<\/x-dc>/g) || []).length !== 1) throw new Error('build: expected one </section> before </x-dc>');
+  html = html.replace(/(<\/section>)(\s*<\/x-dc>)/, '$1</div>$2');
+  // Inside the wrapper those two sections would inherit its 16px / 1.5 /
+  // -0.005em text instead of the page's own body defaults, which is what they
+  // were designed with. Read the defaults from the export and restore them.
+  const bodyType = html.match(/body\s*\{\s*margin:\s*0;\s*font-size:\s*([\d.]+px);\s*line-height:\s*([\d.]+);/);
+  if (!bodyType) throw new Error('build: design-system body typography not found');
+  html = html.replace(/<\/head>/i, `<style>#deploy,#start{font-size:${bodyType[1]};line-height:${bodyType[2]};letter-spacing:normal}</style></head>`);
+
   // One wordmark in view at a time. While the hero's big "denormal" is on
   // screen, the small header logo and its LABS tag are hidden; once the hero
   // mark has scrolled up under the 64px header, they fade in.
