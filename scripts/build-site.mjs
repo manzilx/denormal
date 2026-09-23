@@ -122,6 +122,23 @@ function finish(html, { theme, label }) {
     'hero label block');
   html = must(html, '">28.61° N · 77.21° E · NEW DELHI</span>', '" data-dn-coords>28.61° N · 77.21° E · NEW DELHI</span>', 'hero coordinates');
 
+  // The orange bar under the hero wordmark should end exactly at the first
+  // tick, and when scroll has filled it, exactly at the closing stroke. Its
+  // width was a fixed 4-5px short of the target, but the strokes and ticks it
+  // sits between scale with the viewport (clamp(2px,.2vw,3px)), so it left a
+  // 1px gap on phones and ran up to 2px over the strokes on wide screens.
+  // Bar right edge = stroke + width. First tick's left edge = 33.333% − stroke/2;
+  // the closing stroke's = 100% − stroke. Hence width = P% − (1.5 + 0.5f)·stroke,
+  // where P runs 33.333→100 and f 0→1 as the page scrolls.
+  html = must(html,
+    'left:clamp(2px,.2vw,3px);bottom:clamp(2px,.2vw,3px);top:0;width:calc(33.333% - 5px)',
+    'left:clamp(2px,.2vw,3px);bottom:clamp(2px,.2vw,3px);top:0;width:calc(33.333% - clamp(2px,.2vw,3px) * 1.5)',
+    'hero bar at rest');
+  html = must(html,
+    "this.heroBarRef.current.style.width = 'calc(' + (33.333 + Math.min(1, y / 700) * 66.667).toFixed(2) + '% - 4px)';",
+    "this.heroBarRef.current.style.width = 'calc(' + (33.333 + Math.min(1, y / 700) * 66.667).toFixed(3) + '% - clamp(2px,.2vw,3px) * ' + (1.5 + Math.min(1, y / 700) * .5).toFixed(3) + ')';",
+    'hero bar on scroll');
+
   // About tab: appended to the primary nav, after the three section links.
   const inactive = theme === 'light' ? '#18181B' : '#F4F4F5';
   const about = theme === 'light' ? '/about/' : '/dark/about/';
