@@ -172,6 +172,23 @@ function finish(html, { theme, label }) {
     + html.slice(close);
   html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){[data-dn-tagline],[data-dn-eyebrow],[data-dn-coords]{display:none!important}header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
+  // Each section heading is one row — SHEET NN · title · ruler · right label —
+  // whose labels never wrap and whose ruler has a 40px minimum. On a phone
+  // the rows need up to 446px in a 335px column. Android Chrome sizes its
+  // layout viewport to that overflow (466px wide, so 1010px tall on an 812px
+  // screen), and a touch scroll then pans the screen inside that taller
+  // viewport, sliding the sticky header off the top. The root overflow clip
+  // hides the overflow but does not stop Android sizing from it, so the rows
+  // themselves must fit: under 560px they wrap, the decorative ruler goes and
+  // the right label takes its own line.
+  {
+    const rowRe = /<div style="display:flex;align-items:flex-end;gap:16px;padding-bottom:10px;border-bottom:2px solid #[0-9A-Fa-f]{6}">/g;
+    const n = (html.match(rowRe) || []).length;
+    if (n !== 4) throw new Error(`build: expected 4 sheet heading rows, found ${n}`);
+    html = html.replace(rowRe, (m) => m.replace('<div ', '<div data-dn-sheet '));
+    html = html.replace(/<\/head>/i, '<style>@media (max-width:560px){[data-dn-sheet]{flex-wrap:wrap;row-gap:6px}[data-dn-sheet]>:nth-child(3){display:none!important}[data-dn-sheet]>:nth-child(4){flex-basis:100%}}</style></head>');
+  }
+
   // The sticky header lives inside a wrapper that closed straight after
   // <main>, with the Deployment and Next step sections outside it. A sticky
   // element cannot outlive its container, so the header — nav and "Send one
