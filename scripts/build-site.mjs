@@ -105,6 +105,13 @@ function finish(html, { theme, label }) {
   // narrows the grid but not the media query.
   html = must(html, '<div style="position:sticky;top:120px">', '<div data-dn-vision style="position:sticky;top:120px">', 'Vision pin');
 
+  // The hero stacks two small-caps labels above the wordmark. On a phone the
+  // first already runs to two or three lines, and the second — "Five systems ·
+  // shipped capability only" — broke after "shipped" or ran to the edge. It is
+  // hidden under 560px, where the Systems heading says "Five systems" anyway;
+  // tablets and desktops, where it sits on one line, keep it.
+  html = must(html, '">Five systems · shipped capability only</span>', '" data-dn-tagline>Five systems · shipped capability only</span>', 'hero tagline');
+
   // About tab: appended to the primary nav, after the three section links.
   const inactive = theme === 'light' ? '#18181B' : '#F4F4F5';
   const about = theme === 'light' ? '/about/' : '/dark/about/';
@@ -127,7 +134,7 @@ function finish(html, { theme, label }) {
   html = html.slice(0, close)
     + `<a href="${about}" data-dn-about style="align-items:center;padding:10px 11px;flex:0 0 auto;white-space:nowrap;color:${inactive};font:600 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase">About</a>`
     + html.slice(close);
-  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
+  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){[data-dn-tagline]{display:none!important}header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
   return correct(html);
 }
