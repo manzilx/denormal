@@ -105,14 +105,15 @@ function finish(html, { theme, label }) {
   // Below 1040px the canvas hides its nav, which would leave About unreachable
   // on tablets and phones. A compact link sits beside the theme toggle there.
   // The header CTA is dropped under 560px: it ran 149px off a phone screen,
-  // and the hero repeats the same call to action.
+  // and the hero repeats the same call to action. So is the LABS tag beside
+  // the logo, which otherwise pushes the About link off a 360px screen.
   const toggle = html.indexOf(theme === 'light' ? '<a href="/dark/"' : '<a href="/"');
   const close = html.indexOf('</a>', toggle) + 4;
   if (toggle < 0 || close < 4) throw new Error('build: theme toggle not found for the mobile About link');
   html = html.slice(0, close)
-    + `<a href="${about}" data-dn-about style="align-items:center;margin-left:8px;padding:10px 11px;flex:0 0 auto;white-space:nowrap;color:${inactive};font:600 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase">About</a>`
+    + `<a href="${about}" data-dn-about style="align-items:center;padding:10px 11px;flex:0 0 auto;white-space:nowrap;color:${inactive};font:600 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase">About</a>`
     + html.slice(close);
-  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:560px){header a[href="#start"]{display:none!important}}</style></head>`);
+  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:560px){header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
   return correct(html);
 }
