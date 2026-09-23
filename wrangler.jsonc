@@ -1,0 +1,14 @@
+// Cloudflare Workers Builds deploys this repo on every push to main.
+//
+// This file must exist. Without it, `wrangler deploy` auto-detects the
+// framework, finds Astro in package.json, runs `astro build` itself and ships
+// the old site from src/ — overwriting the dist/ that `pnpm build` produced.
+{
+  "name": "denormal",
+  "compatibility_date": "2026-09-01",
+  // Runs before every deploy, whatever the dashboard's build command is.
+  "build": { "command": "pnpm build" },
+  // Static only. _headers and _redirects in dist/ are honoured by the
+  // assets layer; /about/ resolves to about/index.html.
+  "assets": { "directory": "./dist", "html_handling": "auto-trailing-slash", "not_found_handling": "none" }
+}

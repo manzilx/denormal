@@ -1,8 +1,16 @@
 # Deploying denormal.in
 
-The site is hosted on **Cloudflare Pages**, which builds this repo directly on
-every push to `main`. There is no CI workflow in this repo — Cloudflare does
-the build itself.
+The site is a **Cloudflare Worker with static assets**, deployed by Workers
+Builds on every push to `main` (the GitHub check is named
+*Workers Builds: denormal*). There is no CI workflow in this repo — Cloudflare
+does the build itself. It is not a Pages project, whatever older notes say.
+
+**`wrangler.jsonc` is load-bearing.** Without it, `wrangler deploy`
+auto-detects the framework, finds Astro in `package.json`, runs `astro build`
+itself and ships the old site from `src/` — the build still reports success.
+The config names the Worker (`denormal`, which must match the dashboard),
+runs `pnpm build` before every deploy, and serves `dist/` as static assets.
+`_headers` and `_redirects` in `dist/` are honoured by the assets layer.
 
 **What gets built.** The site is designed in Claude Design and exported to
 `export/` as three self-unpacking HTML files (Light, Dark, Brochure).
@@ -29,17 +37,17 @@ The previous Astro site is still in `src/` and builds with
 Domain `denormal.in` is registered at Hostinger; its DNS is served by
 Cloudflare. Hostinger hosting is not used.
 
-## Build settings (Cloudflare dashboard)
+## Build settings
 
-| Setting | Value |
-|---|---|
-| Framework preset | None (Astro also works — the build command is what runs) |
-| Build command | `pnpm build` |
-| Output directory | `dist` |
-| `NODE_VERSION` | `22` |
+All in `wrangler.jsonc`; the dashboard's build and deploy commands can stay at
+their defaults (`npx wrangler deploy`). To check a deploy without publishing:
 
-`NODE_VERSION` is not optional. Cloudflare defaults to an older Node than
-Astro 7 supports, and the failure message does not clearly say so.
+    npx wrangler deploy --dry-run
+
+It should print `[custom build] Running: pnpm build` and read ~33 files from
+`dist/`. If it mentions Astro, the config is not being picked up.
+
+`NODE_VERSION` = `22` in the dashboard's build variables is still wise.
 
 ## Settings that live in the dashboard, not in this repo
 
