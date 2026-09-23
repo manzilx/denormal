@@ -97,6 +97,14 @@ function finish(html, { theme, label }) {
   // the mousemove handler already returns early when the elements are absent.
   html = must(html, 'cad: (this.props.cadCursor ?? true) && st.fine && !this.reduced,', 'cad: false,', 'CAD cursor');
 
+  // The Lean section's Vision block is pinned (position:sticky) so it can sit
+  // beside the Mission list while that scrolls. Its grid only has two columns
+  // from 983px wide; below that they stack, the pin stays, and the Mission
+  // list scrolled straight through the Vision text on tablets and phones.
+  // Un-pin it below 1000px — the margin covers a desktop scrollbar, which
+  // narrows the grid but not the media query.
+  html = must(html, '<div style="position:sticky;top:120px">', '<div data-dn-vision style="position:sticky;top:120px">', 'Vision pin');
+
   // About tab: appended to the primary nav, after the three section links.
   const inactive = theme === 'light' ? '#18181B' : '#F4F4F5';
   const about = theme === 'light' ? '/about/' : '/dark/about/';
@@ -119,7 +127,7 @@ function finish(html, { theme, label }) {
   html = html.slice(0, close)
     + `<a href="${about}" data-dn-about style="align-items:center;padding:10px 11px;flex:0 0 auto;white-space:nowrap;color:${inactive};font:600 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase">About</a>`
     + html.slice(close);
-  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:560px){header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
+  html = html.replace(/<\/head>/i, `<style>html{overflow-x:clip}[data-dn-about]{display:none}@media (max-width:1039.98px){[data-dn-about]{display:flex}}@media (max-width:999.98px){[data-dn-vision]{position:static!important}}@media (max-width:560px){header a[href="#start"]{display:none!important}header a[aria-label="Denormal Labs home"]+span{display:none!important}}</style></head>`);
 
   return correct(html);
 }
