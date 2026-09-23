@@ -139,6 +139,15 @@ function finish(html, { theme, label }) {
     "this.heroBarRef.current.style.width = 'calc(' + (33.333 + Math.min(1, y / 700) * 66.667).toFixed(3) + '% - clamp(2px,.2vw,3px) * ' + (1.5 + Math.min(1, y / 700) * .5).toFixed(3) + ')';",
     'hero bar on scroll');
 
+  // Both wordmark scales (header logo, hero) draw their orange progress bar as
+  // the last child, so as scroll grows it, it paints over the black ticks it
+  // passes. Moving the bar to the front of each scale keeps the ticks on top.
+  for (const ref of ['barRef', 'heroBarRef']) {
+    const re = new RegExp(`(<span aria-hidden="true"[^>]*style="position:relative;display:block;height:[^"]*">)(\\s*)((?:<span style="position:absolute[^"]*"></span>\\s*){5})(<span ref="\\{\\{ ${ref} \\}\\}"[^>]*></span>)`);
+    if (!re.test(html)) throw new Error(`build: expected markup not found (${ref} scale)`);
+    html = html.replace(re, '$1$2$4$2$3');
+  }
+
   // About tab: appended to the primary nav, after the three section links.
   const inactive = theme === 'light' ? '#18181B' : '#F4F4F5';
   const about = theme === 'light' ? '/about/' : '/dark/about/';
