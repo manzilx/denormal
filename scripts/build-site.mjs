@@ -91,6 +91,12 @@ function finish(html, { theme, label }) {
     ? must(html, 'href="Denormal%20Website%20-%20Dark.html"', 'href="/dark/"', 'toggle')
     : must(html, 'href="Denormal%20Website%20-%20Light.html"', 'href="/"', 'toggle');
 
+  // The CAD cursor (crosshair, square and coordinate label that follow the
+  // mouse) is switched off. Forced here rather than through the canvas's
+  // cadCursor prop, so a fresh export with the prop left on cannot restore it;
+  // the mousemove handler already returns early when the elements are absent.
+  html = must(html, 'cad: (this.props.cadCursor ?? true) && st.fine && !this.reduced,', 'cad: false,', 'CAD cursor');
+
   // About tab: appended to the primary nav, after the three section links.
   const inactive = theme === 'light' ? '#18181B' : '#F4F4F5';
   const about = theme === 'light' ? '/about/' : '/dark/about/';
