@@ -1,0 +1,77 @@
+{
+  "checked": "2026-09-30",
+  "scope": "Website composition, not standalone stock redistribution.",
+  "licence_findings": "Pexels License permits commercial website use and adaptation; do not imply endorsement or use as a trademark. Photographer credits retained on About.",
+  "assets": [
+    {
+      "slot": "systems-plant",
+      "author": "Nothing Ahead",
+      "source": "https://www.pexels.com/photo/industrial-plant-silhouette-against-mountainous-backdrop-38601898/",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-09-30",
+      "crop": null,
+      "original_sha256": "6e7d70c63897bbf1dd23a5659e96d4d352f506da28b47e3d65a282c8bd683798",
+      "outputs": {
+        "systems-plant-1024.jpg": "fa49f0f49626a459c8ad9ab975812506e1dd4e7777f5e945513c5970adbf1c3b",
+        "systems-plant-1024.webp": "71a948fc93228fbcfcc4c234ab1e5764649a8bc78542e94896c76aea02e15e63",
+        "systems-plant-1600.jpg": "47e58cfed1b59c6f4b1d55d8a7e7ac6764d3168ff1e87e62e2e003771a431e10",
+        "systems-plant-1600.webp": "f01fa75aca4c2567e7fc0929839bf61c57bc333f76c819d71b7e39fd451fcf83",
+        "systems-plant-2400.jpg": "812177a83d588db661b58574495a4ecdef59733a61f895355e0c34bbf5e09de2",
+        "systems-plant-2400.webp": "841bde0a75622ad6907ee49ff90a4916cebf58b298bb567c89080b721a3c8a5f",
+        "systems-plant-3840.jpg": "1ec3b775be19113d216a94b6a9db86e2ef0d3aa6e8dc8fb06ac441d09939ff31",
+        "systems-plant-3840.webp": "b8d48f28c8cd96a7b35cc42a11bc0145a482a753667d77a42b50024f8663482a",
+        "systems-plant-640.jpg": "6df8cdc8a2902ee41f87ef1246e3d1676404bb225945a396c33456973e34b285",
+        "systems-plant-640.webp": "fbc0e7c522357cb9be05011538c4674db1d920d4a59ce77ccb2bf72368dab94d"
+      },
+      "review": "Stock imagery with generic captions; no customer, project, employee or endorsement relationship implied. Refinery detail cropped to exclude visible equipment nameplate. No identifiable people in new refinery photos. Model/property releases not independently verified."
+    },
+    {
+      "slot": "refinery-detail",
+      "author": "Dheeraj Singh",
+      "source": "https://www.pexels.com/photo/low-angle-view-of-a-refinery-23369348/",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-09-30",
+      "crop": [
+        0,
+        0,
+        1,
+        0.58
+      ],
+      "original_sha256": "46deeadd44f6fbc04b08f2b73f25a06ade3924b8bf3ca0a90d2015eb7273ac42",
+      "outputs": {
+        "refinery-detail-1024.jpg": "a91805916d06336ceb64bcc766deb66cd4049946702cade0b2ddc0a2482137e6",
+        "refinery-detail-1024.webp": "58d085cad3b513018bce5e654881de8e51f73000f399288800b3e32ef59e62e6",
+        "refinery-detail-1600.jpg": "dbd203194b52f23ad0166abfdbe4cf0b942f99032f6d09d5dcfc88899405b3d1",
+        "refinery-detail-1600.webp": "460b402bad1ccf27b134796ffc48f08f97a81d707498789ddde973ddd37d0fe5",
+        "refinery-detail-2400.jpg": "d876b85a83661a02b9ef0ef159acb61c6e88dff0acdf4b68bd71b2a8e45dadcb",
+        "refinery-detail-2400.webp": "c041a3fe9227ba3a641cadc174064d5647d9292eea7292e0be9c6303fc4fef0c",
+        "refinery-detail-640.jpg": "79e238f4c766b344c55ada5f000fa9a9e16c1358d569c94999751a54acc03544",
+        "refinery-detail-640.webp": "691991bfb407bdfcd79969c4ca66fe78b8d4e3f5a96d5ff4b0e7b95ae6dfc9a5"
+      },
+      "review": "Stock imagery with generic captions; no customer, project, employee or endorsement relationship implied. Refinery detail cropped to exclude visible equipment nameplate. No identifiable people in new refinery photos. Model/property releases not independently verified."
+    },
+    {
+      "slot": "nexusref",
+      "author": "Burst",
+      "source": "https://www.pexels.com/photo/person-holding-drafting-paper-544971/",
+      "licence": "CC0 1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checked": "2026-09-30",
+      "crop": null,
+      "original_sha256": "f4297e0090864161c86565afd43bd72f507407c29ddf283a0e64b0a75e6194a7",
+      "outputs": {
+        "nexusref-1024.jpg": "58b373a478ca84921ca285ef4294a9edd0851bf126c8a34217356bf6f3da464a",
+        "nexusref-1024.webp": "42172b544b0bf7ca14ae182a41e43ed61aef52baebae13dd4ec6a27b967333b9",
+        "nexusref-1600.jpg": "67b51a141156e0f4a27e77aec9e2222f1f3d5da22295608a3142ffc300a3ac14",
+        "nexusref-1600.webp": "a924399c727e04b46b168f86a39fbcafcd09f577250085b68889b47f9aeca521",
+        "nexusref-2400.jpg": "b655b6f598c89a4a539c875c96e8b2268cfa3eef578e24e69d2ea044f63af919",
+        "nexusref-2400.webp": "06e257a3da1189c3c7a4d0c6bdd8470bf3e4b9fdfe55e012d8e77b02da0cc713",
+        "nexusref-640.jpg": "e87f9501b54258cfbc1ee89e68ad7dd1a1c986817d4e3c0402033391c1519762",
+        "nexusref-640.webp": "083c5d98a9157a3eff9d3e0e4be26865d86305f22101995c38e2e0946637964a"
+      },
+      "review": "Stock imagery with generic captions; no customer, project, employee or endorsement relationship implied. Refinery detail cropped to exclude visible equipment nameplate. No identifiable people in new refinery photos. Model/property releases not independently verified."
+    }
+  ]
+}

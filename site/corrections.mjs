@@ -71,6 +71,12 @@ export const CORRECTIONS = [
   // says so; the label said hazards only.
   ['Hazard taxonomy', 'Hazard and waste types', 'Sentinel proof label'],
 
+  // ── Biography ───────────────────────────────────────────────────────────
+  // No biographic numbers anywhere (PRODUCT.md). Proposed wording, 2026-09-29.
+  ['Over two decades of EPC, infrastructure and power-sector leadership came before the software.',
+   'The operating side came first: EPC, infrastructure and power, before any software.', 'brochure about lede'],
+  ['Over two decades across EPC, infrastructure and power.', 'EPC, infrastructure and power.', 'brochure experience'],
+
   // ── Labour Compliance ───────────────────────────────────────────────────
   // No count of 29 Acts exists anywhere in the code.
   ['29 Acts · 4 Codes', 'Acts · 4 Codes', 'Labour gate 2'],

@@ -1,0 +1,34 @@
+{
+  "checked": "2026-09-30",
+  "slot": "pci",
+  "author": "Magda Ehlers",
+  "source": "https://www.pexels.com/photo/gray-and-red-industrial-machine-2569839/",
+  "download": "https://images.pexels.com/photos/2569839/pexels-photo-2569839.jpeg?cs=srgb&dl=pexels-magda-ehlers-pexels-2569839.jpg&fm=jpg",
+  "licence": "Pexels License",
+  "licence_url": "https://www.pexels.com/license/",
+  "permitted_use": "Commercial website imagery and adaptations permitted; attribution retained on About; no endorsement or customer relationship represented.",
+  "review": "No identifiable people. Crop excludes the prominent AEG manufacturer lettering. Generic caption and alt text. No independent property-release verification.",
+  "crop": [
+    0,
+    0,
+    0.77,
+    0.75
+  ],
+  "original_dimensions": [
+    5472,
+    3648
+  ],
+  "original_sha256": "c4027b382e6654933df3ff6e2a2518828d94d2b4831ce262ce2720aee5cfc4ca",
+  "outputs": {
+    "pci-1024.jpg": "6a5f511c63bb2ebf5bef880ba03a3afbb3b2ffeb38c3f0809c67f434d4ff8684",
+    "pci-1024.webp": "a65a6f5905f48b1a1bb7ab24506b3d461653a6c0b8d7d6572adc04c4c39398ee",
+    "pci-1600.jpg": "dcd2458fa7de7939c07e8954823b78bdc4d32f6fd9d91feb9d88ce0141451240",
+    "pci-1600.webp": "1beea61d5d9523476d2a6f85a113d8691870815a3f0cdf4df359a630d69e388d",
+    "pci-2400.jpg": "dd0101787a1281b761fca050cf42ea849f1586e8ac2745a25acd2dd825a240c7",
+    "pci-2400.webp": "cc1f6fd1ace583af1f05f79b572ec9f1280ba0266582e01922a5812050cf6e7b",
+    "pci-3840.jpg": "d0c70f898413663d7c746efbe1050de87f3e9a5f299e869fd7cb75cb98c478ce",
+    "pci-3840.webp": "f187f90022676a9e9e43ee5a49cf89934d04b5cc50a4dea276a651a0aadeaf00",
+    "pci-640.jpg": "52fb9e58702cde61e65ebc245e55bd26bb9516cf9d68f9e97aa882ccba1aaaef",
+    "pci-640.webp": "cf52b309a80b1866015351c68de9293e4fcedb36e008f2d8bd3f8f8d44448bc2"
+  }
+}

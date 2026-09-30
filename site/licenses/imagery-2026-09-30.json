@@ -1,0 +1,167 @@
+{
+  "checked": "2026-09-30",
+  "terms_source": "https://www.pexels.com/terms-of-service/",
+  "terms_date": "2024-11-15",
+  "scope": "Website composition only, not standalone redistribution; photographer credits on /about/#credits.",
+  "licence_findings": "Pexels Terms section 5 permits commercial use and adaptation, excludes commercial depictions of brands, and prohibits misleading endorsements. Third-party permissions are not warranted by Pexels. CC0 removes copyright restrictions to the extent legally possible; other rights can remain.",
+  "risk_controls": [
+    "No images or assets copied from reference websites.",
+    "Branded close-up 1216589 excluded from all delivered assets.",
+    "Faces excluded from newly added people/process derivatives; broad workplace captions only.",
+    "Source URLs, licence references and source/output hashes retained."
+  ],
+  "limitation": "Licences and crops reduce risk; they do not guarantee title or eliminate every possible third-party claim. Model/property releases are not independently verified.",
+  "assets": [
+    {
+      "slot": "engineering-team",
+      "file": "anonymous-planning.jpg",
+      "source": "https://www.pexels.com/photo/person-holding-drafting-paper-544971/",
+      "author": "Burst",
+      "licence": "CC0 1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "crop": null,
+      "checked": "2026-09-30",
+      "original_sha256": "f4297e0090864161c86565afd43bd72f507407c29ddf283a0e64b0a75e6194a7",
+      "review": "Processed derivatives visually checked: no visible faces or branding. No endorsement or client/team relationship implied.",
+      "outputs": {
+        "engineering-team-2400.webp": "b71a7af0cd0fce941dee2e4f1b263932be88fab48524d559d5f04120533f9776",
+        "engineering-team-1600.jpg": "0942a9be55b9c63528bbd9192fdc5ef64b525720d7ee9cf802d082e953c9789f",
+        "engineering-team-1600.webp": "75a18a31a92a06df78c1ad7bd1aec962c0b629c8881ac64e65d947cdd32eb62a",
+        "engineering-team-640.webp": "f9f1a2d5c024151ddcd69dd1db4952b1078b8dac0abc5a0d7d7027da452422bf",
+        "engineering-team-1024.jpg": "2dd7860fb077c19297a3aacc0ca2442fe4056495d8c74738fdc8bf8beb5773f8",
+        "engineering-team-1024.webp": "327d6fb7438f2ed4c6cc8d0d69a1c9ec97d08afa6c4badda52b63b932b0ea68f",
+        "engineering-team-640.jpg": "1acae947474a3b71f1e2b68e7a6464686677dc944cf5bde437a83d9289bc6df2",
+        "engineering-team-2400.jpg": "916fe9e3ae9c7d5353fd177becea6536ba34e7ad2c4cabef78ee17e318dcac65"
+      }
+    },
+    {
+      "slot": "site-planning",
+      "file": "site-measurement.jpg",
+      "source": "https://www.pexels.com/photo/construction-worker-measuring-wall-8488023/",
+      "author": "Kindel Media",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "crop": null,
+      "checked": "2026-09-30",
+      "original_sha256": "53f85a046f640e5b7a5c0054e4d9c5254ef8dcc8259e6220bde0dccd36b39d26",
+      "review": "Rear view visually checked: no visible face or branding. No endorsement or client/team relationship implied.",
+      "outputs": {
+        "site-planning-1024.webp": "21631ce40926a86d44598b41f5c993d058236239b67be04650aefd5b2363fe71",
+        "site-planning-1024.jpg": "b4aa91ea75d5eeeb6587324051fc64ad9a94ea065825d026b4414e7b6e0554c7",
+        "site-planning-1600.jpg": "b7a207446e6a4e3aaf7ef01b0417264e9a4280797cdd41183b22b758b8186c9a",
+        "site-planning-1600.webp": "127d48678469b007964ef4ed73ace66bcccb507bde4ded3f7eb87d22b3c0f11f",
+        "site-planning-640.jpg": "2c9b0f8569bdb0839b29e28499e458bddafd52a02575721b1379a527f405ce6c",
+        "site-planning-640.webp": "af0aa189af58e91d24a4a73ef013117873209a10a713b875b7dd848026fafdf8"
+      }
+    },
+    {
+      "slot": "process-inspection",
+      "file": "process-inspection.jpg",
+      "source": "https://www.pexels.com/photo/industrial-worker-inspecting-materials-in-factory-35383622/",
+      "author": "Ruslan Alekso",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "crop": [
+        0.16,
+        0.44,
+        0.7,
+        0.96
+      ],
+      "checked": "2026-09-30",
+      "original_sha256": "48e2194841ada6a30e43e7d839e9c6d11d0e8c8a0e56e7179f8c2813cd425cb0",
+      "review": "Processed derivatives visually checked: no visible faces or branding. No endorsement or client/team relationship implied.",
+      "outputs": {
+        "process-inspection-640.jpg": "bf3513218fed14232f771a6011085381dcbdb33be277ab107fffa8864aeb2072",
+        "process-inspection-640.webp": "c11031ce6c091d235dccae081806ad8c66385d96d1f8f77156a6352d57baf037",
+        "process-inspection-1296.webp": "ade77b13fe658eceffb36e3750d26cdbf96413ecb5d5c9614b0436230e0105a7",
+        "process-inspection-1296.jpg": "1636b92ee434c88079623e05e1751d4fa3e0dfda4f76847611aef755af9716da",
+        "process-inspection-1024.jpg": "811fe87b17c2485bf12b7ec6877ef23427c6dabb16368c4c057df9989372edde",
+        "process-inspection-1024.webp": "9eaefabadfe0f7a8009647c5e42936aa3887e1a195294de4642b10c31e403db5"
+      }
+    },
+    {
+      "slot": "pci",
+      "file": "pci.jpg",
+      "source": "https://www.pexels.com/photo/aerial-view-of-cooling-towers-at-power-plant-34461376/",
+      "author": "Sean P. Twomey",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-09-30",
+      "download_dimensions": [
+        6000,
+        3375
+      ],
+      "original_sha256": "0636a6f647eb400115db3ce1d21097afe9ecb04b350f858eb598a7061b508a23",
+      "crop": null,
+      "review": "Visually reviewed for visible branding and identifiable faces; generic stock caption, no customer, employee, project or endorsement relationship implied. Model/property releases not independently verified.",
+      "outputs": {
+        "pci-2400.webp": "d4429123274ec63c32c21ef5acce965ec55a35864e127c26e10a08ed9dfdd639",
+        "pci-3840.webp": "131f7424563a975d3bef9a1a487e7fe58683cf31374b10a9003a60a1c535c7ff",
+        "pci-3840.jpg": "767160660c2ac1018109946aa41705d070b41c0f5551712d17b207fb016a87bc",
+        "pci-1600.jpg": "ea7b952c75155ccdbfddc66a171cdc7b52c061914d0a14a7aef39dcacffe2f81",
+        "pci-1600.webp": "dc3faa0db4e1b71ef898279ff2462ceba7155842e31cae5286a3a387c2bcb201",
+        "pci-640.webp": "4cd66c543ac407a340689cbbf98976e46a15c985dea0bbe60771f21497afa5ca",
+        "pci-640.jpg": "6bdb4a7f14ba54b01a8b267029b00ec3a56b329b4ae05f7fb675549037db2eb7",
+        "pci-1024.jpg": "00a63ffe489250af5e0f716773615cd693cf15588291820b22f36edc3cdb4255",
+        "pci-1024.webp": "3fc9aaf28e6921e8d61e51b540703a0cec27a3fd11dc83f8399bc39fa338d2c7",
+        "pci-2400.jpg": "f66111126ee1ab179c03aeb20a543a39d69b83870c1d9214a0c94aaf3bbfec95"
+      }
+    },
+    {
+      "slot": "peak-logic",
+      "file": "peak-logic.jpg",
+      "source": "https://www.pexels.com/photo/construction-crane-over-building-16331733/",
+      "author": "Eswar.jpeg",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-09-30",
+      "download_dimensions": [
+        5184,
+        3456
+      ],
+      "original_sha256": "dc20d0670e9f79dc5a7e5357f4c33965e5639e357193df8e57af7c2df384c1da",
+      "crop": null,
+      "review": "Visually reviewed for visible branding and identifiable faces; generic stock caption, no customer, employee, project or endorsement relationship implied. Model/property releases not independently verified.",
+      "outputs": {
+        "peak-logic-1600.webp": "e32fee7025d745d0e6b780eb9aebbe76290a157c068381bd0a5946bebb568d7e",
+        "peak-logic-1024.jpg": "532d88ed6a78eb48d9af428e081deccbf41f9e54c83d9572a983bf3b4f8e3b84",
+        "peak-logic-2400.jpg": "5ad417a1823629689e1e91c08a653b419cdac89a90889e23fca8a07da55eb42b",
+        "peak-logic-3840.webp": "9f3ad47a5a65c66b6209a531e21104c6ce8bd0a92379108dbfc4db4ee1a217e1",
+        "peak-logic-2400.webp": "e2d7c88d1cd1fec96464e9eaf80c223002cc3f9179c6386355ccc5f7c3307432",
+        "peak-logic-640.jpg": "4bdc35d9365c4cdabf82ba04e1abbffedf8593d157cb40ca5117978851ce970c",
+        "peak-logic-3840.jpg": "9394a8b289069ceb9f3691d4d05cd810142686845ef942396e96603874fdab26",
+        "peak-logic-1024.webp": "69389e4550eaff404f1cfd9d633f2cd27dc8eac3621693ed8c89f5148236a942",
+        "peak-logic-640.webp": "5f15363b469723f22ef6c6f1318e0702afdd570da020b8471772caf89e9b5701",
+        "peak-logic-1600.jpg": "1ceb6078e6bca2677ad1bcbec21a25af83ffde96dc12956058973ed571c5a774"
+      }
+    },
+    {
+      "slot": "labour-compliance",
+      "file": "labour-compliance.jpg",
+      "source": "https://www.pexels.com/photo/construction-workers-at-waterfront-site-35861510/",
+      "author": "Nazmul Haque",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-09-30",
+      "download_dimensions": [
+        4323,
+        2432
+      ],
+      "original_sha256": "299cbb15879dd5b34fab7b8f7455eb519bfd603f25fe8ef1651bd4fa4c143965",
+      "crop": null,
+      "review": "Visually reviewed for visible branding and identifiable faces; generic stock caption, no customer, employee, project or endorsement relationship implied. Model/property releases not independently verified.",
+      "outputs": {
+        "labour-compliance-3840.webp": "f197a85a701e08448a93a90b0c9adbfb751e0e7d9ba13703ed5de94027498034",
+        "labour-compliance-2400.webp": "30ddbf1cfdba33451c85d84a02a8a2b0a9cc0efaeb90a0b17073709e17f256bc",
+        "labour-compliance-2400.jpg": "6232600bb4bb093034202052e2286ba2fb07e1ac9cf09c06624fb2e5790ff2db",
+        "labour-compliance-1024.jpg": "1cee9aeaa96b208bb8a70224c4d7be115ad7195378b8f26383cb4557ace3fec7",
+        "labour-compliance-640.jpg": "958861dbb836c868e2cdc44b7c36d43aba7e17b7212ef1fc9dfc2f0a5efa887f",
+        "labour-compliance-1600.webp": "1960639bcda215cf208a483fe144f55fcbdee9ada28b1de444070d46b8321b67",
+        "labour-compliance-1600.jpg": "75aa239793dea4d43fdadb596c9552891485bd5f269016f9cd5005c80d68939f",
+        "labour-compliance-640.webp": "77491b11614e8c7a596bcfc7179624edca2eb05759942c8ae735cfba85db7fc1",
+        "labour-compliance-1024.webp": "2fd72c6abd049b41e13ae95523e62a4ca26e2667347af49efa41aaffc210ca55",
+        "labour-compliance-3840.jpg": "ce0d760979c30aa3f63eaf2ddcee895a4c4564c38d95a13a7189f4c7663044ec"
+      }
+    }
+  ]
+}

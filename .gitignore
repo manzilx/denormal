@@ -5,3 +5,6 @@ dist/
 
 # local preview config
 .claude/
+
+# Original stock photographs; only processed outputs in site/assets/img are committed.
+photos-src/
