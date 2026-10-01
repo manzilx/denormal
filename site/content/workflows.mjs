@@ -31,16 +31,16 @@ export const WORKFLOWS = {
     "example": "A tender clause cannot be verified against its source. It appears as a gap for review and a possible pre-bid query; it is not presented as compliant."
   },
   "onelegal": {
-    "area": "Contracts & claims",
-    "audience": "Counsel · contracts and claims teams",
-    "headline": "Build the position from the record.",
-    "summary": "Review the contract, organise the evidence and prepare notices and claims from a record counsel has reviewed and sealed.",
-    "challenge": "The contract, correspondence and evidence may tell different parts of the same story. A legal position needs a clear link between what is asserted and the record relied upon.",
-    "input": "Contracts and a curated evidence set",
+    "area": "Contract risk & claims",
+    "audience": "Counsel · contracts, commercial and claims teams",
+    "headline": "Know the risk. Build the claim.",
+    "summary": "Run the contract through a playbook of 301 questions. Every answer is cited to its clause and every clause is scored against a market baseline. When a claim follows, notices and a Statement of Claim draft from evidence counsel has sealed.",
+    "challenge": "Contractual risk is fixed when the contract is signed and tested when something goes wrong. The team needs to see which clauses carry the exposure before it signs, and a claim needs a clear link between what is asserted and the record relied upon.",
+    "input": "The contract set, and for claims a curated evidence set",
     "delivers": [
       {
-        "t": "A contract risk review",
-        "d": "Playbook questions and a clause-level risk matrix across supported contract families."
+        "t": "A playbook risk review",
+        "d": "301 playbook questions across eleven contract families, each answer cited to its clause and each clause scored against a market baseline."
       },
       {
         "t": "A defined evidence record",
@@ -52,9 +52,9 @@ export const WORKFLOWS = {
       }
     ],
     "flow": [
-      "Review the contract",
-      "Curate the evidence",
-      "Seal the record",
+      "Run the playbook",
+      "Score the clause risk",
+      "Seal the evidence",
       "Review the draft"
     ],
     "review": "Counsel selects the evidence and reviews the legal position. Filing, signing, serving and sending remain human actions; the system does not perform them.",

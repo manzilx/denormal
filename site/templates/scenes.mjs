@@ -16,18 +16,18 @@ export function aerial(photo, slot) {
   return `<div class="canvas">
     ${picture(photo, slot, { eager: true })}
     <svg class="hud" viewBox="0 0 1536 1024" aria-hidden="true">
-      <path class="hud-flow" d="M96 653 L294 634 L346 627 L614 557 L691 474 L845 422"/>
-      <g class="hud-box" style="--d:2.1s"><path d="M880 390v-30h30M1150 360h30v30M1180 510v30h-30M910 540h-30v-30"/></g>
-      <g class="hud-call" style="--d:2.4s"><path d="M1180 360 L1230 310 H1360"/><text x="1236" y="300">A1 · COOLING TOWERS</text></g>
-      <g class="hud-box" style="--d:2.5s"><path d="M1330 400v-24h24M1480 376h24v24M1504 470v24h-24M1354 494h-24v-24"/></g>
-      <g class="hud-call" style="--d:2.8s"><path d="M1417 376 V250 H1300"/><text x="1300" y="238">A2 · STACKS</text></g>
-      <circle class="hud-ping" cx="1350" cy="398" r="6" style="--d:3s"/>
-      <circle class="hud-ping" cx="1463" cy="366" r="6" style="--d:3.4s"/>
-      <circle class="hud-dot" cx="845" cy="422" r="4"/><circle class="hud-dot" cx="614" cy="557" r="4"/><circle class="hud-dot" cx="294" cy="634" r="4"/>
+      <path class="hud-flow" d="M1000 760 L1120 720 L1280 760 L1530 840"/>
+      <g class="hud-box" style="--d:2.1s"><path d="M935 359v-24h24M976 335h24v24M1000 426v24h-24M959 450h-24v-24"/></g>
+      <g class="hud-call" style="--d:2.4s"><path d="M1000 335 L1060 266 H1190"/><text x="1066" y="256">A1 · WIND</text></g>
+      <g class="hud-box" style="--d:2.5s"><path d="M700 684v-24h24M976 660h24v24M1000 766v24h-24M724 790h-24v-24"/></g>
+      <g class="hud-call" style="--d:2.8s"><path d="M1000 660 L1040 620 H1200"/><text x="1046" y="608">A2 · SOLAR ARRAY</text></g>
+      <circle class="hud-ping" cx="962" cy="426" r="6" style="--d:3s"/>
+      <circle class="hud-ping" cx="766" cy="400" r="6" style="--d:3.4s"/>
+      <circle class="hud-dot" cx="1120" cy="720" r="4"/><circle class="hud-dot" cx="1280" cy="760" r="4"/><circle class="hud-dot" cx="1530" cy="840" r="4"/>
     </svg>
     <span class="hud-scan" aria-hidden="true"></span>
   </div>
-  <div class="cover-readout" aria-hidden="true"><span class="mono">Grid ref</span><b data-gridref>F · 07</b><span class="mono">View A · illustrative · NTS</span></div>`;
+  <div class="cover-readout" aria-hidden="true"><span class="mono">Grid ref</span><b data-gridref>F · 07</b><span class="mono">View A · NTS</span></div>`;
 }
 
 // ── Ticker: the five rules, moving ───────────────────────────────────────
@@ -77,7 +77,7 @@ export function stackScene({ id, letter, sheet }) {
   return `<section class="zone scrub stack-zone" id="${id}" data-zone="${letter}" data-scrub="stack" aria-labelledby="${id}-h" style="--len:2.4">
   <div class="scrub-stage"><span class="scrub-progress" aria-hidden="true"></span><div class="wrap scrub-grid">
     <div class="scrub-copy">
-      ${zoneHead({ letter, id, title: 'Section through every system.', sheet, lede: 'The five systems share one construction. Your documents at the bottom, rules the code enforces above them, models bounded to what they were shown, and a person on top.' })}
+      ${zoneHead({ letter, id, title: 'Section through every system.', sheet, lede: 'The five systems share one construction. Your documents at the bottom, rules the code enforces above them, models bounded to what they were shown, and the decision on top.' })}
       <ol class="stack-list">${LAYERS.map((l) => `<li data-layer="${3 - LAYERS.indexOf(l)}"${l.accent ? ' class="is-ctl"' : ''}><span class="mono">${l.n}</span><div><b>${esc(l.t)}</b><p>${esc(l.d)}</p></div></li>`).join('')}</ol>
     </div>
     <div class="iso-scene" aria-hidden="true"><div class="scene-grid"></div><span class="scene-meta mono">Architecture / exploded view</span><div class="iso iso-stack">${slabs}<div class="stack-axis"></div></div><span class="scene-note mono">01—04 / scroll to separate the layers</span></div>
@@ -123,6 +123,14 @@ export function pipeScene({ id, letter, sheet }) {
   </div></div>
   <script type="application/json" id="pipe-data">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>
 </section>`;
+}
+
+// The three beats as kinetic type: two rows that travel with the page in
+// opposite directions and lean with the speed of the scroll. The separators
+// are the logo's ruler in miniature.
+export function kinetic() {
+  const run = ['It reads', 'The rule checks', 'You decide'].map((w) => `<span>${w}</span><i class="k-cell"></i>`).join('');
+  return `<section class="kinetic" aria-label="It reads. The rule checks. You decide."><div class="k-row" data-k="1" aria-hidden="true"><div class="k-track">${run.repeat(4)}</div></div><div class="k-row k-out" data-k="-1" aria-hidden="true"><div class="k-track">${run.repeat(4)}</div></div></section>`;
 }
 
 // A photograph that follows the pointer over the systems list.

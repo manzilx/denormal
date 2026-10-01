@@ -2,11 +2,12 @@ import { esc } from '../lib/html.mjs';
 import { layout } from '../templates/layout.mjs';
 import { zone, zoneHead, band, commitments, notBuilt, startPlate } from '../templates/components.mjs';
 import { HERO, AUDIENCE, PURPOSE, DEPLOYMENT, PRINCIPLES } from '../content/site.mjs';
-import { aerial, ticker, figures, stackScene } from '../templates/scenes.mjs';
+import { aerial, ticker, figures, stackScene, kinetic } from '../templates/scenes.mjs';
 import { PHOTOS } from '../content/photos.mjs';
 import { workflowExplorer } from '../templates/portfolio.mjs';
 import { picture, split } from '../templates/components.mjs';
 import { processRefinery, boundaryAtlas } from '../templates/immersive.mjs';
+import { readAlong } from '../templates/readalong.mjs';
 
 const SHEET = 'DL-000';
 const ZONES = [
@@ -22,8 +23,8 @@ const ZONES = [
 
 function hero() {
   const frames = [
-    { slot: 'landing', label: 'Power & infrastructure', word: 'Operations', caption: 'Plant and switchyard · illustrative' },
-    { slot: 'engineering-team', label: 'People & decisions', word: 'People', caption: PHOTOS['engineering-team'].caption },
+    { slot: 'landing', label: 'Power & infrastructure', word: 'Operations', caption: PHOTOS.landing.caption },
+    { slot: 'people-decisions', label: 'People & decisions', word: 'People', caption: PHOTOS['people-decisions'].caption },
     { slot: 'process-inspection', label: 'Process & control', word: 'Process', caption: PHOTOS['process-inspection'].caption },
   ];
   return `<section class="cover cover-home cinema" id="top" data-zone="A" aria-labelledby="top-h">
@@ -60,16 +61,16 @@ function how() {
 }
 
 function systems() {
-  return zone({ id:'systems', letter:'D', cls:'workflow-zone', body:`<p class="purpose-k mono">03 / What · Our systems</p>${zoneHead({letter:'D',id:'systems',title:'Built around the work you do.',sheet:SHEET,lede:'Five focused workflows for infrastructure, power and complex operations. Start with the work in front of you.'})}${workflowExplorer({prefix:'home-workflow',compact:true})}` });
+  return zone({ id:'systems', letter:'D', cls:'workflow-zone', body:`<p class="purpose-k mono">03 / What · Our systems</p>${zoneHead({letter:'D',id:'systems',title:'Built around the work you do.',sheet:SHEET,lede:'Five focused workflows for infrastructure, power and complex operations. Start with the work in front of you.'})}${workflowExplorer({prefix:'home-workflow',compact:true})}${readAlong()}` });
 }
 
 function field() {
   const work = [
-    { slot:'site-planning', n:'01', title:'Start where the work happens.', text:'On site, with the people who know the process.' },
-    { slot:'process-inspection', n:'02', title:'Check the process.', text:'The evidence, the controls and the record of what was checked.' },
-    { slot:'engineering-team', n:'03', title:'Keep people in control.', text:'A person reviews the finding and decides what happens next.' },
+    { slot:'site-planning', n:'01', title:'Start where the work happens.', text:'On site, with the teams who know the process.' },
+    { slot:'field-check', n:'02', title:'Check the process.', text:'The evidence, the controls and the record of what was checked.' },
+    { slot:'field-decision', n:'03', title:'Keep the decision.', text:'A person reviews the finding and decides what happens next.' },
   ];
-  return zone({ id:'field', letter:'E', cls:'zone-field people-zone', body:`${zoneHead({letter:'E', id:'field', title:'People run the process.', sheet:SHEET, lede:'The work happens at the drawing table, on the factory floor and out on site. We build systems around that work, with judgment staying in the hands of the people responsible for it.'})}
+  return zone({ id:'field', letter:'E', cls:'zone-field people-zone', body:`${zoneHead({letter:'E', id:'field', title:'People run the process.', sheet:SHEET, lede:'The work happens at the drawing table, on the factory floor and out on site. We build systems around that work, with judgment staying with whoever is responsible for it.'})}
     <div class="people-grid">${work.map(w=>`<figure class="people-card"><div class="people-photo duo">${picture(PHOTOS[w.slot], w.slot, { sizes:'(min-width: 960px) 60vw, 100vw' })}</div><figcaption><span class="mono">${w.n} / ${esc(PHOTOS[w.slot].caption)}</span><h3>${w.title}</h3><p>${w.text}</p></figcaption></figure>`).join('')}</div><p class="people-credit"><a href="/about/#credits">Photography credits</a> · Stock imagery illustrating work and processes.</p>` });
 }
 
@@ -95,7 +96,7 @@ export function renderHome() {
     zones: ZONES,
     cover: true,
     main: [
-      hero(), why(), how(), systems(), figs(), ticker(), field(),
+      hero(), why(), how(), systems(), figs(), ticker(), field(), kinetic(),
       band({ photo: PHOTOS['engineering-team'], slot: 'engineering-team', view: 'B', kicker: PHOTOS['engineering-team'].caption, title: PRINCIPLES[0].t + '.', body: PRINCIPLES[0].d }),
       stackScene({ id: 'architecture', letter: 'F', sheet: SHEET }),
       band({ photo: PHOTOS.hero, slot: 'hero', view: 'C', kicker: PHOTOS.hero.caption, title: PRINCIPLES[3].t + '.', body: PRINCIPLES[3].d }),

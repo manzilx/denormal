@@ -506,6 +506,7 @@
   const sceneButtons = [...document.querySelectorAll('[data-scene]')];
   let sceneIndex = 0, sceneFocused = false, lastScene = performance.now();
   const selectScene = (i) => {
+    if (i !== sceneIndex) frames.forEach((f, k) => f.classList.toggle('was-active', k === sceneIndex));
     sceneIndex = i;
     frames.forEach((f, k) => f.classList.toggle('is-active', k === i));
     sceneButtons.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
@@ -560,4 +561,245 @@
       last = i;
     }, { passive: true });
   }
+})();
+
+// Read-along: one synthetic record per system, chosen by tab. A panel plays
+// when it first comes into view or is chosen: each line lights its item,
+// types out in the machine voice, then leaves its tag on the record; the rule
+// line marks what the system won't do; it stops at "Held for you" until the
+// visitor decides. Reduced or paused motion shows the finished read-out.
+(() => {
+  const el = document.querySelector('[data-readalong]');
+  if (!el) return;
+  const root = document.documentElement;
+  const still = () => root.dataset.motion === 'paused' || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const beats = Object.fromEntries([...el.querySelectorAll('[data-ra-beat]')].map((b) => [b.dataset.raBeat, b]));
+  const tabs = [...el.querySelectorAll('[data-ra-tab]')];
+  const panels = [...el.querySelectorAll('[data-ra-panel]')];
+  const voice = (l) => (l.classList.contains('ra-rule') ? 'rule' : l.classList.contains('ra-held') ? 'held' : 'read');
+  let run = 0;
+  const wait = (ms, t) => new Promise((r) => setTimeout(r, ms)).then(() => { if (t !== run) throw 'stop'; });
+  const beat = (v) => {
+    beats.read.classList.add('is-on');
+    if (v !== 'read') beats.rule.classList.add('is-on');
+    if (v === 'held') beats.held.classList.add('is-on');
+  };
+  const parts = (p) => ({
+    lines: [...p.querySelectorAll('.ra-line')],
+    items: Object.fromEntries([...p.querySelectorAll('.ra-doc [data-c]')].map((n) => [n.dataset.c, n])),
+    status: p.querySelector('[data-ra-status]'),
+    decided: p.querySelector('[data-ra-decided]'),
+    choices: [...p.querySelectorAll('[data-ra-choice]')],
+  });
+  const mark = (p, x, l) => {
+    const n = x.items[l.dataset.c];
+    if (!n) return;
+    n.classList.remove('is-reading');
+    n.classList.add(voice(l) === 'rule' ? 'is-gap' : 'is-read');
+    n.querySelector('.ra-v').textContent = l.dataset.v || '';
+    if (voice(l) === 'rule') p.classList.add('is-gap');
+  };
+  const reset = (p, x) => {
+    p.classList.remove('is-held', 'is-gap');
+    Object.values(beats).forEach((b) => b.classList.remove('is-on'));
+    Object.values(x.items).forEach((n) => { n.classList.remove('is-reading', 'is-read', 'is-gap'); n.querySelector('.ra-v').textContent = ''; });
+    x.lines.forEach((l) => { l.classList.remove('is-on', 'is-done', 'is-typing'); l.querySelector('.ra-text').textContent = ''; });
+    x.choices.forEach((b) => { b.disabled = false; b.removeAttribute('aria-pressed'); });
+    x.decided.textContent = '';
+    x.status.textContent = 'Ready';
+  };
+  const finish = (p, x) => {
+    x.lines.forEach((l) => {
+      l.classList.remove('is-typing');
+      l.classList.add('is-on', 'is-done');
+      l.querySelector('.ra-text').textContent = l.querySelector('.ra-full').textContent;
+      mark(p, x, l); beat(voice(l));
+    });
+    p.classList.add('is-held');
+    x.status.textContent = 'Held for you';
+  };
+  const play = async (p) => {
+    const t = ++run;
+    const x = parts(p);
+    reset(p, x);
+    if (still()) return finish(p, x);
+    x.status.textContent = 'Reading…';
+    try {
+      for (const l of x.lines) {
+        if (still()) return finish(p, x);
+        x.items[l.dataset.c]?.classList.add('is-reading');
+        if (voice(l) === 'rule') x.status.textContent = 'Rule check';
+        beat(voice(l));
+        l.classList.add('is-on', 'is-typing');
+        const full = l.querySelector('.ra-full').textContent;
+        const out = l.querySelector('.ra-text');
+        await wait(260, t);
+        for (let i = 2; i < full.length; i += 2) { out.textContent = full.slice(0, i); await wait(16, t); }
+        out.textContent = full;
+        l.classList.remove('is-typing');
+        l.classList.add('is-done');
+        mark(p, x, l);
+        await wait(voice(l) === 'rule' ? 1000 : 480, t);
+      }
+      p.classList.add('is-held');
+      x.status.textContent = 'Held for you';
+    } catch (e) { if (e !== 'stop') throw e; }
+  };
+  el.classList.add('is-live');
+  panels.forEach((p) => {
+    const x = parts(p);
+    x.choices.forEach((b) => b.addEventListener('click', () => {
+      if (!p.classList.contains('is-held')) return;
+      x.choices.forEach((c) => { c.disabled = true; c.setAttribute('aria-pressed', String(c === b)); });
+      x.decided.textContent = b.dataset.out;
+      x.status.textContent = 'Decided by you';
+    }));
+    p.querySelector('[data-ra-run]').addEventListener('click', () => play(p));
+  });
+  let seen = false;
+  const select = (i, focus) => {
+    tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+    panels.forEach((p, k) => { p.hidden = k !== i; });
+    if (focus) tabs[i].focus();
+    if (seen) play(panels[i]);
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(i));
+    t.addEventListener('keydown', (e) => {
+      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
+      if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+      if (e.key === 'End') { e.preventDefault(); select(tabs.length - 1, true); }
+    });
+  });
+  const current = () => panels.find((p) => !p.hidden);
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); seen = true; play(current()); } }, { threshold: 0.3 });
+    io.observe(el.querySelector('.ra-tabs'));
+  } else panels.forEach((p) => finish(p, parts(p)));
+})();
+
+// Motion: the ruler shutter between pages, the header ruler as reading
+// progress, the kinetic band, the crosshair and magnetic buttons.
+// Everything checks the motion state live, so the pause control and the
+// reduced-motion preference stop it at once.
+(() => {
+  const root = document.documentElement;
+  const still = () => root.dataset.motion === 'paused' || root.classList.contains('no-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+
+  // Leave through the shutter: same-site page links only; new tabs,
+  // downloads, modified clicks and in-page anchors behave as normal.
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || still()) return;
+    const a = e.target.closest('a[href]');
+    if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || /\.\w{2,4}$/.test(url.pathname)) return;
+    if (url.pathname === location.pathname && url.search === location.search) return;
+    e.preventDefault();
+    root.classList.remove('shutter-in');
+    root.classList.add('is-leaving');
+    try { sessionStorage.setItem('shutter', '1'); } catch (err) { /* arrives without the shutter */ }
+    setTimeout(() => { location.href = url.href; }, 560);
+  });
+  addEventListener('pageshow', (e) => { if (e.persisted) root.classList.remove('is-leaving', 'shutter-in'); });
+  setTimeout(() => root.classList.remove('shutter-in'), 1400);
+
+  const brand = document.querySelector('.brand');
+  const rows = [...document.querySelectorAll('.k-row')];
+  let kinVisible = false;
+  if (rows.length && 'IntersectionObserver' in window) {
+    new IntersectionObserver((es) => { kinVisible = es[0].isIntersecting; }).observe(rows[0].closest('.kinetic'));
+  }
+
+  // Crosshair. Drawn exactly where the pointer is: placed straight from the
+  // raw pointer event (no easing, no colour blending), so it never trails or
+  // flickers. Over controls the system hand pointer takes over for precise
+  // clicking; open dialogs and leaving the window hand back the system cursor.
+  // A tag beside it reads the drawing's zone and column.
+  let xh, tag, cx = -100, cy = -100, label = '', hoverAt = null, inside = false;
+  // Columns are read off the content width (the column strip is hidden over the cover).
+  const measure = () => [...document.querySelectorAll('.colrefs-grid, main .wrap')].map((n) => n.getBoundingClientRect()).find((r) => r.width > 0);
+  let stripBox = measure();
+  addEventListener('resize', () => { stripBox = measure(); });
+  const LINK = 'a, button, [role="tab"], summary, label, input, select, textarea, [contenteditable]';
+  const readAt = (el) => {
+    hoverAt = el;
+    const zone = el?.closest?.('[data-zone]')?.dataset.zone;
+    let col = '';
+    if (stripBox && stripBox.width) col = String(Math.min(12, Math.max(1, Math.floor((cx - stripBox.left) / stripBox.width * 12) + 1))).padStart(2, '0');
+    const next = zone ? `${zone} · ${col}` : '';
+    if (next !== label) { label = next; tag.textContent = label; }
+    const on = inside && !document.querySelector('dialog[open]');
+    root.classList.toggle('has-xhair', on);
+    xh.classList.toggle('is-on', on);
+    xh.classList.toggle('is-link', !!el?.closest?.(LINK));
+    xh.classList.toggle('no-tag', !label);
+    xh.classList.toggle('flip-x', cx > innerWidth - 120);
+    xh.classList.toggle('flip-y', cy > innerHeight - 48);
+  };
+  if (fine.matches) {
+    xh = document.createElement('div');
+    xh.className = 'xhair';
+    xh.setAttribute('aria-hidden', 'true');
+    xh.innerHTML = '<i></i><i></i><i></i><i></i><span class="xhair-tag"></span>';
+    tag = xh.lastElementChild;
+    document.body.append(xh);
+    const move = (e) => {
+      if (e.pointerType !== 'mouse') return;
+      cx = e.clientX; cy = e.clientY; inside = true;
+      xh.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      if (e.target !== hoverAt || e.type === 'pointermove') readAt(e.target);
+    };
+    addEventListener('onpointerrawupdate' in window ? 'pointerrawupdate' : 'pointermove', move, { passive: true });
+    if ('onpointerrawupdate' in window) addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') readAt(e.target); }, { passive: true });
+    const out = () => { inside = false; root.classList.remove('has-xhair'); xh.classList.remove('is-on'); };
+    root.addEventListener('mouseleave', out);
+    addEventListener('blur', out);
+    addEventListener('pointerdown', () => xh.classList.add('is-down'));
+    addEventListener('pointerup', () => xh.classList.remove('is-down'));
+  }
+
+  // Magnetic buttons: they lean toward the pointer and settle back.
+  if (fine.matches) {
+    document.querySelectorAll('.btn, .cinema-link').forEach((b) => {
+      b.classList.add('is-magnet');
+      b.addEventListener('pointermove', (e) => {
+        if (still()) return;
+        const r = b.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+        const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        b.style.transform = `translate3d(${(dx * 9).toFixed(1)}px, ${(dy * 6).toFixed(1)}px, 0)`;
+      });
+      b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+    });
+  }
+
+  // One frame loop: reading progress, kinetic band, the tag under scroll.
+  let lastY = scrollY, vel = 0, skew = 0, scrolledAt = scrollY;
+  const tick = () => {
+    const y = scrollY;
+    vel = vel * 0.8 + (y - lastY) * 0.2;
+    lastY = y;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if (brand) brand.style.setProperty('--sp', max > 0 ? Math.min(1, y / max).toFixed(4) : 0);
+    const moving = !still();
+    if (kinVisible && rows.length) {
+      skew += ((moving ? Math.max(-12, Math.min(12, vel * -0.45)) : 0) - skew) * 0.12;
+      rows.forEach((row) => {
+        const r = row.getBoundingClientRect();
+        const p = (innerHeight - r.top) / (innerHeight + r.height);
+        const dir = Number(row.dataset.k);
+        const track = row.firstElementChild;
+        const x = moving ? dir * (p - 0.5) * track.scrollWidth * 0.18 - track.scrollWidth * 0.12 : 0;
+        track.style.setProperty('--kx', `${x.toFixed(1)}px`);
+        track.style.setProperty('--ks', `${(skew * dir).toFixed(2)}deg`);
+      });
+    }
+    // Scrolling moves the page under a still pointer: re-read what is under it.
+    if (xh && inside && y !== scrolledAt) { scrolledAt = y; const el = document.elementFromPoint(cx, cy); if (el !== hoverAt) readAt(el); }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
 })();

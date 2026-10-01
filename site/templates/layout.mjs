@@ -30,7 +30,7 @@ const pad = (n) => String(n).padStart(2, '0');
 // Runs before the stylesheet so a dark-theme visitor never sees a light flash.
 // It also shows the page as drawn if site.js has not run within three seconds.
 // Olive is the chosen palette; a palette saved during exploration is ignored.
-const THEME_BOOT = `(function(d){d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}setTimeout(function(){if(!window.__dn)d.classList.add('no-motion');},3000);})(document.documentElement);`;
+const THEME_BOOT = `(function(d){d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(sessionStorage.getItem('shutter')){sessionStorage.removeItem('shutter');d.classList.add('shutter-in');}}catch(e){}setTimeout(function(){if(!window.__dn)d.classList.add('no-motion');},3000);})(document.documentElement);`;
 
 // Exploration only: a dock to compare the three palettes on the real pages.
 // Remove (EXPLORE = false) once a palette is chosen.
@@ -152,6 +152,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 <script src="${asset('site.js')}" defer></script>
 </head>
 <body${s ? ` data-sheet="${s.dwg}"` : ''}${cover ? ' class="has-cover at-cover"' : ''}>
+<div class="shutter" aria-hidden="true"><i></i><i></i><i></i></div>
 <a class="skip" href="#main">Skip to content</a>
 ${header(path, cover)}
 ${rail(zones)}

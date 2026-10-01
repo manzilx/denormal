@@ -35,7 +35,7 @@ export function boundaryAtlas() {
         <div class="atlas-floor"><div class="atlas-floor-grid"></div><span class="atlas-floor-label mono" data-boundary-label>Your perimeter</span><svg class="atlas-paths" viewBox="0 0 600 400"><path class="atlas-route" d="M60 200H540M140 90V310H460V90Z"/><path class="atlas-packet" d="M60 200H540"/><path class="atlas-packet packet-two" d="M140 90V310H460V90"/></svg><i class="atlas-corner corner-a"></i><i class="atlas-corner corner-b"></i><i class="atlas-corner corner-c"></i><i class="atlas-corner corner-d"></i></div>
         <div class="atlas-volume"></div>
         ${['Records','Workflow','Review'].map((t,i)=>`<div class="atlas-rack rack-${i}"><div class="rack-front">${Array.from({length:5},()=>'<i><b></b><b></b><b></b><span></span></i>').join('')}<strong class="mono">${t}</strong></div><div class="rack-side"></div><div class="rack-top"></div></div>`).join('')}
-        <div class="atlas-halo"></div><span class="atlas-review mono">People retain<br>the decision.</span>
+        <div class="atlas-halo"></div>
       </div></div>
       <div class="atlas-scope"><span class="mono">The operating boundary</span><p data-boundary-caption>Hardware you own.<br>Controls you govern.</p></div>
       <span class="atlas-scene-note mono">Conceptual deployment model · select a view above</span>

@@ -13,13 +13,16 @@ from PIL import Image, ImageOps
 
 SRC, OUT = Path('photos-src'), Path('site/assets/img')
 WIDTHS = [640, 1024, 1600, 2400]  # 2400 for the full-bleed covers and bands
-HIRES = {'pci', 'labour-compliance', 'systems-plant'}
+HIRES = {'pci', 'labour-compliance', 'systems-plant', 'landing', 'people-decisions'}
 QUALITY = {slot: 82 for slot in HIRES}
 MAXW = {}
 
 # slot: (file, crop box as fractions of the original (x0, y0, x1, y1) or None)
 SLOTS = {
-    'landing': ('landing.png', None),                # supplied generated aerial, from the FIELDWORK concept
+    'landing': ('landing-wind-solar.jpg', None),     # Pexels 35105432, wind and solar at sunrise
+    'people-decisions': ('people-decisions.jpg', None),  # Pexels 8824526, crew at golden hour
+    'field-check': ('field-check.jpg', None),         # Pexels 5830633, hands measuring material at the bench
+    'field-decision': ('field-decision.jpg', (0.04, 0.04, 0.85, 0.96)),  # Pexels 8487401; glove brand cropped out
     'hero': ('hero.jpg', None),
     'pci': ('pci.jpg', (0, 0, 0.77, 0.75)),
     'onelegal': ('onelegal.jpg', None),

@@ -843,3 +843,176 @@ html.no-motion .immersive *,html.no-motion .immersive *::before,html.no-motion .
 /* On a phone the footer display sits directly above the title block, so
    the title block drops its own copy of the logo and keeps the owner and QR. */
 @media(max-width:720px) { .tb-mark > a:first-child { display:none; } .tb-mark { grid-template-rows:auto; } }
+
+/* ── Read-along ──────────────────────────────────────────────────────────
+   A synthetic tender page read the way PCI reads one. Three voices:
+   machine (mono, streams in, cites its source), rule (the signal-coloured
+   gate line), person (sans, still: the visitor decides). Without script,
+   or with motion paused, the finished read-out is shown as plain text. */
+.readalong { margin-top:clamp(72px,9vw,128px); }
+.ra-k { color:var(--muted); font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+.ra-title { margin-top:16px; font-size:clamp(34px,4.6vw,68px); font-weight:500; line-height:.98; letter-spacing:-.045em; max-width:20ch; }
+.ra-b { transition:opacity .6s var(--ease), color .6s var(--ease); }
+.readalong.is-live .ra-b { opacity:.28; }
+.readalong.is-live .ra-b.is-on { opacity:1; }
+.ra-b[data-ra-beat="rule"].is-on { color:var(--signal); }
+.ra-lede { margin-top:22px; max-width:62ch; color:var(--ink-2); font-size:clamp(16px,1.3vw,18px); line-height:1.6; }
+.ra-stage { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); margin-top:0; }
+.ra-stage[hidden] { display:none; }
+.ra-tabs { display:flex; flex-wrap:wrap; gap:0; margin-top:36px; border-bottom:1px solid var(--line); }
+.ra-tabs button { display:flex; gap:10px; align-items:baseline; padding:14px 18px 13px; border:0; border-bottom:2px solid transparent; margin-bottom:-1px; background:none; color:var(--ink-2); font:500 15px/1.2 var(--sans); cursor:pointer; }
+.ra-tabs button .mono { color:var(--muted); font-size:10px; }
+.ra-tabs button:hover { color:var(--ink); }
+.ra-tabs button[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--signal); }
+.ra-photo { position:relative; aspect-ratio:16/9; overflow:hidden; margin:4px 0 10px; }
+.ra-photo picture, .ra-photo img { display:block; width:100%; height:100%; object-fit:cover; }
+.ra-doc { margin:30px; padding:26px 28px 22px; background:#EEEDE4; color:#1A1B11; box-shadow:0 30px 60px -30px rgba(0,0,0,.6); font:400 15px/1.6 var(--sans); align-self:start; }
+.ra-doc-h { display:flex; justify-content:space-between; gap:12px; padding-bottom:10px; border-bottom:1px solid #CDCBB8; color:#5F614B; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+.ra-doc-t { margin:16px 0 8px; font-size:20px; font-weight:560; letter-spacing:-.02em; }
+.ra-clauses { margin:0; padding:0; list-style:none; }
+.ra-clauses li { position:relative; margin:0 -12px; padding:9px 12px; border-left:3px solid transparent; transition:background .5s var(--ease), border-color .5s var(--ease); }
+.ra-clauses b { font-weight:600; }
+.ra-clauses li.is-reading { background:rgba(204,168,69,.22); border-left-color:#86680F; }
+.ra-clauses li.is-read { background:rgba(204,168,69,.08); }
+.ra-clauses li.is-gap { background:repeating-linear-gradient(135deg,rgba(204,168,69,.22) 0 6px,transparent 6px 12px); border-left-color:#86680F; }
+.ra-v { display:inline-block; margin-left:8px; padding:1px 6px; border:1px solid #5F614B; color:#3B3D2C; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; vertical-align:2px; }
+.ra-v:empty { display:none; }
+.ra-clauses li.is-gap .ra-v { background:#86680F; border-color:#86680F; color:#EEEDE4; }
+.ra-doc-foot { margin-top:14px; padding-top:10px; border-top:1px dashed #ABA98E; color:#5F614B; font-size:10px; letter-spacing:.1em; text-transform:uppercase; transition:color .5s; }
+.ra-stage.is-gap .ra-doc-foot { color:#86680F; }
+.ra-doc-foot.is-gap { margin-inline:-12px; padding:10px 12px; border-top-color:transparent; border-left:3px solid #86680F; background:repeating-linear-gradient(135deg,rgba(204,168,69,.22) 0 6px,transparent 6px 12px); color:#86680F; }
+.ra-doc-foot.is-gap .ra-v { background:#86680F; border-color:#86680F; color:#EEEDE4; }
+.ra-out { display:flex; flex-direction:column; padding:30px 30px 22px 6px; min-width:0; }
+.ra-out-h { display:flex; justify-content:space-between; gap:12px; padding-bottom:12px; color:var(--scene-muted); font-size:10px; letter-spacing:.14em; text-transform:uppercase; }
+.ra-status { color:var(--scene-ink); }
+.ra-stage.is-held .ra-status { color:var(--signal); }
+.ra-lines { margin:0; padding:0; list-style:none; }
+.ra-line { display:grid; grid-template-columns:58px minmax(0,1fr); gap:12px; padding:11px 0; border-top:1px solid var(--scene-line); }
+.readalong.is-live .ra-line { opacity:0; transform:translateY(6px); transition:opacity .4s var(--ease), transform .4s var(--ease); }
+.readalong.is-live .ra-line.is-on { opacity:1; transform:none; }
+.ra-tag { padding-top:2px; color:var(--scene-muted); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; }
+.ra-text, .ra-full { font:400 13px/1.6 var(--mono); color:var(--scene-ink); }
+.ra-full { display:inline; }
+.ra-text { display:none; }
+.readalong.is-live .ra-text { display:inline; }
+.readalong.is-live .ra-full { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.ra-line.is-typing .ra-text::after { content:'▍'; margin-left:1px; color:var(--signal); animation:ra-caret .8s steps(1) infinite; }
+@keyframes ra-caret { 50% { opacity:0; } }
+.ra-cite { display:block; margin-top:3px; color:var(--scene-muted); font-size:11px; }
+.readalong.is-live .ra-line:not(.is-done) .ra-cite { visibility:hidden; }
+.ra-rule .ra-tag, .ra-rule .ra-text, .ra-rule .ra-full { color:var(--signal); }
+.ra-rule .ra-body { padding-left:12px; border-left:2px solid var(--signal); }
+.ra-held .ra-tag { color:var(--scene-ink); }
+.ra-decide { margin-top:20px; padding-top:18px; border-top:1px solid var(--scene-line); }
+.readalong.is-live .ra-stage:not(.is-held) .ra-decide { visibility:hidden; }
+.ra-decide { transition:opacity .6s var(--ease); }
+.ra-q { font:500 clamp(24px,2.2vw,32px)/1 var(--sans); letter-spacing:-.035em; color:var(--scene-ink); }
+.ra-choices { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.ra-decide .btn-plate { background:var(--signal); color:#17160B; --fill:#ECEBDE; }
+.ra-decide .btn-plate:hover { color:#17160B; }
+.ra-return { border:1px solid var(--scene-line); color:var(--scene-ink); --fill:#ECEBDE; }
+.ra-return:hover { color:#17160B; }
+.ra-choices .btn[aria-pressed="false"][disabled] { opacity:.35; }
+.ra-choices .btn[disabled] { cursor:default; }
+.ra-decided { margin-top:14px; min-height:1.6em; font:400 16px/1.6 var(--sans); color:var(--scene-ink); }
+.ra-foot { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:18px; color:var(--scene-muted); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.ra-run { background:none; padding:0; color:var(--scene-ink); text-decoration:underline; text-underline-offset:3px; letter-spacing:.1em; text-transform:uppercase; font-size:10px; }
+.readalong:not(.is-live) .ra-run { display:none; }
+@media(max-width:900px) {
+  .ra-stage { grid-template-columns:minmax(0,1fr); }
+  .ra-doc { margin:16px 16px 0; padding:20px 18px 16px; font-size:14px; }
+  .ra-out { padding:22px 16px 18px; }
+  .ra-line { grid-template-columns:48px minmax(0,1fr); }
+}
+.ra-text, .ra-full, .ra-cite { text-transform:none; letter-spacing:0; }
+.ra-tabs button { white-space:nowrap; text-align:left; flex:none; }
+@media(max-width:900px) { .ra-tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-inline:calc(-1 * var(--gutter)); padding-inline:var(--gutter); } .ra-tabs::-webkit-scrollbar { display:none; } .ra-tabs button { padding:12px 14px 11px; font-size:14px; } }
+
+/* ── Motion · ruler + cinematic scroll ───────────────────────────────────
+   One idea carried everywhere: the logo's three-cell ruler. Pages change
+   behind a three-panel shutter (first panel in the signal colour), hero
+   frames wipe in cell by cell, and the header ruler fills as you read.
+   Scroll adds depth (photos drift), focus (headings sharpen), an iris on
+   the two dark sections and one kinetic band. Reduced motion and the pause
+   control switch all of it off; scroll-linked parts need scroll timelines
+   and stay static elsewhere. The header is never covered. */
+@property --wa { syntax:'<percentage>'; inherits:false; initial-value:0%; }
+@property --wb { syntax:'<percentage>'; inherits:false; initial-value:0%; }
+@property --wc { syntax:'<percentage>'; inherits:false; initial-value:0%; }
+
+.shutter { position:fixed; inset:0; z-index:38; display:grid; grid-template-columns:repeat(3,1fr); pointer-events:none; }
+.shutter i { background:var(--plate); transform:scaleY(0); transform-origin:50% 100%; }
+.shutter i:first-child { background:var(--accent); }
+.shutter i + i { box-shadow:inset 1px 0 0 color-mix(in srgb, var(--plate-ink) 16%, transparent); }
+html.is-leaving .shutter { pointer-events:auto; }
+html.is-leaving .shutter i { transform:scaleY(1); transition:transform .44s cubic-bezier(.76,0,.24,1); }
+html.is-leaving .shutter i:nth-child(2) { transition-delay:.06s; }
+html.is-leaving .shutter i:nth-child(3) { transition-delay:.12s; }
+html.shutter-in .shutter i { transform-origin:50% 0; animation:shutter-open .72s cubic-bezier(.76,0,.24,1) .05s both; }
+html.shutter-in .shutter i:nth-child(2) { animation-delay:.13s; }
+html.shutter-in .shutter i:nth-child(3) { animation-delay:.21s; }
+@keyframes shutter-open { from { transform:scaleY(1); } to { transform:scaleY(0); } }
+
+.kinetic { overflow:hidden; padding-block:clamp(56px,8vw,128px); color:var(--ink); }
+.k-row { white-space:nowrap; line-height:1; }
+.k-row + .k-row { margin-top:clamp(4px,1vw,14px); }
+.k-track { display:inline-flex; align-items:center; gap:.32em; padding-right:.32em; font:500 clamp(58px,10.5vw,176px)/1.04 var(--sans); letter-spacing:-.055em; transform:translate3d(var(--kx,0px),0,0) skewX(var(--ks,0deg)); }
+.k-out .k-track { color:transparent; -webkit-text-stroke:1.2px color-mix(in srgb, var(--ink) 70%, transparent); }
+.k-cell { flex:none; position:relative; width:.92em; height:.3em; margin-top:.28em; border:.055em solid currentColor; border-top:0; background:linear-gradient(currentColor,currentColor) 33.3% 0/.055em 100% no-repeat, linear-gradient(currentColor,currentColor) 66.6% 0/.055em 100% no-repeat; }
+.k-cell::before { content:''; position:absolute; left:0; top:0; bottom:0; width:calc(33.3% - .03em); background:var(--signal); }
+.k-out .k-cell { color:color-mix(in srgb, var(--ink) 70%, transparent); }
+
+/* Crosshair: four arms around an open centre (the hotspot stays visible),
+   ink with a thin sheet-coloured edge so it reads on photos and paper alike. */
+.xhair { position:fixed; left:0; top:0; z-index:90; pointer-events:none; opacity:0; }
+.xhair.is-on { opacity:1; }
+.xhair i { position:absolute; background:var(--ink); box-shadow:0 0 0 1px color-mix(in srgb, var(--sheet) 75%, transparent); transition:transform .15s ease-out; }
+.xhair i:nth-child(1), .xhair i:nth-child(2) { top:-.5px; height:1px; width:9px; }
+.xhair i:nth-child(1) { left:-13px; }
+.xhair i:nth-child(2) { left:4px; }
+.xhair i:nth-child(3), .xhair i:nth-child(4) { left:-.5px; width:1px; height:9px; }
+.xhair i:nth-child(3) { top:-13px; }
+.xhair i:nth-child(4) { top:4px; }
+.xhair.is-down i:nth-child(1) { transform:translateX(3px); }
+.xhair.is-down i:nth-child(2) { transform:translateX(-3px); }
+.xhair.is-down i:nth-child(3) { transform:translateY(3px); }
+.xhair.is-down i:nth-child(4) { transform:translateY(-3px); }
+.xhair-tag { position:absolute; left:16px; top:14px; padding:4px 6px 3px; background:var(--ink); color:var(--sheet); font:600 10px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; }
+.xhair.flip-x .xhair-tag { left:auto; right:16px; }
+.xhair.flip-y .xhair-tag { top:auto; bottom:14px; }
+.xhair.no-tag .xhair-tag { display:none; }
+.xhair.is-link { opacity:0; }
+html.has-xhair, html.has-xhair * { cursor:none; }
+html.has-xhair :is(a, button, [role="tab"], summary, label, select), html.has-xhair :is(a, button, [role="tab"], summary, label) * { cursor:pointer; }
+html.has-xhair :is(input, textarea, [contenteditable]) { cursor:text; }
+html.has-xhair :is(button, .btn)[disabled] { cursor:default; }
+@media (prefers-reduced-motion:reduce) { .xhair i { transition:none; } }
+
+@media (prefers-reduced-motion:no-preference) {
+  /* Header ruler: the first cell is the brand at rest; it fills to the end of the ruler with the page. */
+  .js:not(.no-motion) .brand .logo-rule { isolation:isolate; }
+  .js:not(.no-motion) .brand .logo-rule::before, .js:not(.no-motion) .brand .logo-rule::after { z-index:1; }
+  .js:not(.no-motion) .brand .logo-rule i { --cell:calc((100% - 2 * var(--st)) / 3); width:calc(var(--cell) + (100% - var(--cell)) * var(--sp, 0)); }
+  .js:not(.no-motion) .masthead-progress { display:none; }
+
+  /* Hero frames: the incoming frame drops in three ruler cells, staggered. */
+  .js:not(.no-motion) .cinema-frame { opacity:1; z-index:0; clip-path:polygon(0 0,100% 0,100% var(--wc),66.67% var(--wc),66.67% var(--wb),33.33% var(--wb),33.33% var(--wa),0 var(--wa)); transition:--wa 1s cubic-bezier(.76,0,.24,1), --wb 1s cubic-bezier(.76,0,.24,1) .09s, --wc 1s cubic-bezier(.76,0,.24,1) .18s; }
+  .js:not(.no-motion) .cinema-frame.is-active { z-index:2; --wa:100%; --wb:100%; --wc:100%; }
+  .js:not(.no-motion) .cinema-frame.was-active { z-index:1; --wa:100%; --wb:100%; --wc:100%; transition:none; }
+
+  /* Headings arrive out of focus and settle sharp. */
+  .js:not(.no-motion) .zone-head .w > span { filter:blur(10px); transition:transform 1.05s var(--ease) calc(var(--i,0) * 65ms), filter 1.15s var(--ease) calc(var(--i,0) * 65ms); }
+  .js:not(.no-motion) .zone-head.is-in .w > span { filter:none; }
+  .js:not(.no-motion) .btn.is-magnet { transition:transform .6s var(--ease), translate .35s var(--ease), color .45s var(--ease), border-color .45s var(--ease); }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion:no-preference) {
+    html:not(.no-motion) :is(.people-photo, .purpose-visual, .ra-photo, .workflow-image) img { animation:depth linear both; animation-timeline:view(); animation-range:cover 0% cover 100%; }
+    html:not(.no-motion) :is(.zone-field, .zone-start) { animation:iris linear both; animation-timeline:view(); animation-range:entry 0% entry 60%; }
+  }
+}
+@keyframes depth { from { transform:translate3d(0,-6%,0) scale(1.15); } to { transform:translate3d(0,6%,0) scale(1.15); } }
+@keyframes iris { from { clip-path:circle(6% at 50% 10%); } to { clip-path:circle(150% at 50% 10%); } }
+@media (prefers-reduced-motion:reduce) { .shutter { display:none; } }
+html.no-motion .shutter { display:none; }
+html.no-motion .k-track { transform:none; }

@@ -8,7 +8,7 @@ export const SITE = {
   origin: 'https://denormal.in',
   email: 'hello@denormal.in',
   city: 'New Delhi, India',
-  description: 'Denormal Labs builds human-centered, lean digital workflows for infrastructure, power and complex operations. Empower people to innovate, make informed decisions and create lasting impact.',
+  description: 'Denormal Labs builds human-centered, lean digital workflows for infrastructure, power and complex operations.',
 };
 
 export const NAV = [
@@ -22,7 +22,7 @@ export const HERO = {
   kicker: 'Our core purpose',
   title: 'Empower. Innovate. Sustain.',
   lines: ['Empower.', 'Innovate. Sustain.'],
-  lede: 'Human-centered, lean digital workflows to empower people, enable innovation and create lasting impact.',
+  lede: 'Human-centered, lean digital workflows that enable innovation and create lasting impact.',
   primary: { label: 'Start with one document', href: '#start' },
   secondary: { label: 'See the five systems', href: '/systems/' },
 };
@@ -32,13 +32,13 @@ export const HERO = {
 export const PURPOSE = {
   vision: {
     title: 'A better tomorrow, built around people.',
-    statement: 'A future where human-centered technology makes complex work leaner, empowers people to innovate, and helps them stand by decisions that create lasting impact.',
+    statement: 'A future where technology makes complex work leaner, gives teams room to innovate, and helps them stand by decisions that create lasting impact.',
     foot: 'Clarity to act. Confidence to decide. Room to innovate.',
   },
   mission: {
     title: 'Complex operations. Lean digital workflows.',
     statement: 'We transform complex operations into lean digital workflows by removing friction, improving efficiency and making decisions easier to audit, explain and defend.',
-    method: 'Six moves from the Lean tradition, starting with the work and keeping judgment with people.',
+    method: 'Six moves from the Lean tradition, starting where the work is done.',
   },
 };
 
@@ -53,7 +53,7 @@ export const SYSTEMS_INTRO = {
 // The architecture every system shares. Labels are descriptions of the
 // mechanisms verified per system, not a separate product.
 export const LAYERS = [
-  { n: '04', t: 'Control', d: 'Consequential decisions stay with people. Approval and exception paths reflect the specific workflow.', accent: true },
+  { n: '04', t: 'Control', d: 'Consequential decisions stay with your team. Approval and exception paths reflect the specific workflow.', accent: true },
   { n: '03', t: 'Bounded models', d: 'Models read, classify and draft, only over the passages they were shown. Where a model is optional, the system runs without it.' },
   { n: '02', t: 'Deterministic gates', d: 'Rules the code enforces: grounding floors, reconciliation tolerances, tenant checks, sealed evidence.' },
   { n: '01', t: 'Your documents, inside your boundary', d: 'Tender packs, correspondence, contracts, site photos, contractor records, on the infrastructure you choose.' },
@@ -63,7 +63,7 @@ export const PHASES = [
   { n: '01', t: 'One document', when: 'Week 0', d: 'Agree the scope and sharing arrangements for one real artifact: a tender pack, project correspondence, a contract set, six months of near-miss reports, or a month of contractor records.' },
   { n: '02', t: 'Written findings', when: 'Within two weeks', d: 'A findings document covering the risks, the gaps and the waste in the process, each finding cited to its source. Fixed scope, fixed fee.' },
   { n: '03', t: 'Pilot', when: 'Scoped together', d: 'If the findings show you something new, we scope a pilot on your documents, inside the boundary you choose.' },
-  { n: '04', t: 'Deployed', when: 'With your team', d: 'The system runs where your data lives, with your people deciding. We stay alongside it rather than handing it over.' },
+  { n: '04', t: 'Deployed', when: 'With your team', d: 'The system runs where your data lives, with your team deciding. We stay alongside it rather than handing it over.' },
 ];
 
 export const PRINCIPLES = [
@@ -132,16 +132,16 @@ export const ABOUT = {
   welcome: 'Welcome home.',
   invitation: 'Let’s build something meaningful, together.',
   title: 'Technology shaped around people.',
-  lede: 'We build intuitive, human-centered digital workflows that give you the clarity to innovate, confidence to stand by your choices and tools to create lasting impact.',
+  lede: 'We build intuitive digital workflows that give you the clarity to innovate, confidence to stand by your choices and tools to create lasting impact.',
   body: [
-    'We start with the people doing the work: the tender that has to be priced by Friday, the correspondence a project has to keep connected, the contractor records that have to be reconciled. We map the process before building the technology, remove waste and rework, and keep consequential decisions with people.',
+    'We start with the people doing the work: the tender that has to be priced by Friday, the correspondence a project has to keep connected, the contractor records that have to be reconciled. We map the process before building the technology and remove waste and rework.',
     'We write down what each system does, what it refuses to do, and what is not built yet. If a claim on this site does not survive being checked against the code, we would rather correct it than keep it.',
   ],
 };
 
 export const VALUES = [
-  { n:'01', t:'Lean Software, Deep Care', d:'We remove bloat, unnecessary complexity and administrative friction so people can focus on work that matters. Lean means intentional, thoughtful craftsmanship.' },
+  { n:'01', t:'Lean Software, Deep Care', d:'We remove bloat, unnecessary complexity and administrative friction so teams can focus on work that matters. Lean means intentional, thoughtful craftsmanship.' },
   { n:'02', t:'Clarity in Complexity', d:'Complex work needs a clear structure. We make the process, evidence and decision points easier to understand, so teams can act with confidence.' },
   { n:'03', t:'Efficiency Meets Empathy', d:'Efficiency should give people time and energy back. We build sustainable workflows that respect attention and support teams without making burnout the price of progress.' },
-  { n:'04', t:'Value Addition That Matters', d:'Every feature, architectural choice and process should add useful value for the people who rely on it. We favour meaningful outcomes over more software.' },
+  { n:'04', t:'Value Addition That Matters', d:'Every feature, architectural choice and process should add useful value for those who rely on it. We favour meaningful outcomes over more software.' },
 ];

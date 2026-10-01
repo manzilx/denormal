@@ -1,0 +1,52 @@
+{
+  "checked": "2026-10-01",
+  "scope": "Website composition, not standalone stock redistribution.",
+  "licence_findings": "Pexels License permits commercial website use and adaptation; do not imply endorsement or use as a trademark. Photographer credits retained on About. Faces outside the frame; the glove maker's mark is cropped out of field-decision.",
+  "assets": [
+    {
+      "slot": "field-check",
+      "author": "Anna Shvets",
+      "source": "https://www.pexels.com/photo/crop-tailor-measuring-piece-of-fabric-in-workshop-5830633/",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-10-01",
+      "crop": null,
+      "original_sha256": "e2c9ff462a23a62249fcdd84c71aeabaddadbb4b9145f289464e96c92a4456c6",
+      "outputs": {
+        "field-check-1024.jpg": "706379ce96fc073f39efacccb8612011154dcd0cf020e8f71b53170ff194e5c5",
+        "field-check-1024.webp": "3768ff2743c6d70104e476fcaa8b1962b1f7fd60b7e73327d8ad3cc71f1652f1",
+        "field-check-1600.jpg": "e554c098dbfc45425bbebc2f24f47df8dc45ede28bd26150ac67b8fe44ab515b",
+        "field-check-1600.webp": "0ef7f376b40a01806752c1d71fd5be6c7dfa72a21686eda6dd3268a4fc8c2119",
+        "field-check-2400.jpg": "155fa03da5f093082eb5a8c1425948299c4c9df908be797288e136b02c9a8128",
+        "field-check-2400.webp": "4b049bfbf12c3580fa84378ad537b33dc36119356fe75a4807fef0128931a5cc",
+        "field-check-640.jpg": "f9255cf83fc9f14337024afc460d18e3d90471b68760828a25b6b19b4a9e1d5e",
+        "field-check-640.webp": "16d33d8c52da54292b2a7c9f7927c1eee187d260977a1cfedf600d49cb17036b"
+      }
+    },
+    {
+      "slot": "field-decision",
+      "author": "Kindel Media",
+      "source": "https://www.pexels.com/photo/close-up-photo-of-person-holding-documents-8487401/",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-10-01",
+      "crop": [
+        0.04,
+        0.04,
+        0.85,
+        0.96
+      ],
+      "original_sha256": "ece2dce1dc26453e8a5b08a7662cdd9331c4490d203849393d0eefcad5957b39",
+      "outputs": {
+        "field-decision-1024.jpg": "ff5d67832ccf2ef609662ab4ac758d8e6a2cc31b41937639c8d4bca05758631a",
+        "field-decision-1024.webp": "803cd70e24c6b9df6faa87180d13ae998331016e9af007fbcaed0a82aa5b9853",
+        "field-decision-1600.jpg": "13fbdb5fb2a26125b7ccc8932231aeee0ecf74a9f5156e54bbad1794ddcab839",
+        "field-decision-1600.webp": "94a8248d2ac70aaf61126535ec6cce5b70c793a1d3bbe3d2bed4fbeffed04b87",
+        "field-decision-2400.jpg": "951a6b120d3c826aa50c2c4dfeb0b55e4bf908bc6dfe43b9ce2582685071df0e",
+        "field-decision-2400.webp": "8eba85fb4c99fafe9ce108929cc15748d51bff15e34279ed9b8d542698692075",
+        "field-decision-640.jpg": "8db18cbc2d6ec9bba7f4b5f9792a61b4a104321560552c6e16c5883d7fa22513",
+        "field-decision-640.webp": "a9f77b98f08dd9a2e3d30d1b4c6f771c253d782ab519ebc645d0e4d3fb898069"
+      }
+    }
+  ]
+}

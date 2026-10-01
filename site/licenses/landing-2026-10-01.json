@@ -1,0 +1,29 @@
+{
+  "checked": "2026-10-01",
+  "scope": "Website composition, not standalone stock redistribution.",
+  "licence_findings": "Pexels License permits commercial website use and adaptation; do not imply endorsement or use as a trademark. Photographer credit retained on About. Replaces the generated landing image.",
+  "assets": [
+    {
+      "slot": "landing",
+      "author": "Quang Nguyen Vinh",
+      "source": "https://www.pexels.com/photo/aerial-view-of-wind-turbines-and-solar-panels-at-sunrise-35105432/",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-10-01",
+      "crop": null,
+      "original_sha256": "5badda2a5278520435c22b68c87c8ae17fb3354998de9dcbfbc887cf40d7bb28",
+      "outputs": {
+        "landing-1024.jpg": "ad31ac3828741d2ea0d5d10ec62b85024edaa555d94cc4b4ad38f877ea88d90c",
+        "landing-1024.webp": "4610b423194e43e10b520a80491d5d55e72fd85faa7cd8471d87b122c0bc47fb",
+        "landing-1600.jpg": "8326bfee8b8001817ba845a20ca56a2522fdd8ccb1b1665aac028032641719de",
+        "landing-1600.webp": "a0b7b71e055a1e3f8ce660abbf2a503fde5e502fe5c7dbd6513e59756df89c9a",
+        "landing-2400.jpg": "e53aee9104c14ee3516b3d4964fd328677de196d6f2d0339159412d3485760a7",
+        "landing-2400.webp": "0dcb32264262c8efd9986e228a90278ea79ac512ca7663947d28c8aa62d64834",
+        "landing-3840.jpg": "dbe5c3ac96566cbf8df8713944e2cabe25c262d931ae48457aaeb85d91dc190d",
+        "landing-3840.webp": "9aa224c7a7d9ca5862191508e64e152752fbcc607c2bc72b77bea5ee1cd9fa84",
+        "landing-640.jpg": "0d4baa2819c6ac1f9bffa0beb6042629ea4a6950829e96d77a5a7b8f9eabb56b",
+        "landing-640.webp": "acc9a3d20273e7c30fb566d77fd89a9e48d5da4ad5effc4b7b307e51e98f9a68"
+      }
+    }
+  ]
+}

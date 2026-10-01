@@ -50,14 +50,33 @@ export const PHOTOS = {
     author: 'Ruslan Alekso', source: 'https://www.pexels.com/photo/industrial-worker-inspecting-materials-in-factory-35383622/', ...PEXELS,
     note: 'cropped to hands and work surface; stock imagery; no team, customer or endorsement implied',
   },
-  // Supplied with the FIELDWORK concept. It is a generated image (its C2PA
-  // record names an OpenAI model), so it is credited as illustrative and is
-  // never described as a real site.
+  'field-check': {
+    widths: [640, 1024, 1600, 2400], w: 2400, h: 1600,
+    alt: 'Hands hold a straight edge flat on sheet material at a workshop bench; the face is outside the frame',
+    caption: 'Material checked at the bench · stock photograph',
+    author: 'Anna Shvets', source: 'https://www.pexels.com/photo/crop-tailor-measuring-piece-of-fabric-in-workshop-5830633/', ...PEXELS,
+    note: 'cropped to hands and work surface; stock imagery; no team, customer or endorsement implied',
+  },
+  'field-decision': {
+    widths: [640, 1024, 1600, 2400], w: 2400, h: 2044,
+    alt: 'A gloved hand holds site documents beside a colleague in a high-visibility vest; faces are outside the frame',
+    caption: 'Site documents in hand · stock photograph',
+    author: 'Kindel Media', source: 'https://www.pexels.com/photo/close-up-photo-of-person-holding-documents-8487401/', ...PEXELS,
+    note: 'cropped; glove maker mark removed; stock imagery; no team, customer or endorsement implied',
+  },
+  'people-decisions': {
+    widths: [640, 1024, 1600, 2400], w: 2400, h: 1800,
+    alt: 'Four workers in hard hats stand as silhouettes on top of industrial equipment against a low golden sun',
+    caption: 'The crew at golden hour · stock photograph',
+    author: 'Эдуард Галеев', source: 'https://www.pexels.com/photo/a-silhouette-of-workers-during-the-golden-hour-8824526/', ...PEXELS,
+    note: 'silhouettes only; stock imagery; no team, customer or endorsement implied',
+  },
   landing: {
-    widths: [640, 1024, 1536], w: 1536, h: 1024,
-    alt: 'Illustrative aerial view of a power station at dusk: cooling towers, two stacks and a switchyard, with transmission lines running across wooded hills towards a river',
-    caption: 'Plant and switchyard, illustrative',
-    author: 'Denormal Labs', source: '', licence: 'Generated image', licenceUrl: '', note: 'illustrative, not a real site',
+    widths: [640, 1024, 1600, 2400, 3840], w: 3840, h: 2558,
+    alt: 'Aerial view at sunrise of wind turbines rising through morning mist over a wide solar farm, with mountains behind',
+    caption: 'Wind and solar at sunrise · stock photograph',
+    author: 'Quang Nguyen Vinh', source: 'https://www.pexels.com/photo/aerial-view-of-wind-turbines-and-solar-panels-at-sunrise-35105432/', ...PEXELS,
+    note: 'stock imagery; no project, customer or endorsement implied',
   },
   hero: {
     widths: [640, 1024, 1600, 2400], w: 2400, h: 1600,

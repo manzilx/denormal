@@ -1,0 +1,27 @@
+{
+  "checked": "2026-10-01",
+  "scope": "Website composition, not standalone stock redistribution.",
+  "licence_findings": "Pexels License permits commercial website use and adaptation; do not imply endorsement or use as a trademark. Photographer credit retained on About. Subjects are silhouettes; no faces visible.",
+  "assets": [
+    {
+      "slot": "people-decisions",
+      "author": "Эдуард Галеев",
+      "source": "https://www.pexels.com/photo/a-silhouette-of-workers-during-the-golden-hour-8824526/",
+      "licence": "Pexels License",
+      "licence_url": "https://www.pexels.com/license/",
+      "checked": "2026-10-01",
+      "crop": null,
+      "original_sha256": "b3725524817651f3260a255c73f3b21af890dfd2301cce7fb16bb81198c61351",
+      "outputs": {
+        "people-decisions-1024.jpg": "c3f171607bf423b8fd8f033e72d59ba19b73ef82929bfe83bd243f2d86a581aa",
+        "people-decisions-1024.webp": "1b68d066c6e58cff7868d87b75e72b2af0fba600931a61c1737a2abdf363787e",
+        "people-decisions-1600.jpg": "b813d070c0606b7c85951c07d8039d926cf719733b7ac6f2524fcb10fe7d454c",
+        "people-decisions-1600.webp": "b2fa81ded8353e8bdaae10b605b5998ac19ac0500d1f291d14912536822022e9",
+        "people-decisions-2400.jpg": "38d8c89726a5039b4807af4c5623ea67835cb2eecb13c1389fe4c7ad7f2c4ad7",
+        "people-decisions-2400.webp": "debe7d68c621162ed482451adc1f488501479645fd7d9904db9bfa427e438ee4",
+        "people-decisions-640.jpg": "9c2659e092d95866f9a53f65ecae2e62a2e5ef0a2a656ea2e77eeb43405a6b52",
+        "people-decisions-640.webp": "207de22776a842b33a67d76a42982dcf6be38e600eade6a531b293fb95da8c76"
+      }
+    }
+  ]
+}
