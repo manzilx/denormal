@@ -1,0 +1,27 @@
+{
+  "pages": 8,
+  "trim_mm": [
+    297,
+    210
+  ],
+  "bleed_mm": 3,
+  "photographs": 7,
+  "cover_pixels": [
+    3578,
+    2550
+  ],
+  "CMYK_vector_shadings": 3,
+  "embedded_fonts": [
+    "/AAAAAA+DnBody",
+    "/AAAAAA+DnDisplay",
+    "/AAAAAA+DnLogoWord",
+    "/AAAAAA+DnMono",
+    "/AAAAAA+DnMonoB",
+    "/AAAAAA+DnStrong"
+  ],
+  "printed_QR_payload": "HTTPS://DENORMAL.IN",
+  "text_bounds": "All text within trim safety margins",
+  "content": "Current five products, company purpose, values and six original Lean moves",
+  "brand": "Drawing-set layout as denormal.in; logo set in type (Archivo 800/125%, JetBrains Mono 600 LABS, LABS >= 6.5 pt)",
+  "visual_review": "Every page rendered and reviewed"
+}

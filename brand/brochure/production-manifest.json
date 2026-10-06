@@ -1,0 +1,49 @@
+{
+  "pages": 8,
+  "trim_mm": [
+    297,
+    210
+  ],
+  "bleed_mm": 3,
+  "profile": "Generic CMYK Profile.icc (embedded)",
+  "layout": "Drawing set: margin grid references and a title block on every sheet; drawing numbers match denormal.in",
+  "type": "Archivo (440 display, 400 body, 580 strong; 800 at 125% width for the wordmark) and JetBrains Mono 600; SIL OFL 1.1",
+  "colour": "denormal.in olive palette converted through the ICC profile; photographs baked to the site duotone (#2A2C12 to #ECE6CF) then converted to CMYK",
+  "logo": "Set in type as on denormal.in; print floors: LABS at least 6.5 pt, ruler strokes at least 0.3 mm",
+  "photographs": {
+    "landing": {
+      "author": "Quang Nguyen Vinh",
+      "licence": "Pexels License",
+      "url": "https://www.pexels.com/photo/aerial-view-of-wind-turbines-and-solar-panels-at-sunrise-35105432/"
+    },
+    "people-decisions": {
+      "author": "Eduard Galeev",
+      "licence": "Pexels License"
+    },
+    "pci": {
+      "author": "Magda Ehlers",
+      "licence": "Pexels License"
+    },
+    "sentinel": {
+      "author": "Aravind P.S",
+      "licence": "Pexels License"
+    },
+    "labour-compliance": {
+      "author": "Nazmul Haque",
+      "licence": "Pexels License"
+    },
+    "nexusref": {
+      "author": "Burst",
+      "licence": "CC0 1.0"
+    },
+    "onelegal": {
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License"
+    }
+  },
+  "photo_records": "site/licenses/*.json in the website repository",
+  "graphics": "Original vector drawings of each system as it runs (input, three gates, decision); conceptual, not product screenshots",
+  "qr": "Supplied website QR, HTTPS://DENORMAL.IN, light modules on the dark start plate",
+  "copy_source": "content.json, snapshot of the denormal.in content, 2026-10-01",
+  "sha256": "74ced6434a80a620d65dba3d64713ec9f617d3705c42edf798a687e8cfb16c08"
+}

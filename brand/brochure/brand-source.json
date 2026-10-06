@@ -1,0 +1,32 @@
+{
+  "status": "Latest supplied logos, 2026-09-30",
+  "master": "assets/logo-transparent-original.png",
+  "master_sha256": "9f87e8264443ca0e73a8b1013ff99188a1ee63d3c653f8901af0d69d2966138e",
+  "bbox": [
+    65,
+    78,
+    1983,
+    554
+  ],
+  "width": 1918,
+  "height": 476,
+  "variants": {
+    "light": {
+      "colour_source_sha256": "e8f113a977df6cd7640c5e4dbe495a806a0a7f881dfc7ec9be9ebdb77b976c73",
+      "colors": {
+        "ink": "#18181b",
+        "orange": "#ea580c",
+        "labs": "#5c5c66"
+      }
+    },
+    "dark": {
+      "colour_source_sha256": "c801ce074447a626fa8310a8620c84d394eab9f676da03360681e36be3f3f10a",
+      "colors": {
+        "ink": "#fafafa",
+        "orange": "#ea580c",
+        "labs": "#a1a1aa"
+      }
+    }
+  },
+  "conversion": "Contour outlines of the latest transparent master; no replacement type; original PNGs retained."
+}

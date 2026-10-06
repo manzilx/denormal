@@ -1,0 +1,54 @@
+{
+  "Olive": {
+    "pages": 2,
+    "trim_mm": [
+      85,
+      55
+    ],
+    "bleed_mm": 3,
+    "fonts": "TrueType, subset-embedded; no Type 3",
+    "colour": "CMYK only; all text 100% K or knocked out of a solid",
+    "min_text_pt": 6.5,
+    "safe_area_mm": 4,
+    "qr": "HTTPS://DENORMAL.IN"
+  },
+  "Paper": {
+    "pages": 2,
+    "trim_mm": [
+      85,
+      55
+    ],
+    "bleed_mm": 3,
+    "fonts": "TrueType, subset-embedded; no Type 3",
+    "colour": "CMYK only; all text 100% K or knocked out of a solid",
+    "min_text_pt": 6.5,
+    "safe_area_mm": 4,
+    "qr": "HTTPS://DENORMAL.IN"
+  },
+  "Paper-No-Boundary": {
+    "pages": 2,
+    "trim_mm": [
+      85,
+      55
+    ],
+    "bleed_mm": 3,
+    "fonts": "TrueType, subset-embedded; no Type 3",
+    "colour": "CMYK only; all text 100% K or knocked out of a solid",
+    "min_text_pt": 6.5,
+    "safe_area_mm": 4,
+    "qr": "HTTPS://DENORMAL.IN"
+  },
+  "Paper-Sheet-Frame": {
+    "pages": 2,
+    "trim_mm": [
+      85,
+      55
+    ],
+    "bleed_mm": 3,
+    "fonts": "TrueType, subset-embedded; no Type 3",
+    "colour": "CMYK only; all text 100% K or knocked out of a solid",
+    "min_text_pt": 6.5,
+    "safe_area_mm": 4,
+    "qr": "HTTPS://DENORMAL.IN"
+  }
+}
