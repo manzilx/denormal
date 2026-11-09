@@ -144,7 +144,8 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 <meta property="og:description" content="${esc(description || SITE.description)}">
 <meta property="og:image" content="${SITE.origin}/og.png">
 <meta property="og:url" content="${canonical}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16 32x32">
+<link rel="icon" href="/favicon-dark.ico" type="image/x-icon" sizes="16x16 32x32" media="(prefers-color-scheme: dark)">
 <script>${THEME_BOOT}</script>
 <link rel="preload" href="${asset('fonts/archivo-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${asset('site.css')}">
